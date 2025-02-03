@@ -1,0 +1,35 @@
+# 📌 Svelte 5
+/node_modules/
+/build/
+/dist/
+/.svelte-kit/
+/.vite/
+/.env
+.env.local
+.env.*.local
+.DS_Store
+
+# 📌 Terraform
+.terraform/
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
+terraform.tfvars
+*.tfvars.json
+crash.log
+
+# 📌 Vite (if used with Svelte)
+.vite/
+.cache/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+pnpm-error.log*
+.vscode/
+
+# 📌 IDE & Editor Files
+*.swp
+*.swo
+*.idea/
+*.vscode/
