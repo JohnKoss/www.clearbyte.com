@@ -1,0 +1,87 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+    themes: corporate --default;
+  }
+
+/* modern theme */
+@font-face {
+	font-family: 'Quicksand';
+	src: url('/fonts/Quicksand.ttf');
+	font-display: swap;
+}
+.tiptap{
+	padding: 1rem;
+}
+
+.ProseMirror:focus {
+    outline: none;
+}
+
+ table {
+	@apply table border-4 w-96;
+  }
+
+.ProseMirror {
+
+	hr {
+	  @apply my-4; /* Add margin-top and margin-bottom to hr */
+	}
+	p {
+	  @apply mb-2;
+	}
+  
+	h1, h2 {
+	  @apply font-bold;
+	}
+  
+	h1, h2, h3, h4, h5, h6 {
+	  @apply mb-4;
+	}
+  
+	h1 {
+	  @apply text-3xl;
+	}
+  
+	h2 {
+	  @apply text-2xl;
+	}
+  
+	/* Add more styles as needed */
+	h3 {
+	  @apply text-xl;
+	}
+  
+	ul, ol {
+	  @apply list-disc list-outside ml-10 mb-4 ;
+	}
+  
+	
+	blockquote {
+	  @apply border-l-4 border-gray-300 pl-4 italic;
+	}
+  
+	code {
+	  @apply bg-gray-100 p-1 rounded;
+	}
+  
+	pre {
+	  @apply bg-gray-100 p-4 rounded overflow-x-auto;
+	}
+  
+	a {
+	  @apply text-blue-500 underline;
+	}
+  
+	strong {
+	  @apply font-bold;
+	}
+  
+	em {
+	  @apply italic;
+	}
+  }
+
+  .cm-error-highlight {
+    background-color: rgba(255, 0, 0, 0.3); /* Red highlight */
+    border-bottom: 2px solid red;
+}

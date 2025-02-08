@@ -1,0 +1,76 @@
+{
+    "AttrsMod": null,
+    "AttrsNew": [
+        [
+            {
+                "type": "create",
+                "path": [
+                    "CreatedAt"
+                ],
+                "from": null,
+                "to": "2025-01-28T19:11:50.32Z"
+            },
+            {
+                "type": "create",
+                "path": [
+                    "EncryptionConfiguration"
+                ],
+                "from": null,
+                "to": {
+                    "EncryptionType": "AES256",
+                    "KmsKey": null
+                }
+            },
+            {
+                "type": "create",
+                "path": [
+                    "ImageScanningConfiguration"
+                ],
+                "from": null,
+                "to": {
+                    "ScanOnPush": false
+                }
+            },
+            {
+                "type": "create",
+                "path": [
+                    "ImageTagMutability"
+                ],
+                "from": null,
+                "to": "MUTABLE"
+            },
+            {
+                "type": "create",
+                "path": [
+                    "RegistryId"
+                ],
+                "from": null,
+                "to": "748939641058"
+            },
+            {
+                "type": "create",
+                "path": [
+                    "RepositoryArn"
+                ],
+                "from": null,
+                "to": "arn:aws:ecr:us-east-1:748939641058:repository/bbbbbbbbbbb"
+            },
+            {
+                "type": "create",
+                "path": [
+                    "RepositoryName"
+                ],
+                "from": null,
+                "to": "bbbbbbbbbbb"
+            },
+            {
+                "type": "create",
+                "path": [
+                    "RepositoryUri"
+                ],
+                "from": null,
+                "to": "748939641058.dkr.ecr.us-east-1.amazonaws.com/bbbbbbbbbbb"
+            }
+        ]
+    ]
+}

@@ -1,33 +1,29 @@
 provider "aws" {
-  region = "us-east-1"  
+  region = "us-east-1"
 }
-
-# provider "aws" {
-#   alias  = "us_east_2"
-#   region = "us-east-2"  
-# }
 
 ##############
 data "aws_caller_identity" "current" {}
 data "aws_region" "current" {}
 
 locals {
-  domain_name = "clearbyte.com"
-  api_version = "v1"
-  account_id  = data.aws_caller_identity.current.account_id
-  region      = data.aws_region.current.id
+  root_domain_name = "clearbyte.com"
+  www_domain_name  = "www.clearbyte.com"
+  api_version      = "v1"
+  account_id       = data.aws_caller_identity.current.account_id
+  region           = data.aws_region.current.id
 }
 
 // This needs to already exists.
 data "aws_s3_bucket" "clearbyte_com" {
-  bucket   = local.domain_name
+  bucket = local.www_domain_name
 }
 
 # Find a certificate that is issued
 data "aws_acm_certificate" "clearbyte_com" {
-  domain      = local.domain_name
+  domain      = local.root_domain_name
   statuses    = ["ISSUED"]
-  most_recent = true          # ✅ Ensures the latest valid certificate is used
+  most_recent = true
 }
 
 // clearbyte.com bucket, bucket policy
@@ -55,16 +51,29 @@ resource "aws_s3_bucket_policy" "clearbyte_com_origin_access_control" {
   })
 }
 
+resource "aws_s3_bucket_cors_configuration" "clearbyte_cors" {
+  bucket = data.aws_s3_bucket.clearbyte_com.id
+
+  cors_rule {
+    allowed_methods = ["GET", "HEAD", "POST"]
+    allowed_origins = ["*"] # ✅ Allow all origins (or restrict to specific domains)
+    allowed_headers = ["*"] # ✅ Allow all headers
+    expose_headers  = []
+    max_age_seconds = 2
+  }
+}
+
+
 //////////////////////
 // Will be fronted by "Cloudfront"
 resource "aws_apigatewayv2_api" "api_clearbyte_com" {
-  name          = local.domain_name
-  description   = "Routes for ${local.domain_name}"
+  name          = local.www_domain_name
+  description   = "Routes for ${local.www_domain_name}"
   protocol_type = "HTTP"
   cors_configuration {
-    allow_headers = ["authorization"]
-    allow_methods = ["GET"]
-    allow_origins = ["http://localhost:5173"]
+    allow_headers = ["*"]
+    allow_methods = ["GET", "POST", "OPTIONS"]
+    allow_origins = ["*"]
     //max_age       = 86400 // 24 hours
     max_age = 2 // Debug
   }
@@ -113,13 +122,22 @@ resource "aws_cloudfront_origin_access_control" "clearbyte_com" {
 }
 
 
-// The Cloudfront Dist.
+
+resource "aws_cloudfront_function" "redirect" {
+  name    = "cf-redirect"
+  runtime = "cloudfront-js-2.0"
+  comment = "URL to redirect to WWW"
+  code    = file("${path.module}/lambdas/cloudfront/redirect.js")
+  publish = true # Publishes a specific version for use in a distribution
+}
+
+################## The Cloudfront Dist. ##################
 resource "aws_cloudfront_distribution" "clearbyte_com" {
 
   price_class         = "PriceClass_100"
   enabled             = true
   is_ipv6_enabled     = true
-  comment             = local.domain_name
+  comment             = local.www_domain_name
   default_root_object = "index.html" # Ensures https://www.clearbyte.com loads index.html
   // Alternate domain names.
   aliases = [
@@ -153,12 +171,12 @@ resource "aws_cloudfront_distribution" "clearbyte_com" {
   }
 
   // Not sure if this works.
-  custom_error_response {
-    error_caching_min_ttl = 10
-    error_code            = 404
-    response_code         = 404
-    response_page_path    = "/404.html"
-  }
+  # custom_error_response {
+  #   error_code            = 403
+  #   response_code         = 200
+  #   response_page_path    = "/index.html" # ✅ Redirects unknown routes to index.html
+  #   error_caching_min_ttl = 10
+  # }
 
   ////////////// Origins /////////////////
   /// Apigateway origin ...
@@ -184,59 +202,51 @@ resource "aws_cloudfront_distribution" "clearbyte_com" {
   ////////////// Cache Behaviors /////////////////
   // default
   default_cache_behavior {
-    target_origin_id       = "clearbyte_com"
-    allowed_methods        = ["GET", "HEAD", "OPTIONS"]
-    cached_methods         = ["GET", "HEAD"]
-    compress               = true
-    viewer_protocol_policy = "allow-all"
+    target_origin_id = "clearbyte_com"
+    allowed_methods  = ["GET", "HEAD", "OPTIONS"]
+    cached_methods   = ["GET", "HEAD"]
+    compress         = true
+    //viewer_protocol_policy = "allow-all"
+    viewer_protocol_policy = "redirect-to-https"
     // For developing....
     // cache_policy_id       = "658327ea-f89d-4fab-a63d-7e88639e58f6" // Managed-CachingOptimized
     cache_policy_id = "4135ea2d-6df8-44a3-9df3-4b5a84be39ad" // Managed-CachingDisabled
 
     // CORS stuff...
-    // This only seems necessary for "canvas.test" local development. Figure this out!!!
     origin_request_policy_id   = "88a5eaf4-2fd4-4709-b370-b4c650ea3fcf" //Managed-CORS-S3Origin
     response_headers_policy_id = "60669652-455b-4ae9-85a4-c4c02393f86c" // Managed-SimpleCORS
+
+    // Cloudfront function
+    function_association {
+      event_type   = "viewer-request"
+      function_arn = aws_cloudfront_function.redirect.arn
+    }
   }
 
   // Cache behavior with precedence 0
   ordered_cache_behavior {
     target_origin_id       = "apigateway"
-    path_pattern           = "/opt-in"
+    path_pattern           = "/api/*" # ✅ Matches only API calls
     allowed_methods        = ["HEAD", "DELETE", "POST", "GET", "OPTIONS", "PUT", "PATCH"]
     cached_methods         = ["GET", "HEAD"]
-    compress               = true
     viewer_protocol_policy = "redirect-to-https"
+    compress               = true
 
     cache_policy_id          = "4135ea2d-6df8-44a3-9df3-4b5a84be39ad" // Managed-CachingDisabled - Recommended for APIGateway (that's what it says)
     origin_request_policy_id = "b689b0a8-53d0-40ab-baf2-68738e2966ac" // Managed-AllViewerExceptHostHeader - Recommended for APIGateway (that's what it says)  
 
   }
-
-  // Cache behavior with precedence 0
-  # default_cache_behavior {
-  #   target_origin_id       = "apigateway"
-  #   allowed_methods        = ["GET", "HEAD", "OPTIONS", "PUT", "POST", "PATCH", "DELETE"]
-  #   cached_methods         = ["GET", "HEAD"]
-  #   compress               = true
-  #   viewer_protocol_policy = "redirect-to-https"
-
-  #   // For developing....
-  #   cache_policy_id          = "4135ea2d-6df8-44a3-9df3-4b5a84be39ad" // Managed-CachingDisabled - Recommended for APIGateway (that's what it says)
-  #   origin_request_policy_id = "b689b0a8-53d0-40ab-baf2-68738e2966ac" // Managed-AllViewerExceptHostHeader - Recommended for APIGateway (that's what it says)  
-  # }
 }
 
-//////////////////////////////////////////
-// Route stuff.
+#########################################################
+// Route53 stuff.
 data "aws_route53_zone" "this" {
-  name         = local.domain_name
+  name         = "${local.root_domain_name}."
   private_zone = false
 }
 
-
 resource "aws_route53_record" "clearbyte_root_a" {
-  name    = local.domain_name
+  name    = local.root_domain_name
   zone_id = data.aws_route53_zone.this.id
   type    = "A"
 
@@ -248,7 +258,7 @@ resource "aws_route53_record" "clearbyte_root_a" {
 }
 
 resource "aws_route53_record" "clearbyte_root_aaaa" {
-  name    = local.domain_name
+  name    = local.root_domain_name
   zone_id = data.aws_route53_zone.this.id
   type    = "AAAA"
 
@@ -259,9 +269,8 @@ resource "aws_route53_record" "clearbyte_root_aaaa" {
   }
 }
 
-
-resource "aws_route53_record" "clearbyte_root_star" {
-  name    = "*.${local.domain_name}"
+resource "aws_route53_record" "clearbyte_www_a" {
+  name    = local.www_domain_name
   zone_id = data.aws_route53_zone.this.id
   type    = "A"
 
@@ -271,10 +280,23 @@ resource "aws_route53_record" "clearbyte_root_star" {
     evaluate_target_health = false
   }
 }
+
+resource "aws_route53_record" "clearbyte_www_aaaa" {
+  name    = local.www_domain_name
+  zone_id = data.aws_route53_zone.this.id
+  type    = "AAAA"
+
+  alias {
+    name                   = aws_cloudfront_distribution.clearbyte_com.domain_name
+    zone_id                = aws_cloudfront_distribution.clearbyte_com.hosted_zone_id
+    evaluate_target_health = false
+  }
+}
+
 ######### Alternate domain names ################
 
 data "aws_route53_zone" "clearbyte" {
-  name         = "${local.domain_name}."
+  name         = "${local.root_domain_name}."
   private_zone = false
 }
 
@@ -348,7 +370,58 @@ resource "aws_route53_record" "clearbyte_validation" {
   records = ["_cbc1ae51400c7d624e40039e10f32f74.mzlfeqexyx.acm-validations.aws."]
 }
 
-#######
+####### API Gateway Lambda Functions ########
+module "contact" {
+  source = "github.com/johnkoss/terraform_apigw_lambda"
+
+  lambda = {
+    name             = "clearbyte_contact"
+    path             = "${path.module}/lambdas/contact"
+    description      = "Used to store contact information"
+    managed_policies = []
+    env_vars = {
+      DEBUG = "yes"
+    }
+  }
+
+  apigateway = {
+    id  = aws_apigatewayv2_api.api_clearbyte_com.id
+    arn = aws_apigatewayv2_api.api_clearbyte_com.execution_arn
+    routes = [
+      {
+        method = "POST"
+        path   = "/api/contact"
+      }
+    ]
+  }
+}
+
+module "sms_opt_in" {
+  source = "github.com/johnkoss/terraform_apigw_lambda"
+
+  lambda = {
+    name             = "clearbyte_sms_opt_in"
+    path             = "${path.module}/lambdas/sms_opt_in"
+    description      = "Used to store SMS opt-in data"
+    managed_policies = []
+    env_vars = {
+      DEBUG = "yes"
+    }
+  }
+
+  apigateway = {
+    id  = aws_apigatewayv2_api.api_clearbyte_com.id
+    arn = aws_apigatewayv2_api.api_clearbyte_com.execution_arn
+    routes = [
+      {
+        method = "POST"
+        path   = "/api/sms-opt-in"
+      }
+    ]
+  }
+}
+
+############################################
 output "api_clearbyte_com_id" {
   value = aws_apigatewayv2_api.api_clearbyte_com.id
 }

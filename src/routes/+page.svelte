@@ -1,103 +1,112 @@
 <script lang="ts">
-    import Hero from '$lib/Hero.svelte';
-    import Testimonial from '$lib/Testimonial.svelte';
+  import "../app.css";
+  import { type TabItem } from "../model";
+  import { Api } from "$components/api.svelte";
+  import Alert from "$lib/Alert.svelte";
+  import { TITLES, TAB_PROPERTIES } from "./constants";
+  import cx from "clsx";
+  import { TabItems } from "./items.svelte";
+
+  ////////////
+  let isSaving = $state(false);
+
+  const { data } = $props();
+
+  //////////////
+  let alertShow = $state(false);
+  let alertType = $state("success");
+  let alertMsg = $state("");
+  const showAlert = (at: string, am: string) => {
+    alertType = at;
+    alertMsg = am;
+    alertShow = true;
+    setTimeout(() => {
+      alertShow = false;
+    }, 2000);
+  };
+
+  /////
+  let activeTabValue = $state(TAB_PROPERTIES);
+  const handleClick = (tabValue: number) => () => (activeTabValue = tabValue);
+
+  const saveContent: any = async () => {
+    isSaving = true;
+    try {
+      let res: any | undefined = await new Api().POST<any>(JSON.stringify(TabItems));
+      if (res.ok) {
+        showAlert("success", "Activity SAVED!");
+      } else {
+        showAlert("error", res.message);        
+      }
+    } catch (error: any) {
+      showAlert("error", error);        
+    } finally {
+      isSaving = false;
+    }
+  };
 </script>
 
-<!-- Hero Section -->
-<section class="hero min-h-screen bg-base-200">
-    <div class="hero-content flex-col lg:flex-row">
-        <img src="home_small.jpg" class="rounded-lg shadow-xl" alt="computer" />
-        <div>
-            <Hero />
-        </div>
+{#snippet tabs(item: TabItem)}
+  <input
+    type="radio"
+    name="main-tabs"
+    role="tab"
+    class="tab hover:bg-base-200"
+    aria-label={TITLES[item?.id]}
+    checked={activeTabValue === item?.id}
+    onclick={handleClick(item?.id)}
+  />
+  <div
+    role="tabpanel"
+    class="tab-content bg-base-100 border-base-300 rounded-box"
+  >
+    <item.component
+      id={item.id}
+      data={data.content ? data.content[item.id] : null}
+    />
+  </div>
+{/snippet}
+
+<svelte:head />
+
+{#if !data.content}
+  <dialog id="my_modal_1" class="modal modal-open">
+    <div class="modal-box">
+      <div class="flex items-center m-4">
+        <h3 class="text-lg font-bold">Loading lab activity...</h3>
+        <span class="loading loading-bars loading-md ml-2"></span>
+      </div>
     </div>
-</section>
+  </dialog>
+{/if}
 
-<section id="labs" class="py-12 bg-white">
-    <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold mb-8 text-center">What Others Say</h2>
-        <!-- Testimonials Grid -->
-        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            <Testimonial
-                image="person1a.jpg"
-                text="The labs were clear, intuitive, and easy to follow. Thanks guys!"
-                author="Aisha"
-            />
+<div class="p-4">
+  <div class="mb-4">
+    {#if alertShow}
+      <Alert type={alertType} message={alertMsg} />
+    {/if}
+    {#if data.error}
+      <Alert type="error" message={data.content[0]} />
+    {/if}
+  </div>
+  <div role="tablist" class="tabs tabs-lift tabs-lg">
+    {#each TabItems as item}
+      {@render tabs(item)}
+    {/each}
+    <button
 
-            <Testimonial
-                image="person2a.jpg"
-                text="I love how hands-on and practical these labs are. Really helpful!"
-                author="James"
-            />
+    class={cx("tab btn btn-warning ml-2 mr-2", {
+      "loading loading-spinner": isSaving,
+    })}
+    onclick={saveContent}>Save</button
+  >
 
-            <Testimonial
-                image="person3a.jpg"
-                text="The integration with Canvas LMS makes everything seamless."
-                author="Sophia"
-            />
-        </div>
-    </div>
-</section>
+  </div>
+</div>
 
-<!-- Contact Section -->
-<section id="contact" class="py-12 bg-white">
-    <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold mb-8 text-center">Get In Touch</h2>
-        <div class="flex flex-col items-center">
-            <p class="mb-4">
-                Interested in our AWS lab activities? Reach out to us today!
-            </p>
-            <a class="btn btn-primary" href="/contact">Contact Us</a>
-        </div>
-    </div>
-</section>
+<!-- <Tabs {items} {onSave} {isLoading} /> -->
+<!-- {@render children()} -->
 
-
-<!-- Labs Section -->
-<section id="labs" class="py-12 bg-white">
-    <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold mb-8 text-center">AWS Lab Activities</h2>
-        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            <!-- Lab Card 1 -->
-            <div class="card bg-base-100 shadow-xl">
-                <div class="card-body">
-                    <h2 class="card-title">AWS Basics</h2>
-                    <p>
-                        Learn the fundamentals of AWS in an engaging and
-                        straightforward lab activity.
-                    </p>
-                    <div class="card-actions justify-end">
-                        <button class="btn btn-primary">Learn More</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Lab Card 2 -->
-            <div class="card bg-base-100 shadow-xl">
-                <div class="card-body">
-                    <h2 class="card-title">Compute Services</h2>
-                    <p>
-                        Explore EC2 and Lambda with interactive, bite‐sized
-                        exercises.
-                    </p>
-                    <div class="card-actions justify-end">
-                        <button class="btn btn-primary">Learn More</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Lab Card 3 -->
-            <div class="card bg-base-100 shadow-xl">
-                <div class="card-body">
-                    <h2 class="card-title">Storage</h2>
-                    <p>
-                        Understand S3 and other storage services with clear,
-                        practical labs.
-                    </p>
-                    <div class="card-actions justify-end">
-                        <button class="btn btn-primary">Learn More</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
+<!-- {#if import.meta.env.MODE === "development"}
+  <template></template>
+{/if} -->

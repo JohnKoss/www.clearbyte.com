@@ -9,11 +9,29 @@ import (
 	"sync"
 )
 
+// const (
+// 	ID          = "itcc1000_s3_1v1" // 
+// 	LEVEL       = "1"
+// 	NAME        = "S3 Lab 1"
+// 	VERSION     = "1.0.0"
+// 	DESCRIPTION = "An activity to create an S3 bucket to host a static website."
+// 	POINTS      = 35
+// 	ATTEMPTS    = defs.LAB_ATTEMPTS_DEFAULT
+// 	DURATION    = 7200 // Minutes
+
+// 	QTI_FILE_NAME = "qti_1.xml"
+// )
+
+const (
+	CLIENT_ID = "ClientId-63020000000000260"
+	CLASS_ID  = "ClassId-6efa21560506cd9fa3085a10883aec6a61f733f3" // sandbox
+	//CLASS_ID  = "ClassId-94b5a90f84095764f84075f4fd9cdd528e8b8657" //ITCC 1000 O0801 2024SS
+)
 
 // ---------------------------------------------------- //
 
 
-const PATH = "s3://clearbyte.com"
+const PATH = "s3://lti13.clearbyte.io/lti13/instructor"
 
 const PLAN_CREATE = "create"
 const PLAN_DESTROY = "destroy"
@@ -28,6 +46,11 @@ func Execute(when string) bool {
 
 	fmt.Printf("when:%s, root_path:%s\n", when, PATH)
 	if when == PLAN_CREATE {
+
+		// if _, ok := ValidateHcl("../hcl/config.hcl"); !ok {
+		// 	fmt.Println("Error: HCL validation failed")
+		// 	return false
+		// }
 
 		// Build the lab activity objects...
 		err := runCommand("npm", "run", "build")

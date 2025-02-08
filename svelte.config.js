@@ -18,12 +18,21 @@ const config = {
 			precompress: false, // CloudFront will handle this.
 			strict: true
 		}),
+		paths: {
+			base: "/lti13/instructor",
+			relative: false
+		},
+		alias: {
+			$components: "src/lib",
+		},
 	},
 	
 	// Enable runes mode in Svelte 5
-	compilerOptions: {
-		runes: true
-	}
+	// compilerOptions: {
+	// 	runes: true
+	// },
+
+	base: "/myapp/",  // ✅ Adjust base URL for production
 };
 
 export default config;
