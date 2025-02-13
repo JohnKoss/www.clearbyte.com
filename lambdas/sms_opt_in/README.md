@@ -1,0 +1,1 @@
+This function is used to store sms opt-in information.

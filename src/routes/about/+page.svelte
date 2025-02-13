@@ -1,5 +1,6 @@
 <script lang="ts">
 </script>
+
 <section class="min-h-screen flex flex-col md:flex-row items-center gap-8 p-48">
   <!-- Image Section (Left) -->
   <div class="w-full md:w-5/12">
@@ -27,3 +28,4 @@
     </div>
   </div>
 </section>
+

@@ -1,0 +1,1 @@
+This function is used to store contact information.

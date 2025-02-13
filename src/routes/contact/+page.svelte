@@ -13,11 +13,35 @@
       }
   
       // Simulating form submission
-      console.log("Contact Form Submitted:", { name, email, message });
+      onsubmit();
   
       // Show confirmation message
       submitted = true;
     }
+
+    function onsubmit() {
+    fetch('https://www.clearbyte.com/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name, email, message }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.text();
+      })
+      .then((data) => {
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        alert('There was a problem with your submission. Please try again.');
+      });
+  }
+
   </script>
   
   <section class="min-h-screen flex flex-col items-center justify-center p-6 bg-base-200">
@@ -29,8 +53,9 @@
         <div class="alert alert-success mt-4">
           <span>✅ Your message has been sent! We will get back to you soon.</span>
         </div>
+        <a href="/" class="btn btn-primary mt-4">Go Home</a>
       {:else}
-        <form on:submit={handleSubmit} class="space-y-4 mt-4">
+        <form onsubmit={handleSubmit} class="space-y-4 mt-4">
           <!-- Name Input -->
           <div>
             <label class="label" for="name">

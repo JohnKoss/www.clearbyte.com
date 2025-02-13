@@ -5,12 +5,13 @@
 </script>
 
 <!-- Navbar -->
-<nav class="navbar bg-base-100">
+<nav class="navbar bg-primary text-primary-content">
     <div class="flex-1">
         <Logo />
     </div>
     <div class="flex-none">
         <ul class="menu menu-horizontal p-0">
+            <li><a href="/labs">Labs</a></li>
             <li><a href="/about">About</a></li>
             <li><a href="/contact">Contact</a></li>
             <li><a href="/opt-in" class="btn btn-warning btn-sm">SMS Opt-in</a></li> 
@@ -21,7 +22,9 @@
 {@render children()}
 
 <!-- Footer -->
-<footer class="footer flex items-center justify-center p-4 bg-base-300 text-base-content text-center">
+<footer class="footer flex items-center justify-center p-4 bg-primary text-primary-content text-center">
     <p>&copy; {new Date().getFullYear()} ClearByte. All rights reserved.</p>
+    <a href="/privacy">Privacy Policy</a>
+    <a href="/terms">Terms & Conditions</a>
   </footer>
   

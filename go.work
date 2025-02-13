@@ -1,0 +1,7 @@
+go 1.23
+
+use (
+	./lambdas/contact/context
+	./lambdas/sms_opt_in/context
+	./deploy
+)

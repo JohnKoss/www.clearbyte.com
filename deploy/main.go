@@ -13,7 +13,7 @@ import (
 // ---------------------------------------------------- //
 
 
-const PATH = "s3://clearbyte.com"
+const PATH = "s3://www.clearbyte.com"
 
 const PLAN_CREATE = "create"
 const PLAN_DESTROY = "destroy"

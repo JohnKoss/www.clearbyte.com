@@ -23,7 +23,9 @@ const config = {
 	// Enable runes mode in Svelte 5
 	compilerOptions: {
 		runes: true
-	}
+	},
+
+	base: "/myapp/",  // ✅ Adjust base URL for production
 };
 
 export default config;

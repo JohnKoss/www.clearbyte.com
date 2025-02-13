@@ -9,7 +9,7 @@
     <div class="flex items-center space-x-4">
       <!-- Profile Image -->
       <figure class="w-16 h-16">
-        <img class="rounded-full w-full h-full object-cover" src={image} alt="User Image" />
+        <img class="rounded-full w-full h-full object-cover" src={image} alt="profile" />
       </figure>
   
       <!-- Testimonial Content -->
