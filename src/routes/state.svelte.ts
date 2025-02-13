@@ -77,8 +77,10 @@ export let metaData = $state<MetaData>({
 ///////////////////////////////
 export interface DataStore {
     tabs: string[];
+    importing: boolean;
 };
 
 export let Store = $state<DataStore>({
-    tabs: []
+    tabs: [],
+    importing: false
 });

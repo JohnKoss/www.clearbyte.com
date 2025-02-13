@@ -1,22 +1,39 @@
 <script lang="ts">
-  import { EditorView, basicSetup } from "codemirror";
-  import { json } from "@codemirror/lang-json";
-  import { wordCounter } from "./panel";
-  import { lightTheme, fixedHeightEditor, fontTheme } from "./theme";
-  import Menu, { themeCompartment, fontCompartment } from "./Menu.svelte";
-  import { onDestroy, onMount } from "svelte";
-  import { TabItems } from "../../routes/items.svelte";
+  import { EditorView, basicSetup } from 'codemirror';
+  import { json } from '@codemirror/lang-json';
+  import { wordCounter } from './panel';
+  import { lightTheme, fixedHeightEditor, fontTheme } from './theme';
+  import Menu, { themeCompartment, fontCompartment } from './Menu.svelte';
+  import { onDestroy, onMount, untrack } from 'svelte';
+  import { TabItems } from '../../routes/items.svelte';
 
-  import {errorField} from "./errorHighlighting";
+  import { errorField } from './errorHighlighting';
 
   const { id, data }: { id: number; data: string } = $props();
+
   let editor: EditorView | null = $state(null);
+
+  //////////////
+  $effect(() => {
+    const currentVal = editor?.state.doc.toString() ?? '';
+    if (data !== currentVal) {
+      untrack(() => {
+        editor?.dispatch({
+          changes: {
+            from: 0,
+            to: editor.state.doc.length,
+            insert: TabItems[id].data,
+          },
+        });
+      });
+    }
+  });
 
   //////////////
   onMount(async () => {
     let saveTimeout: ReturnType<typeof setTimeout>;
     editor = new EditorView({
-      doc: data,
+      doc: '',
       extensions: [
         basicSetup,
         json(),
@@ -30,7 +47,7 @@
             clearTimeout(saveTimeout);
             saveTimeout = setTimeout(() => {
               TabItems[id].data = update.state.doc.toString();
-            }, 500);
+            }, 1000);
           }
         }),
       ],

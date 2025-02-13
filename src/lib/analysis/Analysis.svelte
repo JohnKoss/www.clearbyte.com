@@ -1,6 +1,11 @@
 <script lang="ts">
-    export let id: number;
+    //export let id: number;
     export function flushData(): void {}
+
+    const { id }: { id: number } = $props();
+    $effect(() => {
+        console.log('Analysis', id);
+    });
 </script>
 
 <h1>{id}Analyzing activity....please wait...</h1>

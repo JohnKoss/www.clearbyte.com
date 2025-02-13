@@ -9,29 +9,37 @@ import {
     TAB_SCORESHEET,
     TAB_ANALYSIS,
 } from "./constants";
-import type { TabItem } from "../model";
+import { type TabItem } from "../model.svelte.";
 
-///////////////
-export let TabItems = $state<TabItem[]>( [
-    {
-        id: TAB_PROPERTIES,
-        component: Config,
-        data:""
-    },
-    {
-        id: TAB_INSTRUCTIONS,
-        component: InstructionEditor,
-        data:""
-    },
-    {
-        id: TAB_ACTIONS,
-        component: ActionsEditor,
-        data:""
-    },
-    {
-        id: TAB_SCORESHEET,
-        component: ActionsEditor,
-        data:""
-    },
-    { id: TAB_ANALYSIS, component: Analysis  },
+export let TabItems: TabItem[] = $state([
+    { id: TAB_PROPERTIES, data: "" },
+    { id: TAB_INSTRUCTIONS, data: "" },
+    { id: TAB_ACTIONS, data: "" },
+    { id: TAB_SCORESHEET, data: "" },
+    { id: TAB_ANALYSIS, data: "" },
 ]);
+
+// ///////////////
+// export let TabItems2 = [
+//     {
+//         id: TAB_PROPERTIES,
+//         component: Config,
+//         data:$state("")
+//     },
+//     {
+//         id: TAB_INSTRUCTIONS,
+//         component: InstructionEditor,
+//         data:""
+//     },
+//     {
+//         id: TAB_ACTIONS,
+//         component: ActionsEditor,
+//         data:""
+//     },
+//     {
+//         id: TAB_SCORESHEET,
+//         component: ActionsEditor,
+//         data:""
+//     },
+//     { id: TAB_ANALYSIS, component: Analysis  },
+// ]

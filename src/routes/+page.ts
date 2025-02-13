@@ -3,7 +3,7 @@ import { browser } from '$app/environment';
 import { Api, type IMessageResults } from '$components/api.svelte';
 import type { PageLoad } from './$types';
 import { TabItems } from './items.svelte';
-import { getJwtCustomClaims } from './state.svelte';
+import { getJwtCustomClaims, Store } from './state.svelte';
 export const prerender = true;
 
 ////////////////////////////
@@ -28,12 +28,22 @@ export const load: PageLoad = async ({ fetch }) => {
 	}
 
 	// Fetch lab activity data
-	const res = await new Api(fetch).GET<IMessageResults>();
+	const api =  new Api(fetch)
+	
+	if (Store.importing)
+		api.appendUrl('import');
+
+	const res = await api.GET<IMessageResults>();
 	if (res.ok) {
 		const dataItems = JSON.parse(res.message) as string[]
+		console.log("dataItems", dataItems);
+
 		Object.keys(dataItems).forEach(key => {
+			console.log(`loading... dataItems[parseInt(${key})]`,dataItems[parseInt(key)])
 			TabItems[parseInt(key)].data = dataItems[parseInt(key)];
+			console.log(`loading... TabItems[parseInt(${key})].data`, TabItems[parseInt(key)].data);
 		});
+		//TabItems[0].data = dataItems[0];
 		return {
 			error: false,
 			content: dataItems,

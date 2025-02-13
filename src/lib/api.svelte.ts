@@ -7,8 +7,8 @@ export interface IMessageResults {
 }
 
 ///
-const API_TIMEOUT = 60 * 1000; // TODO: Change this when not debugging.
-const PUBLIC_API_URL = "https://api.clearbyte.io/admin/labs"
+const API_TIMEOUT = 15 * 1000;
+const PUBLIC_API_URL = "https://api.clearbyte.io/admin/labs/"
 
 //////
 export class Api {
@@ -36,6 +36,10 @@ export class Api {
     this.customFetch = customFetch;
 
     this.abortController = new AbortController();
+  }
+  //////
+  public appendUrl(url: string) {
+    this.url = new URL(url, this.url);
   }
 
   //////

@@ -1,9 +1,0 @@
-export const LAB_DURATION_MIN = 5 * 60;
-export const LAB_DURATION_MAX = 4 * 60 * 60
-export const LAB_ATTEMPTS_MIN = 0
-export const LAB_ATTEMPTS_MAX = 10
-export const LAB_POINTS_MIN = 0
-export const LAB_POINTS_MAX = 100
-export const LAB_LEVEL_EASY = 1
-export const LAB_LEVEL_MEDIUM = 2
-export const LAB_LEVEL_HARD = 3
