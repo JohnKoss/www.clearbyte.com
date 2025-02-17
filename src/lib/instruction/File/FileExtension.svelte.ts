@@ -4,7 +4,7 @@ import { findFirstAvailableId } from "../utils";
 
 const NODE_NAME = 'file';
 const DATA_ID = 'data-id';
-const CONTAINER_CLASS = 'border rounded-lg p-4 w-96 border-2 border-gray-500';
+const CONTAINER_CLASS = 'border rounded-lg p-4 border-2 border-gray-500 max-w-md';
 const DEFAULT_FILE_TYPES: string[] = ['.*'];
 const DEFAULT_TITLE = 'File Upload';
 const DEFAULT_INSTRUCTIONS = '&lt; Instructions for uploading the file go here&gt;';
@@ -150,7 +150,7 @@ export const File = Node.create({
       // Caption Text
       const captionValue = document.createElement('span');
       captionValue.innerHTML = node.attrs.caption; // Using innerHTML to render the bold HTML tags
-      captionValue.className = 'label-text';
+      captionValue.className = 'label-text break-words whitespace-normal';
       captionLabel.appendChild(captionValue);
 
       // File input
@@ -205,26 +205,16 @@ function createFileUploadDialog(editor: Editor, node: any) {
   // Create the container and insert the HTML
   const container = document.createElement('div');
   container.innerHTML = `
-   <dialog id="my_modal_1" class="modal" open="true">
+   <dialog class="modal" open="true">
     <div class="modal-box" method="dialog">
         <form>
-            <div class="form-control">
-                <label class="label">
-                    <span class="label-text">Title:</span>
-                </label>
-                <input id="title" type="text" class="input input-bordered" required />
-            </div>
-            <div class="form-control">
-                <label class="label">
-                    <span class="label-text">Caption:</span>
-                </label>
-                <input id="caption" type="text" class="input input-bordered" required />
-            </div>
-            <div class="form-control">
-                <label class="label">
-                    <span class="label-text">Select Allowed File Types:</span>
-                </label>
-                <select id="file-types" name="fileTypes" multiple size="5" class="select select-bordered w-full" required>
+            <fieldset class="fieldset">
+                <label class="fieldset-label">Title:</label>
+                <input id="title" type="text" class="input" required />
+                <label class="fieldset-label">Caption:</label>
+                <input id="caption" type="text" class="input" required />
+                <label class="fieldset-label">Select Allowed File Types:</label>
+                <select id="file-types" name="fileTypes" multiple size="5" required>
                     <option value=".png">PNG Image (.png)</option>
                     <option value=".jpg">JPEG Image (.jpg)</option>
                     <option value=".jpeg">JPEG Image (.jpeg)</option>
@@ -242,13 +232,13 @@ function createFileUploadDialog(editor: Editor, node: any) {
                     <option value=".zip">ZIP Archive (.zip)</option>
                     <option value="(none)">No Extension (none)</option>
                 </select>
-            </div>
-            <div class="modal-action">
-                <div class="flex gap-4 p-4">
-                    <button id="save-btn" class="btn btn-primary" type="submit">Save</button>
-                    <button id="cancel-btn" class="btn" type="button">Cancel</button>
+                <div class="modal-action">
+                    <div class="flex gap-4 p-4">
+                        <button id="save-btn" class="btn btn-primary" type="submit">Save</button>
+                        <button id="cancel-btn" class="btn" type="button">Cancel</button>
+                    </div>
                 </div>
-            </div>
+            </fieldset>
         </form>
     </div>
 </dialog>

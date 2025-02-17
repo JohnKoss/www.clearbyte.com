@@ -209,7 +209,7 @@ const questionNodeSpec = (HTMLAttributes: Attrs): DOMOutputSpec => {
       'data-points': points,
       'data-question-text': questionText,
       'data-options': JSON.stringify(options),
-      class: "border rounded-lg p-4 w-96 border-2 border-gray-500",
+      class: "border rounded-lg p-4 border-2 border-gray-500 max-w-md",
     },
     [
       'div',

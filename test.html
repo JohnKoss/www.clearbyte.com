@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5.0.0-beta.8/daisyui.css" rel="stylesheet" type="text/css" />
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Document</title>
+</head>
+<body>
+    
+<dialog class="modal" open="true">
+    <div class="modal-box" method="dialog">
+        <form>
+            <fieldset class="fieldset">
+                <label class="fieldset-label">Title:</label>
+                <input id="title" type="text" class="input input-bordered" required />
+                <label class="fieldset-label">Caption:</label>
+                <input id="caption" type="text" class="input insput-bordered" required />
+                <label class="fieldset-label">Select Allowed File Types:</label>
+                <select id="file-types" name="fileTypes" required multiple size=5>
+                    <option value=".png">PNG Image (.png)</option>
+                    <option value=".jpg">JPEG Image (.jpg)</option>
+                    <option value=".jpeg">JPEG Image (.jpeg)</option>
+                    <option value=".gif">GIF Image (.gif)</option>
+                    <option value=".html">Web Page (.html)</option>
+                    <option value=".pdf">PDF Document (.pdf)</option>
+                    <option value=".plain">Text File (.txt)</option>
+                    <option value=".doc">Word Document (.doc)</option>
+                    <option value=".docx">Word Document (.docx)</option>
+                    <option value=".xls">Excel Spreadsheet (.xls)</option>
+                    <option value=".xlsx">Excel Spreadsheet (.xlsx)</option>
+                    <option value=".json">JSON Data (.json)</option>
+                    <option value=".yml">YAML Data (.yml)</option>
+                    <option value=".yaml">YAML Data (.yaml)</option>
+                    <option value=".zip">ZIP Archive (.zip)</option>
+                    <option value="(none)">No Extension (none)</option>
+                </select>
+                <div class="modal-action">
+                    <div class="flex gap-4 p-4">
+                        <button id="save-btn" class="btn btn-primary" type="submit">Save</button>
+                        <button id="cancel-btn" class="btn" type="button">Cancel</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</dialog>
+</body>
+</html>

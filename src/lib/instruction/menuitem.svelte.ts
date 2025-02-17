@@ -5,36 +5,36 @@ import { getDefaultQuestionAttributes } from "./Question/QuestionExtension.svelt
 
 ///////////////////////////
 export class MenuItem {
-    name: string;
-    icon: string;
-    command: () => void;
-    active: (() => boolean | null) | undefined;
-    isActive: boolean = $state(false);
-    separator: boolean = false;
+  name: string;
+  icon: string;
+  command: () => void;
+  active: (() => boolean | null) | undefined;
+  isActive: boolean = $state(false);
+  separator: boolean = false;
 
-    constructor(
-        name: string,
-        icon: string,
-        command: () => void,
-        active?: () => boolean | null,
-        separator:boolean = false,
-    ) {
-        this.name = name;
-        this.icon = icon;
-        this.command = command;
-        this.active = active;
-        this.separator = separator;
-    }
+  constructor(
+    name: string,
+    icon: string,
+    command: () => void,
+    active?: () => boolean | null,
+    separator: boolean = false,
+  ) {
+    this.name = name;
+    this.icon = icon;
+    this.command = command;
+    this.active = active;
+    this.separator = separator;
+  }
 }
 
 export class MenuItems {
-    static menuItems:MenuItem[] = [];
-    static Add(menuItems:MenuItem[]) {
-        this.menuItems = menuItems;
-    }
-    static Update(){
-        this.menuItems.forEach(item =>   item.isActive = item.active ? item.active() ?? false : false);
-    }
+  static menuItems: MenuItem[] = [];
+  static Add(menuItems: MenuItem[]) {
+    this.menuItems = menuItems;
+  }
+  static Update() {
+    this.menuItems.forEach(item => item.isActive = item.active ? item.active() ?? false : false);
+  }
 }
 //////////////////////
 // TODO: Make this a Svelte component or prettier.
@@ -123,8 +123,54 @@ function chooseColor(callback: (color: string) => void) {
 }
 
 //////////////////////
-export function createMenuItems(editor:Editor):MenuItem[] {
-return [
+function chooseAnchor(editor: Editor, callback: (url: string) => void) {
+  const previousUrl = editor.getAttributes('link').href || 'https://';
+
+  const modal = document.createElement('dialog');
+  modal.className = 'modal modal-open font-normal';
+  modal.innerHTML = `
+  <div class="modal-box p-4">
+    <h3 class="text-lg font-bold mb-4">Enter URL</h3>
+    <label class="block mb-2">URL</label>
+    <input type="text" id="url-input" class="input w-full mb-4" value="${previousUrl}">
+    <p id="error-message" class="text-red-500 text-sm hidden">Invalid URL. Please enter a valid URL.</p>
+    <div class="modal-action">
+      <button id="choose-url" class="btn btn-primary">Ok</button>
+      <button id="cancel" class="btn">Cancel</button>
+    </div>
+  </div>`;
+  document.body.appendChild(modal);
+
+  // Open the modal
+  modal.showModal();
+
+  // Event listener for the choose button
+  document.getElementById('choose-url')?.addEventListener('click', () => {
+    const urlInput = document.getElementById('url-input') as HTMLInputElement;
+    const url = urlInput.value.trim();
+
+    try {
+      new URL(url); // Built-in validation
+      callback(url);
+      modal.close();
+      document.body.removeChild(modal);
+    } catch (err) {
+      console.error(err);
+      const errorMessage = document.getElementById('error-message') as HTMLParagraphElement;
+      errorMessage.classList.remove("hidden"); // Show error message
+      return
+    }
+  });
+
+  // Event listener for the cancel button
+  document.getElementById('cancel')?.addEventListener('click', () => {
+    modal.close();
+    document.body.removeChild(modal);
+  });
+}
+//////////////////////
+export function createMenuItems(editor: Editor): MenuItem[] {
+  return [
     new MenuItem(
       "bold",
       "mdi:format-bold",
@@ -175,8 +221,8 @@ return [
       "mdi:palette-swatch",
       () => {
         chooseColor((color) => {
-          editor.chain().focus().setHighlight({color:'bg-red-200'}).run()
-          editor.chain().focus().toggleHighlight({color}).run()
+          editor.chain().focus().setHighlight({ color: 'bg-red-200' }).run()
+          editor.chain().focus().toggleHighlight({ color }).run()
         });
       },
       () => {
@@ -273,18 +319,23 @@ return [
     new MenuItem(
       "link",
       "mdi:link",
-      () =>
-        editor
-          .chain()
-          .focus()
-          .toggleLink({ href: "https://example.com" })
-          .run(),
+      () => {
+        chooseAnchor(editor, (url) => {
+          console.log(url);
+          if (url === null) return; // User canceled input
+          if (url.trim() === "") {
+            editor.chain().focus().unsetLink().run();
+          } else {
+            editor.chain().focus().toggleLink({ href: url, target:"_blank", rel:"noopener noreferrer" }).run();
+          }
+        });
+      },
       () => editor.isActive("link"),
     ),
     new MenuItem(
       "image",
       "mdi:image",
-      () => {   
+      () => {
         chooseImage((imageData) => {
           const imageAttributes = {
             src: imageData.src,
@@ -294,7 +345,7 @@ return [
             height: imageData.height,
             style: IMG_STYLE_LEFT
           };
-      
+
           editor.chain().focus().setImage(imageAttributes).run();
         });
       },

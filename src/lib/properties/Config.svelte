@@ -25,6 +25,9 @@
   /////////////
   let cp = $state<ConfigProps>(new ConfigProps());
 
+  const MAX_LAB_NAME_LENGTH = 128;
+  const MAX_LAB_DESC_LENGTH = 1024;
+
   // Used to maintain state....
   let lastCP = '';
   let lastData = '';
@@ -274,113 +277,107 @@
   </div>
 
   <form>
-    <fieldset class="fieldset pl-4 w-full max-w-xl">
-      <label class="form-control mb-4 w-40">
-        <div class="label">
-          <span class="label-text">Name</span>
-        </div>
-        <input
-          type="text"
-          class="input input-bordered"
-          bind:value={cp.name}
-          placeholder="Name"
-          required
-        />
-      </label>
+    <fieldset class="fieldset pl-4 pb-4">
+      <label for="i1" class="fieldset-label"
+        >Name - <span class="label-text-alt"
+          >Maximum of <span class="text-rose-600">{MAX_LAB_NAME_LENGTH}</span> characters.</span
+        ></label
+      >
+      <input
+        id="i1"
+        type="text"
+        class="input mb-2"
+        bind:value={cp.name}
+        placeholder="Name"
+        min="1"
+        max={MAX_LAB_NAME_LENGTH}
+        required
+      />
+      
 
       <!-- Add a name description -->
-      <label class="form-control w-96 mb-4">
-        <div class="label">
-          <span class="label-text">Description</span>
-        </div>
-        <textarea
-          class="textarea textarea-bordered w-full"
-          bind:value={cp.desc}
-          placeholder={"Please add a description for '" + cp.name + "'"}
-          required
-        ></textarea>
-      </label>
+      <label for="t1" class="fieldset-label">Description - Name - <span class="label-text-alt"
+        >Maximum of <span class="text-rose-600">{MAX_LAB_DESC_LENGTH}</span> characters.</span
+      ></label>
+      <textarea
+        id="t1"
+        class="textarea mb-2"
+        bind:value={cp.desc}
+        placeholder={"Please add a description for '" + cp.name + "'"}
+        minlength="1"
+        maxlength={MAX_LAB_DESC_LENGTH}
+        required
+      ></textarea>
+      
 
-      <div class="flex space-x-4">
         <!-- Add an attempts field -->
-        <label class="form-control mb-4 w-40">
-          <div class="label">
-            <span class="label-text">Attempts</span>
-          </div>
-          <input
-            type="number"
-            class="input input-bordered"
-            bind:value={cp.attempts}
-            min={LAB_ATTEMPTS_MIN.toString()}
-            max={LAB_ATTEMPTS_MAX.toString()}
-            placeholder="Attempts"
-            required
-          />
-        </label>
+        <label for="i2" class="fieldset-label">Attempts</label>
+        <input
+          id="i2"
+          type="number"
+          class="input mb-2"
+          bind:value={cp.attempts}
+          min={LAB_ATTEMPTS_MIN.toString()}
+          max={LAB_ATTEMPTS_MAX.toString()}
+          placeholder="Attempts"
+          required
+        />
+        
 
         <!-- Add an points field -->
-        <label class="form-control mb-4 w-40">
-          <div class="label">
-            <span class="label-text">Points</span>
-          </div>
-          <input
-            type="number"
-            class="input input-bordered"
-            bind:value={cp.points}
-            min={LAB_POINTS_MIN.toString()}
-            max={LAB_POINTS_MAX.toString()}
-            placeholder="Points"
-            required
-          />
-        </label>
-      </div>
+        <label for="i3" class="fieldset-label">Points</label>
+        <input
+          id="i3"
+          type="number"
+          class="input mb-2"
+          bind:value={cp.points}
+          min={LAB_POINTS_MIN.toString()}
+          max={LAB_POINTS_MAX.toString()}
+          placeholder="Points"
+          required
+        />
+      
 
-      <div class="flex space-x-4">
         <!-- Duration Field -->
-        <label class="form-control mb-4 w-40">
-          <div class="label">
-            <span class="label-text">Duration (seconds)</span>
-            <!-- svelte-ignore a11y_invalid_attribute -->
-            <a href="#" class="link link-primary" onclick={convertToSeconds}>
-              {formatDuration()}
-            </a>
-          </div>
-          <input
-            type="number"
-            class="input input-bordered w-full"
-            bind:value={cp.duration}
-            min={LAB_DURATION_MIN.toString()}
-            max={LAB_DURATION_MAX.toString()}
-            placeholder="Duration"
-            required
-          />
+        <label for="i4" class="fieldset-label"
+          >Duration (seconds)
+          <!-- svelte-ignore a11y_invalid_attribute -->
+          <a href="#" class="link link-primary" onclick={convertToSeconds}>
+            {formatDuration()}
+          </a>
         </label>
-
+        <input
+          id="i4"
+          type="number"
+          class="input mb-2"
+          bind:value={cp.duration}
+          min={LAB_DURATION_MIN.toString()}
+          max={LAB_DURATION_MAX.toString()}
+          placeholder="Duration"
+          required
+        />
+        
+        
         <!-- Level Field -->
-        <label class="form-control mb-4 w-40">
-          <div class="label">
-            <span class="label-text">Level (difficulty)</span>
-          </div>
-          <select
-            class="select select-bordered w-full"
-            bind:value={cp.level}
-            required
-          >
-            {#if placeholder}
-              <option value="" disabled selected>{placeholder}</option>
-            {/if}
-            {#each levels as level}
-              <option value={level}>{level}</option>
-            {/each}
-          </select>
-        </label>
-      </div>
+        <label for="s1" class="fieldset-label">Level (difficulty)</label>
+        <select
+          id="s1"
+          class="select mb-2"
+          bind:value={cp.level}
+          required
+        >
+          {#if placeholder}
+            <option value="" disabled selected>{placeholder}</option>
+          {/if}
+          {#each levels as level}
+            <option value={level}>{level}</option>
+          {/each}
+        </select>
+        
 
-      <div class="label-text-alt text-xs text-red-500 mt-1">
-        <p>All fields are required.</p>
-        <p>
-          Changes to 'Attempts' or 'Duration' will not effect users who have
-          already attempted this activity.
+      <div class="label-text-alt text-xs text-red-500">
+        <p>All fields are required. Changes to 'Attempts' or 'Duration' will not effect users who have
+          already viewed or attempted this activity.
         </p>
       </div>
     </fieldset>
