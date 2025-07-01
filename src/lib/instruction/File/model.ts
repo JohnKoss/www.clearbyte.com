@@ -1,7 +1,7 @@
 /////////////
 export interface Attrs {
-    id: string;
-    file_types: string[];
+    fid: string;
     title: string;
     caption: string;
+    file_types: string[];
 }

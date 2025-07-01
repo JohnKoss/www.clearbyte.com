@@ -41,9 +41,8 @@
   const saveContent: any = async () => {
     isSaving = true;
     try {
-      let res: any | undefined = await new Api().POST<any>(
-        JSON.stringify(TabItems),
-      );
+      console.log('TabItems', JSON.stringify(TabItems))
+      let res: any | undefined = await new Api().POST<any>(JSON.stringify(TabItems));
       if (res.ok) {
         showAlert('success', 'Activity SAVED!');
       } else {

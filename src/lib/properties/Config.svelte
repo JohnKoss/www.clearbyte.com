@@ -278,6 +278,7 @@
 
   <form>
     <fieldset class="fieldset pl-4 pb-4">
+      <h2 class="text-base pb-4 text-blue-400">"Lab Id: {cp.id}"</h2>
       <label for="i1" class="fieldset-label"
         >Name - <span class="label-text-alt"
           >Maximum of <span class="text-rose-600">{MAX_LAB_NAME_LENGTH}</span> characters.</span

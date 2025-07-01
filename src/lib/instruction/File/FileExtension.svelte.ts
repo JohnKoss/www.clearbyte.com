@@ -1,9 +1,7 @@
 import { Editor, Node, } from '@tiptap/core'
 import { type Attrs } from "./model";
-import { findFirstAvailableId } from "../utils";
 
 const NODE_NAME = 'file';
-const DATA_ID = 'data-id';
 const CONTAINER_CLASS = 'border rounded-lg p-4 border-2 border-gray-500 max-w-md';
 const DEFAULT_FILE_TYPES: string[] = ['.*'];
 const DEFAULT_TITLE = 'File Upload';
@@ -26,7 +24,7 @@ declare module '@tiptap/core' {
 ///////////////////////
 export function getDefaultFileAttributes(): Attrs {
   return {
-    id: findFirstAvailableId(DATA_ID),
+    fid: "0",//findFirstAvailableId(F_FILE_ID),
     title: DEFAULT_TITLE,
     caption: DEFAULT_INSTRUCTIONS,
     file_types: DEFAULT_FILE_TYPES,
@@ -45,8 +43,8 @@ export const File = Node.create({
   // Add any 'new' attributes to the node
   addAttributes(this: any) {
     return {
-      id: {
-        default: findFirstAvailableId(DATA_ID),
+      fid: {
+        default: "0",   //findFirstAvailableId(DATA_ID),
       },
       title: {
         default: DEFAULT_TITLE,
@@ -68,12 +66,10 @@ export const File = Node.create({
         if (!attrs) {
           attrs = getDefaultFileAttributes();
         } else {
-          attrs.id = findFirstAvailableId(DATA_ID); // Overwrite the id
-        }
+           attrs.fid = "0"  //findFirstAvailableId(DATA_ID); // Overwrite the id
+         }
 
-        console.debug('Adding file:', attrs);
-
-        return commands.insertContent({
+         return commands.insertContent({
           type: this.name,
           attrs,
         });
@@ -84,12 +80,13 @@ export const File = Node.create({
   // Since the document is stored as plain HTML, 
   // we need to parse the HTML to extract the file input attributes
   parseHTML() {
+    console.log('parseHTML');
     return [
       {
-        tag: 'div[data-id][data-file-types][data-title][data-caption]',
+        tag: 'div[data-fid][data-file-types][data-title][data-caption]',
         getAttrs: (dom) => {
           return {
-            id: dom.getAttribute('data-id'),
+            fid: "0", //dom.getAttribute('data-id'),
             title: dom.getAttribute('data-title'),
             caption: dom.getAttribute('data-caption'),
             fileTypes: JSON.parse(dom.getAttribute('data-file-types') || '[]'),
@@ -102,10 +99,11 @@ export const File = Node.create({
   // This called when the node is rendered to the editor (saved).
   // Just save the date attributes to the div element.
   renderHTML({ HTMLAttributes }) {
+    console.log('renderHTML');
     return [
       'div',
       {
-        'data-id': HTMLAttributes.id,
+        'data-fid': "0", //HTMLAttributes.id,
         'data-title': HTMLAttributes.title,
         'data-caption': HTMLAttributes.caption,
         'data-file-types': JSON.stringify(HTMLAttributes.fileTypes),
@@ -120,21 +118,10 @@ export const File = Node.create({
       // Container
       const container = document.createElement('div');
       container.className = CONTAINER_CLASS;
-      container.setAttribute('data-id', node.attrs.id);
+      container.setAttribute('data-fid', node.attrs.fid);
       container.setAttribute('data-title', node.attrs.title);
       container.setAttribute('data-caption', node.attrs.caption);
       container.setAttribute('data-file-types', JSON.stringify(node.attrs.fileTypes));
-
-      // Title Label
-      // const titleLabel = document.createElement('div');
-      // titleLabel.className = 'label';
-      // container.appendChild(titleLabel);
-
-      // // Title Text
-      // const titleValue = document.createElement('span');
-      // titleValue.innerHTML = node.attrs.title; // Using innerHTML to render the bold HTML tags
-      // titleValue.className = 'label-text';
-      // titleLabel.appendChild(titleValue);
 
       // Title
       const titleValue = document.createElement('h2');
@@ -230,7 +217,7 @@ function createFileUploadDialog(editor: Editor, node: any) {
                     <option value=".yml">YAML Data (.yml)</option>
                     <option value=".yaml">YAML Data (.yaml)</option>
                     <option value=".zip">ZIP Archive (.zip)</option>
-                    <option value="(none)">No Extension (none)</option>
+                    <option value="none">No Extension (none)</option>
                 </select>
                 <div class="modal-action">
                     <div class="flex gap-4 p-4">
@@ -302,6 +289,8 @@ function createFileUploadDialog(editor: Editor, node: any) {
 
   return container;
 }
+
+//////////////////////////////////
 
 // function createFileUploadDialog(editor:Editor, node:any) {
 //   // Create dialog container

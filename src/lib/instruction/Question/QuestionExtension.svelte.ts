@@ -57,7 +57,7 @@ export const Question = Node.create({
   addAttributes(this: any) {
     return {
       qid: {
-        default: findFirstAvailableId(DATA_ID), 
+        default: "0" //findFirstAvailableId(DATA_ID), 
       },
       type: {
         default: '0',
@@ -79,7 +79,7 @@ export const Question = Node.create({
     return {
       ...this.parent?.(),
       addQuestion: (attrs: Attrs) => ({ commands }: { commands: any }) => {
-        attrs.qid = findFirstAvailableId(DATA_ID); // Overwrite the id
+        attrs.qid = "0"; //findFirstAvailableId(DATA_ID); // Overwrite the id
         return commands.insertContent({
           type: this.name,
           attrs,
