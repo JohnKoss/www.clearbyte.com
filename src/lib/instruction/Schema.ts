@@ -1,10 +1,12 @@
 import { mergeAttributes } from '@tiptap/core'
+import type { Node } from '@tiptap/pm/model'
+import type { Attributes } from '@tiptap/core'
 
 //////////////
 import { Heading } from '@tiptap/extension-heading'
 export const CustomHeading = Heading.extend({
     levels: [1, 2, 3],
-    renderHTML({ node, HTMLAttributes }) {
+    renderHTML({ node, HTMLAttributes }: { node: Node; HTMLAttributes: Attributes }) {
         const level = this.options.levels.includes(node.attrs.level)
             ? node.attrs.level
             : this.options.levels[0];
@@ -207,7 +209,7 @@ export const CustomTextAlign = TextAlign.extend({
 // });
 
 //////////////
-import Table from "@tiptap/extension-table";
+import {Table} from "@tiptap/extension-table";
 export const CustomTable = Table.extend({
     addOptions() {
         return {

@@ -278,7 +278,7 @@
 
   <form>
     <fieldset class="fieldset pl-4 pb-4">
-      <h2 class="text-base pb-4 text-blue-400">"Lab Id: {cp.id}"</h2>
+      <p class="text-sm pb-4 text-gray-400">"{cp.id}"</p>
       <label for="i1" class="fieldset-label"
         >Name - <span class="label-text-alt"
           >Maximum of <span class="text-rose-600">{MAX_LAB_NAME_LENGTH}</span> characters.</span
@@ -294,12 +294,13 @@
         max={MAX_LAB_NAME_LENGTH}
         required
       />
-      
 
       <!-- Add a name description -->
-      <label for="t1" class="fieldset-label">Description - Name - <span class="label-text-alt"
-        >Maximum of <span class="text-rose-600">{MAX_LAB_DESC_LENGTH}</span> characters.</span
-      ></label>
+      <label for="t1" class="fieldset-label"
+        >Description - <span class="label-text-alt"
+          >Maximum of <span class="text-rose-600">{MAX_LAB_DESC_LENGTH}</span> characters.</span
+        ></label
+      >
       <textarea
         id="t1"
         class="textarea mb-2"
@@ -309,76 +310,67 @@
         maxlength={MAX_LAB_DESC_LENGTH}
         required
       ></textarea>
-      
 
-        <!-- Add an attempts field -->
-        <label for="i2" class="fieldset-label">Attempts</label>
-        <input
-          id="i2"
-          type="number"
-          class="input mb-2"
-          bind:value={cp.attempts}
-          min={LAB_ATTEMPTS_MIN.toString()}
-          max={LAB_ATTEMPTS_MAX.toString()}
-          placeholder="Attempts"
-          required
-        />
-        
+      <!-- Add an attempts field -->
+      <label for="i2" class="fieldset-label">Attempts</label>
+      <input
+        id="i2"
+        type="number"
+        class="input mb-2"
+        bind:value={cp.attempts}
+        min={LAB_ATTEMPTS_MIN.toString()}
+        max={LAB_ATTEMPTS_MAX.toString()}
+        placeholder="Attempts"
+        required
+      />
 
-        <!-- Add an points field -->
-        <label for="i3" class="fieldset-label">Points</label>
-        <input
-          id="i3"
-          type="number"
-          class="input mb-2"
-          bind:value={cp.points}
-          min={LAB_POINTS_MIN.toString()}
-          max={LAB_POINTS_MAX.toString()}
-          placeholder="Points"
-          required
-        />
-      
+      <!-- Add an points field -->
+      <label for="i3" class="fieldset-label">Points</label>
+      <input
+        id="i3"
+        type="number"
+        class="input mb-2"
+        bind:value={cp.points}
+        min={LAB_POINTS_MIN.toString()}
+        max={LAB_POINTS_MAX.toString()}
+        placeholder="Points"
+        required
+      />
 
-        <!-- Duration Field -->
-        <label for="i4" class="fieldset-label"
-          >Duration (seconds)
-          <!-- svelte-ignore a11y_invalid_attribute -->
-          <a href="#" class="link link-primary" onclick={convertToSeconds}>
-            {formatDuration()}
-          </a>
-        </label>
-        <input
-          id="i4"
-          type="number"
-          class="input mb-2"
-          bind:value={cp.duration}
-          min={LAB_DURATION_MIN.toString()}
-          max={LAB_DURATION_MAX.toString()}
-          placeholder="Duration"
-          required
-        />
-        
-        
-        <!-- Level Field -->
-        <label for="s1" class="fieldset-label">Level (difficulty)</label>
-        <select
-          id="s1"
-          class="select mb-2"
-          bind:value={cp.level}
-          required
-        >
-          {#if placeholder}
-            <option value="" disabled selected>{placeholder}</option>
-          {/if}
-          {#each levels as level}
-            <option value={level}>{level}</option>
-          {/each}
-        </select>
-        
+      <!-- Duration Field -->
+      <label for="i4" class="fieldset-label"
+        >Duration (seconds)
+        <!-- svelte-ignore a11y_invalid_attribute -->
+        <a href="#" class="link link-primary" onclick={convertToSeconds}>
+          {formatDuration()}
+        </a>
+      </label>
+      <input
+        id="i4"
+        type="number"
+        class="input mb-2"
+        bind:value={cp.duration}
+        min={LAB_DURATION_MIN.toString()}
+        max={LAB_DURATION_MAX.toString()}
+        placeholder="Duration"
+        required
+      />
+
+      <!-- Level Field -->
+      <label for="s1" class="fieldset-label">Level (difficulty)</label>
+      <select id="s1" class="select mb-2" bind:value={cp.level} required>
+        {#if placeholder}
+          <option value="" disabled selected>{placeholder}</option>
+        {/if}
+        {#each levels as level}
+          <option value={level}>{level}</option>
+        {/each}
+      </select>
 
       <div class="label-text-alt text-xs text-red-500">
-        <p>All fields are required. Changes to 'Attempts' or 'Duration' will not effect users who have
-          already viewed or attempted this activity.
+        <p>
+          All fields are required. Changes to 'Attempts' or 'Duration' will not
+          effect users who have already viewed or attempted this activity.
         </p>
       </div>
     </fieldset>

@@ -26,7 +26,8 @@
   } from '$components/instruction/Image/ImageExtension';
 
   import Color from '@tiptap/extension-color';
-  import TextStyle from '@tiptap/extension-text-style';
+  //import TextStyle from '@tiptap/extension-text-style';
+  import { TextStyleKit } from '@tiptap/extension-text-style'
   import Highlight from '@tiptap/extension-highlight';
   import Gapcursor from '@tiptap/extension-gapcursor';
   import Dropcursor from '@tiptap/extension-dropcursor';
@@ -73,7 +74,7 @@
       extensions: [
         Document,
         Text,
-        TextStyle,
+        TextStyleKit,
         Color,
         History,
         HardBreak,
