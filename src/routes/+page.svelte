@@ -5,10 +5,10 @@
   import Alert from '$lib/Alert.svelte';
   import {
     TITLES,
-    TAB_PROPERTIES,
     TAB_INSTRUCTIONS,
     TAB_ACTIONS,
     TAB_SCORESHEET,
+    TAB_PROPERTIES,
   } from './constants';
   import cx from 'clsx';
   import { TabItems } from './items.svelte';
@@ -35,14 +35,16 @@
   };
 
   /////
-  let activeTabValue = $state(TAB_PROPERTIES);
+  let activeTabValue = $state(TAB_INSTRUCTIONS);
   //const handleClick = (tabValue: number) => () => (activeTabValue = tabValue);
 
   const saveContent: any = async () => {
     isSaving = true;
     try {
-      console.log('TabItems', JSON.stringify(TabItems))
-      let res: any | undefined = await new Api().POST<any>(JSON.stringify(TabItems));
+      console.log('TabItems', JSON.stringify(TabItems));
+      let res: any | undefined = await new Api().POST<any>(
+        JSON.stringify(TabItems),
+      );
       if (res.ok) {
         showAlert('success', 'Activity SAVED!');
       } else {
@@ -83,18 +85,6 @@
       type="radio"
       name="main-tabs"
       class="tab"
-      aria-label={TITLES[TAB_PROPERTIES]}
-      onclick={() => (activeTabValue = TAB_PROPERTIES)}
-      checked={activeTabValue === TAB_PROPERTIES}
-    />
-    <div class="tab-content bg-base-100 border-base-300">
-      <Config id={TAB_PROPERTIES} data={TabItems[TAB_PROPERTIES].data} />
-    </div>
-
-    <input
-      type="radio"
-      name="main-tabs"
-      class="tab"
       aria-label={TITLES[TAB_INSTRUCTIONS]}
       onclick={() => (activeTabValue = TAB_INSTRUCTIONS)}
       checked={activeTabValue === TAB_INSTRUCTIONS}
@@ -129,6 +119,19 @@
     <div class="tab-content bg-base-100 border-base-300">
       <ActionsEditor id={TAB_SCORESHEET} data={TabItems[TAB_SCORESHEET].data} />
     </div>
+
+    <input
+      type="radio"
+      name="main-tabs"
+      class="tab"
+      aria-label={TITLES[TAB_PROPERTIES]}
+      onclick={() => (activeTabValue = TAB_PROPERTIES)}
+      checked={activeTabValue === TAB_PROPERTIES}
+    />
+    <div class="tab-content bg-base-100 border-base-300">
+      <Config id={TAB_PROPERTIES} data={TabItems[TAB_PROPERTIES].data} />
+    </div>
+
     <!-- {#each TabItems as item}
       {console.debug('item', item)}
       {@render tabs(item)}

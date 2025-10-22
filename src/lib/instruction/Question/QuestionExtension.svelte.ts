@@ -36,10 +36,12 @@ export function getDefaultQuestionAttributes(): Attrs {
     qid: findFirstAvailableId(DATA_ID), 
     type: QUESTION_TYPE_MULTIPLE_CHOICE, // Multiple choice
     points: '5',
-    questionText: 'Sample question text',
+    questionText: '',
     options: [
-      { text: 'Option 1', selected: false },
-      { text: 'Option 2', selected: false },
+      { text: '', selected: false },
+      { text: '', selected: false },
+      { text: '', selected: false },
+      { text: '', selected: false },
     ],
   };
 }
@@ -137,13 +139,16 @@ export const Question = Node.create({
         domQ.appendChild(rendered.dom);
       }
 
-      // Add a dblclick event listener to the domQ
-      domQ.addEventListener('dblclick', () => {
-        // Get the current attributes of the node
-        // and let the user edit them in a dialog
-        const pos = getPos();
-        const node = editor.state.doc.nodeAt(pos);
-        if (node) showQuestionDlg(editor, node.attrs as Attrs, pos);
+      // Add a click event listener to the edit button
+      domQ.addEventListener('click', (event) => {
+        const target = event.target as HTMLElement;
+        if (target.id === 'id-edit') {
+          // Get the current attributes of the node
+          // and let the user edit them in a dialog
+          const pos = getPos();
+          const node = editor.state.doc.nodeAt(pos);
+          if (node) showQuestionDlg(editor, node.attrs as Attrs, pos);
+        }
       });
 
       // Return the node view object
@@ -254,10 +259,24 @@ const questionNodeSpec = (HTMLAttributes: Attrs): DOMOutputSpec => {
             value: option.text,
             checked: option.selected ? 'checked' : undefined,
             disabled: true,
+            placeholder: 'Option ' + (index + 1),
           },
         ],
       ],
     ]),
+    [
+      'div',
+      { class: 'mt-4 flex justify-end' },
+      [
+        'button',
+        {
+          id: 'id-edit',
+          class: 'btn btn-primary',
+          type: 'button'
+        },
+        'Edit Question'
+      ]
+    ]
   ];
 };
 

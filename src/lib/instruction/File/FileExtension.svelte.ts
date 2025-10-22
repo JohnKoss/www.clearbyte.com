@@ -5,7 +5,7 @@ const NODE_NAME = 'file';
 const CONTAINER_CLASS = 'border rounded-lg p-4 border-2 border-gray-500 max-w-md';
 const DEFAULT_FILE_TYPES: string[] = ['.*'];
 const DEFAULT_TITLE = 'File Upload';
-const DEFAULT_INSTRUCTIONS = '&lt; Instructions for uploading the file go here&gt;';
+const DEFAULT_INSTRUCTIONS = '';
 
 ////////////////////
 declare module '@tiptap/core' {
@@ -199,7 +199,7 @@ function createFileUploadDialog(editor: Editor, node: any) {
                 <label class="fieldset-label">Title:</label>
                 <input id="title" type="text" class="input" required />
                 <label class="fieldset-label">Caption:</label>
-                <input id="caption" type="text" class="input" required />
+                <input id="caption" type="text" class="input" required placeholder="Enter caption" />
                 <label class="fieldset-label">Select Allowed File Types:</label>
                 <select id="file-types" name="fileTypes" multiple size="5" required>
                     <option value=".png">PNG Image (.png)</option>
@@ -266,8 +266,18 @@ function createFileUploadDialog(editor: Editor, node: any) {
     const captionElement = container.querySelector('#caption');
     const caption = captionElement ? (captionElement as HTMLInputElement).value : '';
 
+    if (!caption.trim()) {
+      alert('Please enter a caption.');
+      return;
+    }
+
     const fileTypesElement = container.querySelector('#file-types');
     const selectedFileTypes = fileTypesElement ? Array.from((fileTypesElement as HTMLSelectElement).selectedOptions).map((opt) => opt.value) : [];
+
+    if (selectedFileTypes.length === 0) {
+      alert('Please select at least one file type.');
+      return;
+    }
 
     // Update node attributes in the editor
     editor.chain().focus().updateAttributes(node.type.name, {
