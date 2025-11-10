@@ -41,7 +41,7 @@
       cp.name = metaData.customClaims.lab_name;
       cp.attempts = 3;
       cp.points = 10;
-      cp.duration = 300;
+      cp.duration = 3600;
       cp.level = '1';
     }
 
