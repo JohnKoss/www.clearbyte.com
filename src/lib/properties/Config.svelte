@@ -224,6 +224,12 @@
         />
       </div>
     </label>
+    <label class="form-control w-full max-w-sm mb-4">
+      <div class="label">
+        <span class="label-text">Upload File</span>
+      </div>
+      <input type="file" class="file-input file-input-bordered w-full max-w-xs" />
+    </label>
     <div class="modal-action">
       <form method="dialog">
         <!-- if there is a button in form, it will close the modal -->
