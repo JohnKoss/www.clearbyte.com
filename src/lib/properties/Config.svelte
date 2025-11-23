@@ -224,12 +224,7 @@
         />
       </div>
     </label>
-    <label class="form-control w-full max-w-sm mb-4">
-      <div class="label">
-        <span class="label-text">Upload File</span>
-      </div>
-      <input type="file" class="file-input file-input-bordered w-full max-w-xs" />
-    </label>
+
     <div class="modal-action">
       <form method="dialog">
         <!-- if there is a button in form, it will close the modal -->
@@ -251,9 +246,9 @@
           <div class="font-bold">
             <!-- svelte-ignore a11y_invalid_attribute -->
             <a
-              class="text-sky-600 tooltip"
+              class="text-sky-600"
               href="#"
-              data-tip={key}
+              title={key}
               onclick={(e) => exportChosen(e, key)}>{value.name}</a
             >&nbsp;
           </div>
@@ -382,25 +377,35 @@
     </fieldset>
   </form>
   <div class="divider w-full max-w-xl">Lab Activity Import/Export</div>
-  <button class="btn btn-info" onclick={importContent}>
-    {#if isImporting}
-      <span class="loading loading-spinner"></span>
-    {/if}
-    Import</button
-  >
 
-  <button class="btn btn-info" onclick={exportContent}>
-    {#if isExporting}
-      <span class="loading loading-spinner"></span>
-    {/if}
-    Export</button
+  <fieldset
+    class="fieldset bg-base-100 w-xs  pl-4"
   >
+    
+    <div class="join">
+      <button class="btn btn-info join-item border-white" onclick={importContent}>
+      {#if isImporting}
+        <span class="loading loading-spinner"></span>
+      {/if}
+      Import</button
+      >
+
+      <button class="btn btn-info join-item border-white" onclick={exportContent}>
+      {#if isExporting}
+        <span class="loading loading-spinner"></span>
+      {/if}
+      Export</button
+      >
+    </div>
+    <p class="label">Please save lab activities before export</p>
+  </fieldset>
   {#if exportUrl}
-    <div class="mt-4">
+    <div class="mt-4 text-sm">
+      Click to download:
       <a
-        title="click to download"
-        class="link link-info font-bold"
-        href={exportUrl}>Click to download: {exportLabName}</a
+      title="click to download"
+      class="link link-info font-bold"
+      href={exportUrl}>{exportLabName}</a
       >
     </div>
   {/if}

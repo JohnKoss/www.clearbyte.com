@@ -22,16 +22,15 @@
   const { data } = $props();
 
   //////////////
-  let alertShow = $state(false);
+  let alertAutoClose = $state(false);
   let alertType = $state('success');
   let alertMsg = $state('');
-  const showAlert = (at: string, am: string) => {
+  let alertShow = $state(false);
+  const showAlert = (at: string, am: string, autoClose: boolean) => {
     alertType = at;
     alertMsg = am;
+    alertAutoClose = autoClose;
     alertShow = true;
-    setTimeout(() => {
-      alertShow = false;
-    }, 2000);
   };
 
   /////
@@ -40,18 +39,19 @@
 
   const saveContent: any = async () => {
     isSaving = true;
+    alertShow = false;
     try {
       console.log('TabItems', JSON.stringify(TabItems));
       let res: any | undefined = await new Api().POST<any>(
         JSON.stringify(TabItems),
       );
       if (res.ok) {
-        showAlert('success', 'Activity SAVED!');
+        showAlert('alert-success', res.message, true);
       } else {
-        showAlert('error', res.message);
+        showAlert('alert-error', res.message, false);
       }
     } catch (error: any) {
-      showAlert('error', error);
+      showAlert('alert-error', error, false);
     } finally {
       isSaving = false;
     }
@@ -74,10 +74,10 @@
 <div class="p-4">
   <div class="mb-4">
     {#if alertShow}
-      <Alert type={alertType} message={alertMsg} />
+      <Alert message={alertMsg} type={alertType} autoClose={alertAutoClose} />
     {/if}
     {#if data.error}
-      <Alert type="error" message={data.content[0]} />
+      <Alert type="alert-error" message={data.content[0]} autoClose={false} />
     {/if}
   </div>
   <div class="tabs tabs-lift tabs-lg">
