@@ -47,7 +47,8 @@
   import cx from 'clsx';
 
   import { File } from '$components/instruction/File/FileExtension.svelte';
-  import { TabItems } from '../../routes/items.svelte';
+  //import { TabItems } from '../../routes/items.svelte';
+  import { TabItems } from '../../../routes/items.svelte';
 
   let { id, data }: { id: number; data: string } = $props();
 

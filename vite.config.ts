@@ -9,9 +9,9 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 export default defineConfig({
-	define: {
-		'process.env.PUBLIC_TEST_JWT': JSON.stringify(process.env.PUBLIC_TEST_JWT),
-	},
+	// define: {
+	// 	'process.env.PUBLIC_TEST_JWT': JSON.stringify(process.env.PUBLIC_TEST_JWT),
+	// },
 	plugins: [tailwindcss(), sveltekit()],
 	build: {
 		minify: true, // Minify the output. Turn off for debugging

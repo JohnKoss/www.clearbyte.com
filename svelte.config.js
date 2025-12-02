@@ -23,7 +23,8 @@ const config = {
 			relative: false
 		},
 		alias: {
-			$components: "src/lib",
+			$lib: "src/lib",
+			$components: "src/lib/components",			
 		},
 	},
 	

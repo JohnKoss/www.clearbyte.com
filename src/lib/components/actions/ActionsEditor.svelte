@@ -5,8 +5,7 @@
   import { lightTheme, fixedHeightEditor, fontTheme } from './theme';
   import Menu, { themeCompartment, fontCompartment } from './Menu.svelte';
   import { onDestroy, onMount, untrack } from 'svelte';
-  import { TabItems } from '../../routes/items.svelte';
-
+  import { TabItems } from '../../../routes/items.svelte';
   import { errorField } from './errorHighlighting';
 
   const { id, data }: { id: number; data: string } = $props();

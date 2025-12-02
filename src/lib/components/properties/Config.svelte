@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount, untrack } from 'svelte';
-  import { metaData } from '../../routes/state.svelte';
-  import { TabItems } from '../../routes/items.svelte';
+  import { metaData } from '../../../routes/state.svelte';
+  import { TabItems } from '../../../routes/items.svelte';
   import {
     LAB_DURATION_MIN,
     LAB_DURATION_MAX,
@@ -16,11 +16,21 @@
     type ILabData,
     ConfigProps,
   } from './state.svelte';
-  import { Api, type IMessageResults } from '$components/api.svelte';
+  //import { Api, type IMessageResults } from '$components/old_api.svelte.ts.old';
+  import { Api, type IPostResults } from '$lib/api';
   import Alert from '$lib/Alert.svelte';
+  const URL_ADMIN = import.meta.env.VITE_PUBLIC_API_PATH + '/admin/labs';
 
   /////////////
   const { id, data }: { id: number; data: string } = $props();
+
+  $effect(() => {
+    console.log('id changed:', id);
+  });
+
+  $effect(() => {
+    console.log('data changed:', data);
+  });
 
   /////////////
   let cp = $state<ConfigProps>(new ConfigProps());
@@ -120,9 +130,12 @@
   const exportContent: any = async () => {
     isExporting = true;
     try {
-      let api = new Api();
-      api.appendUrl('export');
-      let res: any | undefined = await api.POST<any>();
+      //let api = new Api('labs/export');
+      //api.appendUrl();
+      //let res: any | undefined = await api.POST<any>();
+      const url = new URL(URL_ADMIN+'/export');
+      const api = new Api(url);
+      const res = await api.Get<IPostResults>();
       if (res.ok) {
         const obj = JSON.parse(res.message);
         exportLabName = obj.name;
@@ -145,9 +158,12 @@
     evt.preventDefault();
     isImporting = true;
     try {
-      let api = new Api();
-      api.appendUrl('export/list');
-      let res = await api.GET<any>();
+      //let api = new Api('labs/export');
+      //api.appendUrl('labs/export/list');
+      //let res = await api.GET<any>();
+      const url = new URL(URL_ADMIN+'/export/list');
+      const api = new Api(url);
+      const res = await api.Get<IPostResults>();
       if (res.ok) {
         const parsedLabData: ILabData = JSON.parse(res.message);
         exportedLabs = new Map(Object.entries(parsedLabData));
@@ -166,10 +182,13 @@
     evt.preventDefault();
     showExports = false;
     try {
-      let api = new Api();
-      api.appendUrl('import');
-      api.url.searchParams.append('lab_id', labId);
-      let res = await api.GET<IMessageResults>();
+      //let api = new Api('labs/import');
+      //api.appendUrl('labs/import');
+      //api.url.searchParams.append('lab_id', labId);
+      //let res = await api.GET<IMessageResults>();
+      const url = new URL(URL_ADMIN+'/import');
+      const api = new Api(url);
+      const res = await api.Get<IPostResults>();
       if (res.ok) {
         const dataItems = JSON.parse(res.message) as string[];
         Object.keys(dataItems).forEach((key) => {
@@ -378,23 +397,26 @@
   </form>
   <div class="divider w-full max-w-xl">Lab Activity Import/Export</div>
 
-  <fieldset
-    class="fieldset bg-base-100 w-xs  pl-4"
-  >
-    
+  <fieldset class="fieldset bg-base-100 w-xs pl-4">
     <div class="join">
-      <button class="btn btn-info join-item border-white" onclick={importContent}>
-      {#if isImporting}
-        <span class="loading loading-spinner"></span>
-      {/if}
-      Import</button
+      <button
+        class="btn btn-info join-item border-white"
+        onclick={importContent}
+      >
+        {#if isImporting}
+          <span class="loading loading-spinner"></span>
+        {/if}
+        Import</button
       >
 
-      <button class="btn btn-info join-item border-white" onclick={exportContent}>
-      {#if isExporting}
-        <span class="loading loading-spinner"></span>
-      {/if}
-      Export</button
+      <button
+        class="btn btn-info join-item border-white"
+        onclick={exportContent}
+      >
+        {#if isExporting}
+          <span class="loading loading-spinner"></span>
+        {/if}
+        Export</button
       >
     </div>
     <p class="label">Please save lab activities before export</p>
@@ -403,9 +425,9 @@
     <div class="mt-4 text-sm">
       Click to download:
       <a
-      title="click to download"
-      class="link link-info font-bold"
-      href={exportUrl}>{exportLabName}</a
+        title="click to download"
+        class="link link-info font-bold"
+        href={exportUrl}>{exportLabName}</a
       >
     </div>
   {/if}
