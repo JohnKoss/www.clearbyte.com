@@ -50,15 +50,18 @@
   //import { TabItems } from '../../routes/items.svelte';
   import { TabItems } from '../../../routes/items.svelte';
 
-  let { id, data }: { id: number; data: string } = $props();
+  let { id, data, dirty = $bindable() }: { id: number; data: string; dirty: number } = $props();
 
   //////////////
   $effect(() => {
     const currentVal = editor?.getHTML() ?? '';
     if (data !== currentVal) {
+      console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXX Data prop changed, updating editor content.',data!== currentVal);
       untrack(() => {
         editor && editor.commands.setContent(data);
       });
+    } else {
+      console.log('DDDDDDDDDDDDDDDDDDDDDDDDDDDD Data prop change matches editor content, no update needed.',data=== currentVal);
     }
   });
 
@@ -120,10 +123,16 @@
         }),
       ],
       content: data,
-      onTransaction: (e: any) => {
+      onTransaction: ({ editor, transaction }) => {
+        // Check if the transaction actually modified the document
+        if (transaction.docChanged) {
+          dirty = dirty + 1;
+        }
+        
+        // Update menu items state regardless of content changes
         menuItems.forEach(
           (item) =>
-            (item.isActive = item.active ? (item.active() ?? false) : false),
+        (item.isActive = item.active ? (item.active() ?? false) : false),
         );
       },
       editorProps: {
@@ -133,9 +142,10 @@
     menuItems = createMenuItems(editor);
 
     //////////////////
-    editor.on('update', ({ editor }) =>
-      setTimeout(() => (TabItems[id].data = editor.getHTML())),
-    );
+    editor.on('update', ({ editor }) => {
+      console.log('Content updated, dirty:', dirty);
+      setTimeout(() => (TabItems[id].data = editor.getHTML()));
+    });
   });
 
   //////////////

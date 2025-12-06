@@ -209,15 +209,14 @@ function createFileUploadDialog(editor: Editor, node: any) {
                     <option value=".html">Web Page (.html)</option>
                     <option value=".pdf">PDF Document (.pdf)</option>
                     <option value=".plain">Text File (.txt)</option>
-                    <option value=".doc">Word Document (.doc)</option>
                     <option value=".docx">Word Document (.docx)</option>
-                    <option value=".xls">Excel Spreadsheet (.xls)</option>
                     <option value=".xlsx">Excel Spreadsheet (.xlsx)</option>
                     <option value=".json">JSON Data (.json)</option>
-                    <option value=".yml">YAML Data (.yml)</option>
                     <option value=".yaml">YAML Data (.yaml)</option>
                     <option value=".zip">ZIP Archive (.zip)</option>
-                    <option value="none">No Extension (none)</option>
+                    <option value=".py">Python Script (.py)</option>
+                    <option value=".tfc">Terraform (.tf)</option>
+                    <option value="any">Any Extension (any)</option>
                 </select>
                 <div class="modal-action">
                     <div class="flex gap-4 p-4">

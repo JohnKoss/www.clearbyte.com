@@ -49,6 +49,7 @@
     if (data === '{}') {
       cp.id = metaData.customClaims.lab_id;
       cp.name = metaData.customClaims.lab_name;
+      cp.desc = `Lab Activity Description for '${cp.name}'`;
       cp.attempts = 3;
       cp.points = 10;
       cp.duration = 3600;
@@ -133,9 +134,9 @@
       //let api = new Api('labs/export');
       //api.appendUrl();
       //let res: any | undefined = await api.POST<any>();
-      const url = new URL(URL_ADMIN+'/export');
+      const url = new URL(URL_ADMIN + '/export');
       const api = new Api(url);
-      const res = await api.Get<IPostResults>();
+      const res = await api.Post<IPostResults>();
       if (res.ok) {
         const obj = JSON.parse(res.message);
         exportLabName = obj.name;
@@ -161,7 +162,7 @@
       //let api = new Api('labs/export');
       //api.appendUrl('labs/export/list');
       //let res = await api.GET<any>();
-      const url = new URL(URL_ADMIN+'/export/list');
+      const url = new URL(URL_ADMIN + '/export/list');
       const api = new Api(url);
       const res = await api.Get<IPostResults>();
       if (res.ok) {
@@ -186,7 +187,7 @@
       //api.appendUrl('labs/import');
       //api.url.searchParams.append('lab_id', labId);
       //let res = await api.GET<IMessageResults>();
-      const url = new URL(URL_ADMIN+'/import');
+      const url = new URL(URL_ADMIN + '/import');
       const api = new Api(url);
       const res = await api.Get<IPostResults>();
       if (res.ok) {

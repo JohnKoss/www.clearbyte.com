@@ -51,11 +51,13 @@ export class Api {
       const response = await fetch(this.url, d);
 
       // Use the responseType parameter to decide how to process the response
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
+      // if (!response.ok) {
+      //   throw new Error(`HTTP error! Status: ${response.status}`);
+      // }
 
-        return (await response.json()) as Type;
+      const j = await response.json()
+      console.log("response", j)
+        return j as Type;
     } catch (error) {
       console.error('Fetch error: ', error);
     } finally {
@@ -82,15 +84,16 @@ export class Api {
   
       // Use the responseType parameter to decide how to process the response
       if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+        const errorMessage = await response.text();
+        throw new Error(errorMessage || `HTTP error! Status: ${response.status}`);
       }  
         return (await response.text()) as Type;
     } catch (error) {
-      console.log('Fetch error: ', error);
+      console.error('Fetch error: ', error);
+      return Promise.reject(error instanceof Error ? error.message : 'Unknown error occurred');
     } finally {
       clearTimeout(timeout);
    }
-    return Promise.reject(`Error! POST`);
   }
   
 

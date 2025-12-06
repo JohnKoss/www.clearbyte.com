@@ -399,7 +399,17 @@ export function createMenuItems(editor: Editor): MenuItem[] {
       "open",
       "mdi:folder-open",
       //openFile,
+      () => {}, // No action
       () => false,
+      true,
     ),
+        new MenuItem(
+      "Auto Save: ON",
+      "mdi:content-save-check",
+      () => {}, // No action
+      () => true, // Never active
+      true,
+    ),
+
   ];
 }

@@ -19,10 +19,12 @@
   import Config from '../lib/components/properties/Config.svelte';
   import ActionsEditor from '../lib/components/actions/ActionsEditor.svelte';
   import Analysis from '../lib/components/analysis/Analysis.svelte';
+  import SaveFab from '../lib/components/SaveFab.svelte';
   //const URL_ADMIN = import.meta.env.VITE_PUBLIC_API_PATH + '/admin/labs/all';
 
   ////////////
   let isSaving = $state(false);
+  let isAutoSave = $state(true);
 
   //const { data }: { data: { content?: any; error?: boolean } } = $props();
 
@@ -43,11 +45,11 @@
   //const handleClick = (tabValue: number) => () => (activeTabValue = tabValue);
 
   let dataError = $state(false);
-  let loadingSuccess = $state(false);
+  let loading = $state(false);
 
   onMount(async () => {
-    loadingSuccess = true;
-    
+    loading = true;
+
     try {
       await LoadJwt();
       await loadLabData();
@@ -55,7 +57,8 @@
       console.error('Error during initialization:', error);
       dataError = true;
     } finally {
-      loadingSuccess = false;
+      console.log('Finished loading lab data.');
+      loading = false;
     }
   });
 
@@ -80,19 +83,14 @@
     isSaving = true;
     alertShow = false;
     try {
-      console.log('TabItems', JSON.stringify(TabItems));
-      //let res: any | undefined = await new Api().POST<any>(
-      //JSON.stringify(TabItems),
-      //);
       const url = new URL(
         import.meta.env.VITE_PUBLIC_API_PATH + '/admin/labs/save',
       );
       const api = new Api(url);
       const res = await api.Post<IPostResults>(TabItems);
+      console.log('Save response:', res);
 
-      if (res.ok) {
-        showAlert('alert-success', res.message, true);
-      } else {
+      if (!res.ok) {
         showAlert('alert-error', res.message, false);
       }
     } catch (error: any) {
@@ -101,11 +99,28 @@
       isSaving = false;
     }
   };
+
+  ///////////////
+  let dirty = $state<number>(0);
+  let debounceTimer: ReturnType<typeof setTimeout>;
+
+  $effect(() => {
+    console.log('Page Svelte effect - dirty changed:', dirty);
+    if (dirty && !loading) {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        if (isAutoSave) {
+          saveContent();
+        }
+      }, 5000);
+    }
+    dirty = 0;
+  });
 </script>
 
 <svelte:head />
 
-{#if loadingSuccess}
+{#if loading}
   <dialog class="modal modal-open">
     <div class="modal-box">
       <div class="flex items-center m-4">
@@ -115,6 +130,13 @@
     </div>
   </dialog>
 {/if}
+
+<!--   
+<SaveFab
+  onSave={saveContent}
+  {dirty}
+  onSaving={handleSaved}  
+/> -->
 
 <div class="p-4">
   <div class="mb-4">
@@ -129,7 +151,7 @@
       />
     {/if}
   </div>
-  <div class="tabs tabs-lift tabs-lg">
+  <div class="tabs tabs-lift">
     <input
       type="radio"
       name="main-tabs"
@@ -142,6 +164,7 @@
       <InstructionEditor
         id={TAB_INSTRUCTIONS}
         data={TabItems[TAB_INSTRUCTIONS].data}
+        bind:dirty
       />
     </div>
 
@@ -196,12 +219,31 @@
       {console.debug('item', item)}
       {@render tabs(item)}
     {/each} -->
-    <button
+    <!-- <button
       class={cx('tab btn btn-warning ml-2 mr-2', {
         'loading loading-spinner': isSaving,
       })}
       onclick={saveContent}>Save</button
-    >
+    > -->
+    <div class="tab flex items-center gap-2 ml-2 mr-2">
+      <button 
+      class={cx('btn btn-sm btn-primary', {
+        'loading loading-spinner': isSaving,
+      })}
+      onclick={saveContent}
+      disabled={isSaving}
+      >
+      Save
+      </button>
+      <label class="label cursor-pointer gap-2">
+      <input 
+        type="checkbox" 
+        class="toggle-primary toggle-xs" 
+        bind:checked={isAutoSave}
+      />
+      <span class="label-text text-primary">Auto-save</span>
+      </label>
+    </div>
   </div>
 </div>
 

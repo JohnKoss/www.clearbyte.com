@@ -54,6 +54,17 @@
       loading = false;
     }
   };
+
+  // Reset 'waitingForResults' after 5 seconds
+  $effect(() => {
+    if (waitingForResults) {
+      const timer = setTimeout(() => {
+        waitingForResults = false;
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  });
+
 </script>
 
 <div class="card bg-base-100 shadow-xl">
