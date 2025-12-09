@@ -2,7 +2,7 @@ import { Editor, Node, } from '@tiptap/core'
 import { type Attrs } from "./model";
 
 const NODE_NAME = 'file';
-const CONTAINER_CLASS = 'border rounded-lg p-4 border-2 border-gray-500 max-w-md';
+const CONTAINER_CLASS = 'border rounded-lg p-4 border-2 border-gray-200 max-w-xl';
 const DEFAULT_FILE_TYPES: string[] = ['.*'];
 const DEFAULT_TITLE = 'File Upload';
 const DEFAULT_INSTRUCTIONS = '';
@@ -165,7 +165,7 @@ export const File = Node.create({
 
       // Edit Button
       const editButton = document.createElement('button');
-      editButton.className = 'text-right btn btn-primary';
+      editButton.className = 'text-right btn btn-primary btn-sm';
       editButton.textContent = 'Edit';
       editButton.addEventListener('click', () => createFileUploadDialog(editor, node));
       actionsContainer.appendChild(editButton);

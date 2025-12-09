@@ -33,7 +33,7 @@ declare module '@tiptap/core' {
 export function getDefaultQuestionAttributes(): Attrs {
 
   return {
-    qid: findFirstAvailableId(DATA_ID), 
+    qid: findFirstAvailableId(DATA_ID),
     type: QUESTION_TYPE_MULTIPLE_CHOICE, // Multiple choice
     points: '5',
     questionText: '',
@@ -146,8 +146,8 @@ export const Question = Node.create({
           // Get the current attributes of the node
           // and let the user edit them in a dialog
           const pos = getPos();
-          const node = editor.state.doc.nodeAt(pos);
-          if (node) showQuestionDlg(editor, node.attrs as Attrs, pos);
+          const node = editor.state.doc.nodeAt(pos as number);
+          if (node) showQuestionDlg(editor, node.attrs as Attrs, pos as number);
         }
       });
 
@@ -214,7 +214,7 @@ const questionNodeSpec = (HTMLAttributes: Attrs): DOMOutputSpec => {
       'data-points': points,
       'data-question-text': questionText,
       'data-options': JSON.stringify(options),
-      class: "border rounded-lg p-4 border-2 border-gray-500 max-w-md",
+      class: "border rounded-lg p-4 border-2 border-gray-200 max-w-xl",
     },
     [
       'div',
@@ -233,34 +233,37 @@ const questionNodeSpec = (HTMLAttributes: Attrs): DOMOutputSpec => {
         `${points} pts`,
       ],
     ],
-    ['h3', { id: 'question-text', class: 'text-left font-bold' }, questionText],
+    ['h3', { 
+      id: 'question-text', 
+      class: `text-left font-bold ${!questionText ? 'text-gray-400 italic' : ''}` 
+    }, questionText || 'Enter question text...'],
     // pass an index too        
-    ...options.map((option: { text: any; selected: any; }, index: number) => [
+    ...options.map((option: { text: any; selected: any }, index: number) => [
       'div',
-      { class: 'form-control pl-4' },
+      { class: 'pl-0' },
       [
-        'label',
-        { class: 'label cursor-pointer' },
+        'ul',
+        { class: 'list-none space-y-1' }, // tighter spacing
         [
-          'span',
+          'li',
           {
-            id: 'option-text-' + qid + index,
-            class: 'label-text'
+            id: 'option-' + qid + index,
+            class: `
+          px-2 py-1 rounded text-sm leading-tight
+          ${option.selected
+                ? 'bg-blue-500 text-white font-semibold marker:text-gray-900'
+                : 'bg-gray-100 text-gray-800 marker:text-gray-800'}
+
+        `,
           },
-          option.text,
-        ],
-        [
-          'input',
-          {
-            id: 'option-value-' + qid + index,
-            type: 'radio',
-            name: 'question-' + qid, // For grouping the radio buttons
-            class: 'radio checked:bg-red-500',
-            value: option.text,
-            checked: option.selected ? 'checked' : undefined,
-            disabled: true,
-            placeholder: 'Option ' + (index + 1),
-          },
+          [
+            'span',
+            {
+              id: 'option-text-' + qid + index,
+              class: `cursor-auto break-words text-wrapping ${!option.text ? 'text-gray-400 italic' : ''}`,
+            },
+            option.text || 'Enter option text...',
+          ],
         ],
       ],
     ]),
@@ -271,7 +274,7 @@ const questionNodeSpec = (HTMLAttributes: Attrs): DOMOutputSpec => {
         'button',
         {
           id: 'id-edit',
-          class: 'btn btn-primary',
+          class: 'btn btn-primary btn-sm',
           type: 'button'
         },
         'Edit Question'

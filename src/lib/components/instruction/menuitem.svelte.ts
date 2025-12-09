@@ -2,6 +2,7 @@ import { Editor } from "@tiptap/core";
 import { chooseImage } from "./Image/ImageExtension";
 import { IMG_STYLE_LEFT } from "$components/instruction/Image/const";
 import { getDefaultQuestionAttributes } from "./Question/QuestionExtension.svelte";
+import {getDefaultCollapsibleAttributes} from "./Collapsible/CollapsibleExtension.svelte";
 
 ///////////////////////////
 export class MenuItem {
@@ -395,19 +396,11 @@ export function createMenuItems(editor: Editor): MenuItem[] {
       () => editor.isActive("file"),
       true,
     ),
-    new MenuItem(
-      "open",
-      "mdi:folder-open",
-      //openFile,
-      () => {}, // No action
-      () => false,
-      true,
-    ),
-        new MenuItem(
-      "Auto Save: ON",
+     new MenuItem(
+      "codeblock",
       "mdi:content-save-check",
-      () => {}, // No action
-      () => true, // Never active
+      () => editor.chain().focus().addCollapsible(getDefaultCollapsibleAttributes()).run(),
+      () => editor.isActive("codeblock"),
       true,
     ),
 

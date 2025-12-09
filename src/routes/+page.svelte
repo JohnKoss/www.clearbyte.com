@@ -1,6 +1,6 @@
 <script lang="ts">
   import '../app.css';
-  import { onMount } from 'svelte';
+  import { onDestroy, onMount } from 'svelte';
   import { Api, type IPostResults } from '$lib/api';
   import { LoadJwt } from '$lib/auth';
   import Alert from '$lib/Alert.svelte';
@@ -20,6 +20,7 @@
   import ActionsEditor from '../lib/components/actions/ActionsEditor.svelte';
   import Analysis from '../lib/components/analysis/Analysis.svelte';
   import SaveFab from '../lib/components/SaveFab.svelte';
+  import { beforeNavigate } from '$app/navigation';
   //const URL_ADMIN = import.meta.env.VITE_PUBLIC_API_PATH + '/admin/labs/all';
 
   ////////////
@@ -62,6 +63,29 @@
     }
   });
 
+  onDestroy(() => {
+    console.log(
+      'XXXXXXXXXXXXXXXXXXXXXXXXXXX Page Svelte onDestroy called. Saving if dirty.',
+    );
+    if (dirty && !loading) {
+      if (isAutoSave) {
+        saveContent();
+      }
+    }
+  });
+
+  beforeNavigate(({ cancel }) => {
+    if (dirty && !loading) {
+      if (
+        !confirm(
+          'Are you sure you want to leave this page? You have unsaved changes that will be lost.',
+        )
+      ) {
+        cancel();
+      }
+    }
+  });
+
   const loadLabData = async () => {
     const url = new URL(
       import.meta.env.VITE_PUBLIC_API_PATH + '/admin/labs/all',
@@ -79,10 +103,15 @@
     });
   };
 
+  ///////////////
+  let dirty = $state<number>(0);
+  let debounceTimer: ReturnType<typeof setTimeout>;
   const saveContent: any = async () => {
-    isSaving = true;
-    alertShow = false;
     try {
+      clearTimeout(debounceTimer);
+      isSaving = true;
+      alertShow = false;
+
       const url = new URL(
         import.meta.env.VITE_PUBLIC_API_PATH + '/admin/labs/save',
       );
@@ -96,13 +125,12 @@
     } catch (error: any) {
       showAlert('alert-error', error, false);
     } finally {
+      dirty = 0;
       isSaving = false;
     }
   };
 
   ///////////////
-  let dirty = $state<number>(0);
-  let debounceTimer: ReturnType<typeof setTimeout>;
 
   $effect(() => {
     console.log('Page Svelte effect - dirty changed:', dirty);
@@ -114,7 +142,6 @@
         }
       }, 5000);
     }
-    dirty = 0;
   });
 </script>
 
@@ -226,22 +253,22 @@
       onclick={saveContent}>Save</button
     > -->
     <div class="tab flex items-center gap-2 ml-2 mr-2">
-      <button 
-      class={cx('btn btn-sm btn-primary', {
-        'loading loading-spinner': isSaving,
-      })}
-      onclick={saveContent}
-      disabled={isSaving}
+      <button
+        class={cx('btn btn-sm btn-primary', {
+          'loading loading-spinner': isSaving,
+        })}
+        onclick={saveContent}
+        disabled={isSaving}
       >
-      Save
+        Save
       </button>
       <label class="label cursor-pointer gap-2">
-      <input 
-        type="checkbox" 
-        class="toggle-primary toggle-xs" 
-        bind:checked={isAutoSave}
-      />
-      <span class="label-text text-primary">Auto-save</span>
+        <input
+          type="checkbox"
+          class="toggle-primary toggle-xs"
+          bind:checked={isAutoSave}
+        />
+        <span class="label-text text-primary">Auto-save</span>
       </label>
     </div>
   </div>

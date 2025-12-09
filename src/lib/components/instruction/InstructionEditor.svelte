@@ -27,7 +27,7 @@
 
   import Color from '@tiptap/extension-color';
   //import TextStyle from '@tiptap/extension-text-style';
-  import { TextStyleKit } from '@tiptap/extension-text-style'
+  import { TextStyleKit } from '@tiptap/extension-text-style';
   import Highlight from '@tiptap/extension-highlight';
   import Gapcursor from '@tiptap/extension-gapcursor';
   import Dropcursor from '@tiptap/extension-dropcursor';
@@ -41,33 +41,58 @@
 
   import { Question } from '$components/instruction/Question/QuestionExtension.svelte';
   import { DataAsAnchors } from '$components/instruction/DataAsAnchors/DataAsAnchorsExtension';
+  import { Collapsible } from '$lib/components/instruction/Collapsible/CollapsibleExtension.svelte';
 
   import { MenuItem, createMenuItems } from './menuitem.svelte';
   import Icon from '@iconify/svelte';
   import cx from 'clsx';
+  import TiptapToolbar from '$lib/components/instruction/TipTapToolbar.svelte';
+  import { tiptapUI } from './tiptap-ui.svelte';
 
   import { File } from '$components/instruction/File/FileExtension.svelte';
   //import { TabItems } from '../../routes/items.svelte';
   import { TabItems } from '../../../routes/items.svelte';
 
-  let { id, data, dirty = $bindable() }: { id: number; data: string; dirty: number } = $props();
+  let {
+    id,
+    data,
+    dirty = $bindable(),
+  }: { id: number; data: string; dirty: number } = $props();
 
   //////////////
   $effect(() => {
     const currentVal = editor?.getHTML() ?? '';
     if (data !== currentVal) {
-      console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXX Data prop changed, updating editor content.',data!== currentVal);
+      console.log(
+        'XXXXXXXXXXXXXXXXXXXXXXXXXXXXX Data prop changed, updating editor content.',
+        data !== currentVal,
+      );
       untrack(() => {
         editor && editor.commands.setContent(data);
       });
     } else {
-      console.log('DDDDDDDDDDDDDDDDDDDDDDDDDDDD Data prop change matches editor content, no update needed.',data=== currentVal);
+      console.log(
+        'DDDDDDDDDDDDDDDDDDDDDDDDDDDD Data prop change matches editor content, no update needed.',
+        data === currentVal,
+      );
+      resetUndo();
     }
   });
 
+  function resetUndo() {
+    if (!editor) return;
+    const { state, view } = editor;
+    const tr = state.tr;
+
+    tr.setMeta('ADD_TO_HISTORY', false); // do not add this reset to history
+    tr.setMeta('history$reset', true); // ProseMirror reset flag
+
+    view.dispatch(tr);
+  }
+
   //////////////
   let menuItems: MenuItem[] = $state([]);
-  let editor: Editor | null = null;
+  let editor: Editor | null = $state(null);
   let element: HTMLDivElement;
 
   //////////////
@@ -80,7 +105,10 @@
         Text,
         TextStyleKit,
         Color,
-        History,
+        History.configure({
+          depth: 100, // default is 100
+          newGroupDelay: 500, // group changes within 500ms
+        }),
         HardBreak,
         Paragraph,
         Gapcursor,
@@ -106,6 +134,7 @@
         CustomLink.configure({
           openOnClick: false,
           autolink: true,
+          linkOnPaste: true,
           defaultProtocol: 'https',
         }),
         CustomTable.configure({
@@ -116,6 +145,7 @@
         TableCell,
         Question,
         File,
+        Collapsible,
         DataAsAnchors,
         CustomImage.configure({
           inline: true,
@@ -128,12 +158,59 @@
         if (transaction.docChanged) {
           dirty = dirty + 1;
         }
-        
-        // Update menu items state regardless of content changes
-        menuItems.forEach(
-          (item) =>
-        (item.isActive = item.active ? (item.active() ?? false) : false),
-        );
+        // Inline formatting state
+        tiptapUI.bold = editor.isActive('bold');
+        tiptapUI.italic = editor.isActive('italic');
+        tiptapUI.underline = editor.isActive('underline');
+        tiptapUI.strike = editor.isActive('strike');
+        tiptapUI.code = editor.isActive('code');
+
+        // headings
+
+        // Block formatting
+        if (editor.isActive('heading')) {
+          const level = editor.getAttributes('heading').level;
+          tiptapUI.blockStyle = `H${level}`;
+        } else {
+          tiptapUI.blockStyle = '¶';
+        }
+
+        tiptapUI.align =
+          editor.getAttributes('paragraph')?.textAlign ||
+          editor.getAttributes('heading')?.textAlign ||
+          'left';
+
+        // Combined list detection
+        if (editor.isActive('bulletList')) {
+          tiptapUI.listStyle = 'bullet';
+        } else if (editor.isActive('orderedList')) {
+          tiptapUI.listStyle = 'ordered';
+        } else {
+          tiptapUI.listStyle = 'none';
+        }
+
+        tiptapUI.blockquote = editor.isActive('blockquote');
+        tiptapUI.codeBlock = editor.isActive('codeBlock');
+
+        tiptapUI.link = editor.isActive('link');
+
+        // Undo / Redo
+        tiptapUI.canUndo = editor.can().undo();
+        tiptapUI.canRedo = editor.can().redo();
+
+        // Highlight
+        tiptapUI.highlight = editor.isActive('highlight');
+
+        // color state
+        tiptapUI.textColor =
+          editor.getAttributes('textStyle').color || '#000000';
+        tiptapUI.bgColor = editor.getAttributes('highlight').color || '#ffffff';
+
+        // // Update menu items state regardless of content changes
+        // menuItems.forEach(
+        //   (item) =>
+        //     (item.isActive = item.active ? (item.active() ?? false) : false),
+        // );
       },
       editorProps: {
         handleDrop: dropImage,
@@ -152,7 +229,9 @@
   onDestroy(() => editor?.destroy());
 </script>
 
-{#snippet MenuButton(item: MenuItem)}
+<TiptapToolbar {editor} />
+
+<!-- {#snippet MenuButton(item: MenuItem)}
   <button
     type="button"
     title={item.name}
@@ -178,6 +257,6 @@
       {/each}
     </div>
   </div>
-</div>
+</div> -->
 
 <div bind:this={element}></div>
