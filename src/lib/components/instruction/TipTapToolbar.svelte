@@ -2,6 +2,8 @@
 <script lang="ts">
   import { Editor } from '@tiptap/core';
   import { tiptapUI } from './tiptap-ui.svelte';
+  import { chooseImage, IMG_STYLE_LEFT } from './Image/ImageExtension';
+  import { getDefaultCollapsibleAttributes } from './Collapsible/CollapsibleExtension.svelte';
 
   let { editor = null }: { editor: Editor | null } = $props();
 
@@ -76,28 +78,68 @@
 
     editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run();
   }
+
+  function insertImage() {
+    if (!editor) return;
+    chooseImage((imageData) => {
+      const imageAttributes = {
+        src: imageData.src,
+        alt: imageData.name,
+        title: imageData.name,
+        width: imageData.width,
+        height: imageData.height,
+        style: IMG_STYLE_LEFT,
+      };
+
+      editor.chain().focus().setImage(imageAttributes).run();
+    });
+  }
+
+  function promptForQuestion() {
+    if (!editor) return;
+    const questionText = window.prompt('Enter the question text:');
+    if (questionText && questionText.trim() !== '') {
+      //editor.chain().focus().insertQuestion({ question: questionText.trim() }).run();
+    }
+  }
+
+  function submitFile() {
+    editor?.chain().focus().addFile().run();
+  }
+
+  function onCollapse() {
+    editor
+      ?.chain()
+      .focus()
+      .addCollapsible(getDefaultCollapsibleAttributes())
+      .run();
+  }
 </script>
 
 <div class="bg-base-200 border-b border-base-300 text-sm font-sans">
-  <div class="flex items-center gap-1 px-2 py-1 bg-base-100">
+  <div class="flex flex-wrap items-center gap-1 px-2 py-1 bg-base-100">
     <!-- TEXT STYLE -->
     <button
       class="btn btn-ghost px-1.5 font-bold min-h-7 h-7"
+      title="Bold"
       onclick={() => cmd('toggleBold')}
       class:btn-active={tiptapUI.bold}>B</button
     >
     <button
       class="btn btn-ghost px-1.5 italic min-h-7 h-7"
+      title="Italic"
       onclick={() => cmd('toggleItalic')}
       class:btn-active={tiptapUI.italic}>I</button
     >
     <button
       class="btn btn-ghost px-1.5 underline min-h-7 h-7"
+      title="Underline"
       onclick={() => cmd('toggleUnderline')}
       class:btn-active={tiptapUI.underline}>U</button
     >
     <button
       class="btn btn-ghost px-1.5 line-through min-h-7 h-7"
+      title="Strikethrough"
       onclick={() => cmd('toggleStrike')}
       class:btn-active={tiptapUI.strike}>S</button
     >
@@ -157,7 +199,7 @@
 
     <!-- HEADINGS -->
     <select
-      class="select select-xs h-7 min-h-7"
+      class="select select-xs h-7 min-h-7 w-16"
       bind:value={tiptapUI.blockStyle}
       onchange={applyBlockStyle}
     >
@@ -254,25 +296,21 @@
       </svg>
     </button>
 
-    <div class="divider divider-horizontal mx-1"></div>
-
-    <!-- INSERT -->
     <button
       class="btn btn-ghost px-1.5 min-h-7 h-7"
       title="Insert Link"
       class:btn-active={tiptapUI.link}
       onclick={setLink}>🔗</button
     >
+
+    <div class="divider divider-horizontal mx-1"></div>
+
+    <!-- INSERT -->
     <button
       class="btn btn-ghost px-1.5 min-h-7 h-7"
-      title="Remove Link"
-      onclick={() => cmd('unsetLink')}
-    >
-      ❌🔗
-    </button>
-
-    <button class="btn btn-ghost px-1.5 min-h-7 h-7" title="Insert Image"
-      >🖼</button
+      title="Insert Image"
+      class:btn-active={tiptapUI.imageSelected}
+      onclick={insertImage}>🖼</button
     >
     <button
       class="btn btn-ghost px-1.5 min-h-7 h-7"
@@ -302,5 +340,79 @@
       disabled={!tiptapUI.canRedo}
       onclick={cmd('redo')}>↻</button
     >
+
+    <div class="divider divider-horizontal mx-1"></div>
+    <button
+      type="button"
+      class="btn btn-ghost px-2 min-h-8 h-8 flex items-center gap-1"
+      aria-label="Add Question"
+      title="Add Question"
+      onclick={promptForQuestion}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-4 h-4"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <!-- Rounded box -->
+        <rect x="3" y="3" width="18" height="18" rx="4" />
+
+        <!-- Question mark curve -->
+        <path d="M9.5 9a3 3 0 0 1 5.5 1.5c0 2-3 2.5-3 4" />
+
+        <!-- Question mark dot -->
+        <circle cx="12" cy="17" r="0.8" />
+      </svg>
+    </button>
+
+    <button
+      class="btn btn-ghost px-2 min-h-8 h-8 flex items-center gap-1"
+      aria-label="Submit File"
+      title="Submit File"
+      onclick={submitFile}
+      class:btn-active={tiptapUI.fileSelected}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-4 h-4"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="black"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M3 15v4a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4" />
+        <path d="M12 3v12" />
+        <path d="M7 8l5-5 5 5" />
+      </svg>
+    </button>
+
+    <button
+      class="btn btn-ghost px-2 min-h-8 h-8 flex items-center gap-1"
+      aria-label="Toggle Collapse"
+      title="Toggle Collapse"
+      onclick={onCollapse}
+      class:btn-active={tiptapUI.collapseSelected}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-4 h-4 transition-transform duration-200"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="black"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M6 9l6 6 6-6" />
+      </svg>
+    </button>
+
   </div>
 </div>

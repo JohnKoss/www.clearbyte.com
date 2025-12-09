@@ -14,7 +14,7 @@ export default defineConfig({
 	// },
 	plugins: [tailwindcss(), sveltekit()],
 	build: {
-		minify: true, // Minify the output. Turn off for debugging
+		minify: false, // Minify the output. Turn off for debugging
 		rollupOptions: {
 			output: {
 				manualChunks(id) {

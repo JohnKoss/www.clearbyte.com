@@ -32,6 +32,11 @@ export const tiptapUI = $state({
     canUndo: false,
     canRedo: false,
 
+    imageSelected: false,
+
+    fileSelected: false,
+    collapseSelected: false,
+
     // state
     dirty: 0,
 });

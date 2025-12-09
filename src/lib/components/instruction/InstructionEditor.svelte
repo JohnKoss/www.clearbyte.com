@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount, onDestroy, untrack } from 'svelte';
+  import { tiptapUI } from './tiptap-ui.svelte';
   import { Editor } from '@tiptap/core';
   import { Document } from '@tiptap/extension-document';
   import { Text } from '@tiptap/extension-text';
@@ -16,7 +17,7 @@
     CustomBlockquote,
     CustomCode,
     CustomCodeBlock,
-    CustomLink,
+    //CustomLink,
     CustomTable,
   } from './Schema';
 
@@ -26,6 +27,7 @@
   } from '$components/instruction/Image/ImageExtension';
 
   import Color from '@tiptap/extension-color';
+  import Link from '@tiptap/extension-link';
   //import TextStyle from '@tiptap/extension-text-style';
   import { TextStyleKit } from '@tiptap/extension-text-style';
   import Highlight from '@tiptap/extension-highlight';
@@ -43,15 +45,15 @@
   import { DataAsAnchors } from '$components/instruction/DataAsAnchors/DataAsAnchorsExtension';
   import { Collapsible } from '$lib/components/instruction/Collapsible/CollapsibleExtension.svelte';
 
-  import { MenuItem, createMenuItems } from './menuitem.svelte';
-  import Icon from '@iconify/svelte';
-  import cx from 'clsx';
+  //import { MenuItem, createMenuItems } from './menuitem.svelte';
+  //import Icon from '@iconify/svelte';
+  //import cx from 'clsx';
   import TiptapToolbar from '$lib/components/instruction/TipTapToolbar.svelte';
-  import { tiptapUI } from './tiptap-ui.svelte';
 
   import { File } from '$components/instruction/File/FileExtension.svelte';
   //import { TabItems } from '../../routes/items.svelte';
   import { TabItems } from '../../../routes/items.svelte';
+  import { linkHoverPlugin } from './Link/linkHoverPlugin';
 
   let {
     id,
@@ -91,7 +93,7 @@
   }
 
   //////////////
-  let menuItems: MenuItem[] = $state([]);
+  //let menuItems: MenuItem[] = $state([]);
   let editor: Editor | null = $state(null);
   let element: HTMLDivElement;
 
@@ -131,7 +133,7 @@
         TextAlign.configure({
           types: ['heading', 'paragraph'],
         }),
-        CustomLink.configure({
+        Link.configure({
           openOnClick: false,
           autolink: true,
           linkOnPaste: true,
@@ -158,55 +160,59 @@
         if (transaction.docChanged) {
           dirty = dirty + 1;
         }
-        // Inline formatting state
-        tiptapUI.bold = editor.isActive('bold');
-        tiptapUI.italic = editor.isActive('italic');
-        tiptapUI.underline = editor.isActive('underline');
-        tiptapUI.strike = editor.isActive('strike');
-        tiptapUI.code = editor.isActive('code');
+        // // Inline formatting state
+        // tiptapUI.bold = editor.isActive('bold');
+        // tiptapUI.italic = editor.isActive('italic');
+        // tiptapUI.underline = editor.isActive('underline');
+        // tiptapUI.strike = editor.isActive('strike');
+        // tiptapUI.code = editor.isActive('code');
 
-        // headings
+        // // headings
 
-        // Block formatting
-        if (editor.isActive('heading')) {
-          const level = editor.getAttributes('heading').level;
-          tiptapUI.blockStyle = `H${level}`;
-        } else {
-          tiptapUI.blockStyle = '¶';
-        }
+        // // Block formatting
+        // if (editor.isActive('heading')) {
+        //   const level = editor.getAttributes('heading').level;
+        //   tiptapUI.blockStyle = `H${level}`;
+        // } else {
+        //   tiptapUI.blockStyle = '¶';
+        // }
 
-        tiptapUI.align =
-          editor.getAttributes('paragraph')?.textAlign ||
-          editor.getAttributes('heading')?.textAlign ||
-          'left';
+        // tiptapUI.align =
+        //   editor.getAttributes('paragraph')?.textAlign ||
+        //   editor.getAttributes('heading')?.textAlign ||
+        //   'left';
 
-        // Combined list detection
-        if (editor.isActive('bulletList')) {
-          tiptapUI.listStyle = 'bullet';
-        } else if (editor.isActive('orderedList')) {
-          tiptapUI.listStyle = 'ordered';
-        } else {
-          tiptapUI.listStyle = 'none';
-        }
+        // // Combined list detection
+        // if (editor.isActive('bulletList')) {
+        //   tiptapUI.listStyle = 'bullet';
+        // } else if (editor.isActive('orderedList')) {
+        //   tiptapUI.listStyle = 'ordered';
+        // } else {
+        //   tiptapUI.listStyle = 'none';
+        // }
 
-        tiptapUI.blockquote = editor.isActive('blockquote');
-        tiptapUI.codeBlock = editor.isActive('codeBlock');
+        // tiptapUI.blockquote = editor.isActive('blockquote');
+        // tiptapUI.codeBlock = editor.isActive('codeBlock');
 
-        tiptapUI.link = editor.isActive('link');
+        // tiptapUI.link = editor.isActive('link');
 
-        // Undo / Redo
-        tiptapUI.canUndo = editor.can().undo();
-        tiptapUI.canRedo = editor.can().redo();
+        // // Undo / Redo
+        // tiptapUI.canUndo = editor.can().undo();
+        // tiptapUI.canRedo = editor.can().redo();
 
-        // Highlight
-        tiptapUI.highlight = editor.isActive('highlight');
+        // // Highlight
+        // tiptapUI.highlight = editor.isActive('highlight');
 
-        // color state
-        tiptapUI.textColor =
-          editor.getAttributes('textStyle').color || '#000000';
-        tiptapUI.bgColor = editor.getAttributes('highlight').color || '#ffffff';
+        // // color state
+        // tiptapUI.textColor =
+        //   editor.getAttributes('textStyle').color || '#000000';
+        // tiptapUI.bgColor = editor.getAttributes('highlight').color || '#ffffff';
 
-        // // Update menu items state regardless of content changes
+        // tiptapUI.imageSelected = editor.isActive('image');
+        // tiptapUI.fileSelected = editor.isActive('file');
+        // tiptapUI.collapseSelected = editor.isActive('collapsible');
+
+        // // // Update menu items state regardless of content changes
         // menuItems.forEach(
         //   (item) =>
         //     (item.isActive = item.active ? (item.active() ?? false) : false),
@@ -214,9 +220,18 @@
       },
       editorProps: {
         handleDrop: dropImage,
+        handleClickOn(view, pos, node, nodePos, event) {
+          // prevents accidental navigation
+          if ((event.target as HTMLElement)?.tagName === 'A') {
+            event.preventDefault();
+            return true;
+          }
+          return false;
+        },
       },
     });
-    menuItems = createMenuItems(editor);
+    //menuItems = createMenuItems(editor);
+    editor.registerPlugin(linkHoverPlugin(editor));
 
     //////////////////
     editor.on('update', ({ editor }) => {
@@ -229,9 +244,11 @@
   onDestroy(() => editor?.destroy());
 </script>
 
-<TiptapToolbar {editor} />
-
-<!-- {#snippet MenuButton(item: MenuItem)}
+{#if editor}
+  <TiptapToolbar {editor} />
+{/if}
+<!-- 
+{#snippet MenuButton(item: MenuItem)}
   <button
     type="button"
     title={item.name}

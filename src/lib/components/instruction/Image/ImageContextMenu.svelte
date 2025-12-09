@@ -5,7 +5,7 @@
     IMG_STYLE_RIGHT,
     IMG_STYLE_CENTER,
     IMG_STYLE_INLINE,
-  } from "./const";
+  } from "./ImageExtension";
 
   const { editor, closeModal } = $props<{editor: Editor, closeModal: () => void}>();
 
@@ -25,7 +25,7 @@
 <svelte:window on:keyup={handleEscape} />
 
 <ul
-  class="menu menu-vertical lg:menu-horizontal bg-white rounded-box border"
+  class="menu menu-xs menu-horizontal bg-base-200 rounded-box"
   onblur={() => alert("ffff")}
 >
   <li><button onclick={() => doAlign(IMG_STYLE_LEFT)}>Left</button></li>
