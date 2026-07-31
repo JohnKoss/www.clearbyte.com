@@ -23,9 +23,17 @@ function handler(event) {
         return request;
     }
 
-    // "/about/" and "/about" resolve to the same file.
+    // Redirect "/about/" to "/about" rather than rewriting it. The pages use
+    // relative asset paths, so serving them under a trailing slash would
+    // resolve "../icon.svg" one directory too high.
     if (uri.endsWith("/")) {
-        uri = uri.slice(0, -1);
+        return {
+            statusCode: 301,
+            statusDescription: "Moved Permanently",
+            headers: {
+                "location": { "value": uri.slice(0, -1) }
+            }
+        };
     }
 
     var lastSegment = uri.slice(uri.lastIndexOf("/") + 1);

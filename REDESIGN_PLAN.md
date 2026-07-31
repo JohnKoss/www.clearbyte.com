@@ -4,6 +4,12 @@
 **Repo:** `D:\GoRepo\Clearbyte\www.clearbyte.com`
 **Related:** `C:\Users\kossj\zenzoom` (lab platform)
 
+## Positioning
+
+Clearbyte (one capital, not "ClearByte") is a tool for **schools** to easily create AWS lab activities — not corporate training. The defining idea is **byte-size steps**: a lab is broken into more, smaller steps, each one small enough that a student can tell whether it worked before moving on. Copy across the site should reflect that, and the mark (cloud above three ascending blocks) encodes it.
+
+`/opt-in` stays in the **primary navigation**. Carriers require the SMS opt-in page to be publicly reachable and visible to a reviewer during A2P 10DLC registration; burying it in the footer risks rejection.
+
 ## Decisions taken
 
 | Question | Decision |
@@ -59,7 +65,9 @@ Note for deployment: `aws s3 sync` without `--delete` leaves the removed JPGs li
 
 The current look reads dated because it's stock daisyUI `corporate` with default spacing and no type scale. Modern is mostly: one confident typeface, a restrained palette, generous and *consistent* spacing, and real depth instead of `shadow-xl` on everything.
 
-**1.1 — Tokens.** Replace [src/style.css](src/style.css) (currently 4 lines) with a token layer:
+**1.1 — Tokens.** *(Done.)* [src/style.css](src/style.css) is now a token layer. Brand colours were sampled from the logo pixels — `#07518F` navy wordmark, `#EE9107` orange cloud — converted to OKLCH, and every foreground/background pair was contrast-checked before being written down. Two `clearbyte` themes (light default, dark via `prefersdark`), all 35 daisyUI built-ins disabled via `themes: false`. Font is the system UI stack: no webfont request, no layout shift, no new dependency.
+
+Original plan for reference:
 - Custom daisyUI theme (`clearbyte`) replacing `corporate` in [app.html:2](src/app.html#L2) — brand primary, a neutral ramp, semantic surface/border tokens.
 - Type scale: fluid `clamp()` sizes for display/h1–h3/body/small. Self-hosted variable font (no Google Fonts request — CloudFront serves it, and it keeps the site fast and dependency-free).
 - Spacing scale, radius scale, two elevation levels. Not five.
@@ -69,13 +77,22 @@ The current look reads dated because it's stock daisyUI `corporate` with default
 
 TypeScript is deliberately held at 6.0.3 rather than the latest 7.0.2: both `@sveltejs/kit` and `svelte-check` peer-depend on `^5 || ^6`. Revisit once they support 7.
 
-**1.3 — Layout primitives.** A `Section`, `Container`, and `Prose` component so page padding is defined once. This kills the `p-48` in [about/+page.svelte:4](src/routes/about/+page.svelte#L4) (12rem of padding — unusable under ~1400px) and the ad-hoc `container mx-auto px-4` repeated on every page.
+**1.3 — Layout primitives.** *(Done.)* `Section`, `Container` and `Prose` added in `src/lib/`. Phase 2 consumes them when rebuilding pages — the `p-48` and the repeated `container mx-auto px-4` go away then.
+
+Original plan for reference: a `Section`, `Container`, and `Prose` component so page padding is defined once. This kills the `p-48` in [about/+page.svelte:4](src/routes/about/+page.svelte#L4) (12rem of padding — unusable under ~1400px) and the ad-hoc `container mx-auto px-4` repeated on every page.
 
 Verify: a tokens page renders every scale step in light and dark; no page-level padding values outside the primitives.
 
 ---
 
-## Phase 2 — Rebuild the pages
+## Phase 2 — Rebuild the pages *(Done)*
+
+All routes rebuilt on the token layer and primitives. `/labs` and `/labs/[slug]` are driven by `src/lib/labs.ts`, seeded from real lab names found in zenzoom with only title-supported copy — see the header comment in that file for what still needs enriching, and note the Week 16 "Magic 8 Ball" lab was left out because its title doesn't say what it covers. `/demo` was pulled forward from Phase 5 and posts to `/api/contact` until the dedicated lambda lands.
+
+**Outstanding from this phase:** `terms.html` §9 still reads "the laws of [Your Jurisdiction]" — an unfilled template placeholder that is live on the site. Left exactly as found; it needs a lawyer or at least a decision, not a guess.
+
+Original plan for reference:
+
 
 Rewrite markup page by page against the new system. Content is the real work here — the current copy is three sentences total.
 
@@ -94,7 +111,18 @@ Verify: every route renders correctly at 375 / 768 / 1280 / 1920 px, in light an
 
 ---
 
-## Phase 3 — Assets and performance
+## Phase 3 — Assets and performance *(Mostly done)*
+
+Done: per-page canonical/Open Graph/Twitter tags via `src/lib/Seo.svelte` (canonical derived from the route so it can't drift), a generated `static/og.png`, `sitemap.xml` as a prerendered endpoint driven by the labs manifest, `robots.txt`, and corrected image dimensions.
+
+**Still outstanding — needs a decision from you:**
+
+1. **AVIF/WebP conversion.** No encoder is installed on this machine (no ImageMagick, `cwebp`, `avifenc`, or `sharp`), so the one remaining photo is still a JPEG. Options: install tooling, add `sharp` as a devDependency for a one-off conversion, or skip it — there is exactly one photo left and it is stock imagery due for replacement anyway.
+2. **Real product imagery.** `about_img_small.jpg` is the last stock photo. Screenshots of the actual lab runtime would be more persuasive, but they have to come from a real lab session — I can't produce them.
+3. **Lighthouse.** Needs a browser run against the dev or production build; I verified the static properties instead (declared dimensions, lazy loading, meta tags, sitemap/robots correctness).
+
+Original plan for reference:
+
 
 - Replace the stock imagery. `home_small.jpg` (52 KB) and `about_img_small.jpg` (66 KB) are generic; product screenshots of the actual lab UI are more persuasive and more modern.
 - Emit AVIF/WebP with JPEG fallback, correct `width`/`height` on every `<img>` (missing on the hero, causing layout shift), `loading="lazy"` below the fold, responsive `srcset`.
@@ -111,7 +139,8 @@ The pipeline is unchanged: `npm run build` → `dist/` → `aws s3 sync ../dist 
 
 - `npm run check` must be clean (`svelte-check`).
 - Preview the built output locally before syncing.
-- **You run the AWS/Terraform commands** — the CloudFront function change in 0.1 requires a `terraform apply`, and the deploy needs `aws s3 sync` plus a CloudFront invalidation (`/*`). The current deploy script does not invalidate; with `Managed-CachingOptimized` on the default behavior, stale HTML will be served after a sync. Adding invalidation to `deploy/main.go` is a one-line `aws cloudfront create-invalidation` addition and should be part of this work.
+- **You run the AWS/Terraform commands** — the CloudFront function change in 0.1 requires a `terraform apply`.
+- `deploy/` was rewritten. It is now a real CLI (`go run . create`), not a test suite: the previous version exposed `Execute` only through `go test`, and because `TestWebsiteDestroy` ran `aws s3 rm --recursive` unguarded, a bare `go test` in that directory deployed the site and then emptied the production bucket. It now also passes `--delete` on the sync and invalidates CloudFront, both of which were missing.
 
 Verify: live site serves new HTML immediately post-deploy; all Phase 0 fixes confirmed against production URLs.
 

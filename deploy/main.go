@@ -1,3 +1,13 @@
+// Deploys the built site to S3 and invalidates CloudFront.
+//
+// Run from this directory:
+//
+//	go run . create
+//	CONFIRM_DESTROY=www.clearbyte.com go run . destroy
+//
+// 'destroy' empties the production bucket, so it refuses to run without the
+// confirmation variable. It is deliberately not a test - a bare `go test ./...`
+// used to wipe the live site.
 package main
 
 import (
@@ -5,106 +15,165 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"strings"
-	"sync"
 )
-
 
 // ---------------------------------------------------- //
 
-
 const PATH = "s3://www.clearbyte.com"
+
+// The site the bucket is served as, used to find the CloudFront distribution.
+const ALIAS = "www.clearbyte.com"
+
+// Everything runs relative to the repository root, one level up from here.
+const ROOT = ".."
 
 const PLAN_CREATE = "create"
 const PLAN_DESTROY = "destroy"
 
+// The value CONFIRM_DESTROY must hold before a destroy is allowed.
+const CONFIRM_ENV = "CONFIRM_DESTROY"
+
 // ////////////
-func Execute(when string) bool {
+func main() {
 
-	if len(when) == 0 {
-		panic("'when' is not set")
+	args := os.Args[1:]
+	if len(args) != 1 {
+		usage()
+		os.Exit(2)
 	}
 
+	switch args[0] {
 
-	fmt.Printf("when:%s, root_path:%s\n", when, PATH)
-	if when == PLAN_CREATE {
-
-		// Build the lab activity objects...
-		err := runCommand("npm", "run", "build")
-		if err != nil {
-			fmt.Println("Error running npm install:", err)
-			return false
+	case PLAN_CREATE:
+		if err := Execute(PLAN_CREATE); err != nil {
+			fmt.Fprintf(os.Stderr, "deploy failed: %s\n", err)
+			os.Exit(1)
 		}
 
-		// Define upload commands...
-		commands := [][]string{{"aws", "s3", "sync", "../dist", PATH}}
-
-
-		// Run upload commands in parallel
-		if err := runCommandsConcurrently(commands); err != nil {
-			panic("Error running commands:")
+	case PLAN_DESTROY:
+		// Emptying the production bucket must be deliberate.
+		if os.Getenv(CONFIRM_ENV) != ALIAS {
+			fmt.Fprintf(os.Stderr,
+				"refusing to destroy %s: set %s=%s to confirm\n", PATH, CONFIRM_ENV, ALIAS)
+			os.Exit(1)
+		}
+		if err := Execute(PLAN_DESTROY); err != nil {
+			fmt.Fprintf(os.Stderr, "destroy failed: %s\n", err)
+			os.Exit(1)
 		}
 
-	} else if when == PLAN_DESTROY {
-
-		// Destroy the lab activity objects...
-		err := runCommand("aws", "s3", "rm", "--recursive", PATH)
-		if err != nil {
-			fmt.Println("Error running npm install:", err)
-			return false
-		}
+	default:
+		usage()
+		os.Exit(2)
 	}
-
-	//ApplyToDb(when, &q)
-	fmt.Println("Success: Execute")
-
-	return true
 }
 
+// ////////////
+func usage() {
+	fmt.Fprintf(os.Stderr, "usage: go run . %s|%s\n", PLAN_CREATE, PLAN_DESTROY)
+	fmt.Fprintf(os.Stderr, "  %s requires %s=%s\n", PLAN_DESTROY, CONFIRM_ENV, ALIAS)
+}
 
-// //////
-func runCommandsConcurrently(commands [][]string) error {
-	var wg sync.WaitGroup
+// ////////////
+func Execute(when string) error {
 
-	// Use a channel to signal completion of each command
-	done := make(chan bool, len(commands))
-
-	for _, cmdArgs := range commands {
-		wg.Add(1)
-
-		go func(args []string) {
-			defer wg.Done()
-
-			err := runCommand(args...)
-			if err != nil {
-				fmt.Printf("Error running %s: %s\n", args[0], err)
-			}
-
-			// Signal completion
-			done <- true
-		}(cmdArgs)
+	if len(when) == 0 {
+		return fmt.Errorf("'when' is not set")
 	}
 
-	// Wait for all commands to finish
-	go func() {
-		wg.Wait()
-		close(done)
-	}()
+	fmt.Printf("when:%s, root_path:%s\n", when, PATH)
 
-	// Wait for completion signal for each command
-	for range commands {
-		<-done
+	switch when {
+
+	case PLAN_CREATE:
+		if err := runCommandIn(ROOT, "npm", "run", "build"); err != nil {
+			return fmt.Errorf("npm run build: %w", err)
+		}
+
+		// --delete removes objects that are no longer in dist, so files taken
+		// out of the site stop being served from their old URLs.
+		dist := filepath.Join(ROOT, "dist")
+		if err := runCommand("aws", "s3", "sync", dist, PATH, "--delete"); err != nil {
+			return fmt.Errorf("aws s3 sync: %w", err)
+		}
+
+		// Without this the default cache behaviour keeps serving the old HTML.
+		if err := invalidate(); err != nil {
+			return fmt.Errorf("cloudfront invalidation: %w", err)
+		}
+
+	case PLAN_DESTROY:
+		if err := runCommand("aws", "s3", "rm", "--recursive", PATH); err != nil {
+			return fmt.Errorf("aws s3 rm: %w", err)
+		}
+
+	default:
+		return fmt.Errorf("unknown plan %q", when)
 	}
 
-	fmt.Println("All commands executed successfully.")
+	fmt.Println("Success: Execute")
+
 	return nil
 }
 
+// ////////////
+// Finds the distribution serving ALIAS and invalidates everything on it.
+func invalidate() error {
+
+	id, err := distributionId()
+	if err != nil {
+		return err
+	}
+
+	fmt.Printf("invalidating distribution %s\n", id)
+
+	return runCommand("aws", "cloudfront", "create-invalidation",
+		"--distribution-id", id, "--paths", "/*")
+}
+
+// ////////////
+// Looked up rather than hardcoded so the id cannot drift from the infrastructure.
+func distributionId() (string, error) {
+
+	query := fmt.Sprintf(
+		"DistributionList.Items[?contains(Aliases.Items,'%s')].Id", ALIAS)
+
+	out, err := runCommandOutput("aws", "cloudfront", "list-distributions",
+		"--query", query, "--output", "text")
+	if err != nil {
+		return "", err
+	}
+
+	id := strings.Fields(out)
+	if len(id) == 0 || id[0] == "None" {
+		return "", fmt.Errorf("no distribution found with alias %s", ALIAS)
+	}
+
+	return id[0], nil
+}
+
+// //////
 func runCommand(args ...string) error {
+	return runCommandIn("", args...)
+}
+
+// //////
+func runCommandIn(dir string, args ...string) error {
 	cmd := exec.Command(args[0], args[1:]...)
+	cmd.Dir = dir
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	return cmd.Run()
+}
+
+// //////
+func runCommandOutput(args ...string) (string, error) {
+	cmd := exec.Command(args[0], args[1:]...)
+	cmd.Stderr = os.Stderr
+	out, err := cmd.Output()
+	return string(out), err
 }
 
 func WriteKV(fileName, key, value string) {

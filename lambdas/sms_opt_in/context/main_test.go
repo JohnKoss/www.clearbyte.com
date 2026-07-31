@@ -2,10 +2,19 @@ package main
 
 import (
 	"context"
+	"os"
 	"testing"
 
 	"github.com/aws/aws-lambda-go/events"
 )
+
+// init() panics when these are unset, and package-level initialisers run before
+// init(), so this is what makes `go test` work without a preconfigured shell.
+var _ = func() bool {
+	os.Setenv("EMAIL_ADDRESS_FROM", "noreply@clearbyte.com")
+	os.Setenv("EMAIL_ADDRESS_TO", "test@example.com")
+	return true
+}()
 
 // Only the paths that reject before SES is reached, so no AWS call is made.
 func TestHandleRequestRejects(t *testing.T) {

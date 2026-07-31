@@ -1,32 +1,9 @@
 <script lang="ts">
-    const width = 210;
-    const height = 40;
+  import Mark from '$lib/Mark.svelte';
 </script>
 
-<a href="/">
-    <svg
-        {width}
-        {height}
-        viewBox="0 0 {width} {height * 2}"
-        xmlns="http://www.w3.org/2000/svg"
-    >
-        <text
-            x="50%"
-            y="50%"
-            dominant-baseline="middle"
-            text-anchor="middle"
-            font-family="Arial, sans-serif"
-            font-size="48"
-            font-weight="bold"
-        >
-            <tspan fill="var(--color-warning)" font-style="italic">Clear</tspan
-            ><tspan fill="var(--color-warning)" font-style="italic">Byte</tspan
-            ><tspan
-                fill="var(--color-warning)"
-                font-family="sans-serif"
-                font-size="30"
-                font-weight="bold">.com</tspan
-            >
-        </text>
-    </svg>
+<!-- Lockup per the icon handoff: mark at 22px, 14px gap, vertically centred. -->
+<a href="/" class="inline-flex items-center gap-3.5" aria-label="Clearbyte home">
+  <Mark class="h-[22px] w-[22px] shrink-0" />
+  <span class="text-xl font-bold tracking-tight">Clearbyte</span>
 </a>

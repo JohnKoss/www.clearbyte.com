@@ -1,21 +1,31 @@
 <script lang="ts">
+  import Section from '$lib/Section.svelte';
+  import Container from '$lib/Container.svelte';
+  import Seo from '$lib/Seo.svelte';
 </script>
 
-<svelte:head>
-  <title>Page Not Found | ClearByte</title>
-  <meta name="robots" content="noindex" />
-</svelte:head>
+<Seo
+  title="Page not found"
+  description="The page you're looking for may have moved or no longer exists."
+  noindex
+/>
 
-<section class="min-h-screen flex flex-col items-center justify-center text-center p-6">
-  <p class="text-6xl font-bold text-primary">404</p>
-  <h1 class="text-3xl font-semibold mt-4">We couldn't find that page</h1>
-  <p class="text-gray-500 mt-2 max-w-md">
-    The page you're looking for may have moved or no longer exists.
-  </p>
+<Section>
+  <Container width="readable">
+    <div class="text-center">
+      <p class="text-sm font-semibold uppercase tracking-wide text-accent">
+        Error 404
+      </p>
+      <h1 class="mt-3 text-h1">We couldn't find that page</h1>
+      <p class="mt-4 text-lead text-base-content/70">
+        The page you're looking for may have moved or no longer exists.
+      </p>
 
-  <div class="flex flex-wrap gap-4 justify-center mt-8">
-    <a href="/" class="btn btn-primary">Go Home</a>
-    <a href="/labs" class="btn btn-outline">Browse Labs</a>
-    <a href="/contact" class="btn btn-outline">Contact Us</a>
-  </div>
-</section>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <a href="/" class="btn btn-primary">Go home</a>
+        <a href="/labs" class="btn btn-outline">Browse labs</a>
+        <a href="/contact" class="btn btn-outline">Contact us</a>
+      </div>
+    </div>
+  </Container>
+</Section>
