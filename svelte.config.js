@@ -24,8 +24,6 @@ const config = {
 	compilerOptions: {
 		runes: true
 	},
-
-	base: "/myapp/",  // ✅ Adjust base URL for production
 };
 
 export default config;

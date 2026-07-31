@@ -3,6 +3,13 @@ provider "aws" {
 }
 
 ##############
+// Read access to the private github.com/zenzoom/* Go modules, used by the
+// lambda docker builds. Supplied via terraform.tfvars, which is gitignored.
+variable "github_token" {
+  type      = string
+  sensitive = true
+}
+
 data "aws_caller_identity" "current" {}
 data "aws_region" "current" {}
 
@@ -11,7 +18,13 @@ locals {
   www_domain_name  = "www.clearbyte.com"
   api_version      = "v1"
   account_id       = data.aws_caller_identity.current.account_id
-  region           = data.aws_region.current.id
+  region           = data.aws_region.current.region
+
+  // Where form submissions are delivered. The 'from' address must belong to the
+  // already-verified clearbyte.com SES identity.
+  email_address_from = "noreply@${local.root_domain_name}"
+  email_address_to   = "kossjohn@gmail.com"
+  ses_identity_arn   = "arn:aws:ses:${local.region}:${local.account_id}:identity/${local.root_domain_name}"
 }
 
 // This needs to already exists.
@@ -170,13 +183,21 @@ resource "aws_cloudfront_distribution" "clearbyte_com" {
     include_cookies = false
   }
 
-  // Not sure if this works.
-  # custom_error_response {
-  #   error_code            = 403
-  #   response_code         = 200
-  #   response_page_path    = "/index.html" # ✅ Redirects unknown routes to index.html
-  #   error_caching_min_ttl = 10
-  # }
+  // S3 with OAC returns 403 (not 404) for a missing key, so map both to the
+  // prerendered 404 page and keep the status honest for crawlers.
+  custom_error_response {
+    error_code            = 403
+    response_code         = 404
+    response_page_path    = "/404.html"
+    error_caching_min_ttl = 10
+  }
+
+  custom_error_response {
+    error_code            = 404
+    response_code         = 404
+    response_page_path    = "/404.html"
+    error_caching_min_ttl = 10
+  }
 
   ////////////// Origins /////////////////
   /// Apigateway origin ...
@@ -209,8 +230,9 @@ resource "aws_cloudfront_distribution" "clearbyte_com" {
     //viewer_protocol_policy = "allow-all"
     viewer_protocol_policy = "redirect-to-https"
     // For developing....
-    // cache_policy_id       = "658327ea-f89d-4fab-a63d-7e88639e58f6" // Managed-CachingOptimized
-    cache_policy_id = "4135ea2d-6df8-44a3-9df3-4b5a84be39ad" // Managed-CachingDisabled
+    //cache_policy_id = "4135ea2d-6df8-44a3-9df3-4b5a84be39ad" // Managed-CachingDisabled
+    cache_policy_id = "658327ea-f89d-4fab-a63d-7e88639e58f6" // Managed-CachingOptimized
+
 
     // CORS stuff...
     origin_request_policy_id   = "88a5eaf4-2fd4-4709-b370-b4c650ea3fcf" //Managed-CORS-S3Origin
@@ -371,6 +393,14 @@ resource "aws_route53_record" "clearbyte_validation" {
 }
 
 ####### API Gateway Lambda Functions ########
+// Both form handlers only need to send as the verified clearbyte.com identity.
+data "aws_iam_policy_document" "ses_send" {
+  statement {
+    actions   = ["ses:SendEmail"]
+    resources = [local.ses_identity_arn]
+  }
+}
+
 module "contact" {
   source = "github.com/johnkoss/terraform_apigw_lambda"
 
@@ -378,9 +408,18 @@ module "contact" {
     name             = "clearbyte_contact"
     path             = "${path.module}/lambdas/contact"
     description      = "Used to store contact information"
+    github_token     = var.github_token
     managed_policies = []
+    inline_policies = [
+      {
+        name   = "clearbyte_contact_ses"
+        policy = data.aws_iam_policy_document.ses_send.json
+      }
+    ]
     env_vars = {
-      DEBUG = "yes"
+      DEBUG              = "yes"
+      EMAIL_ADDRESS_FROM = local.email_address_from
+      EMAIL_ADDRESS_TO   = local.email_address_to
     }
   }
 
@@ -403,9 +442,18 @@ module "sms_opt_in" {
     name             = "clearbyte_sms_opt_in"
     path             = "${path.module}/lambdas/sms_opt_in"
     description      = "Used to store SMS opt-in data"
+    github_token     = var.github_token
     managed_policies = []
+    inline_policies = [
+      {
+        name   = "clearbyte_sms_opt_in_ses"
+        policy = data.aws_iam_policy_document.ses_send.json
+      }
+    ]
     env_vars = {
-      DEBUG = "yes"
+      DEBUG              = "yes"
+      EMAIL_ADDRESS_FROM = local.email_address_from
+      EMAIL_ADDRESS_TO   = local.email_address_to
     }
   }
 

@@ -3,44 +3,42 @@
     let email = $state("");
     let message = $state("");
     let submitted = $state(false);
-  
-    function handleSubmit(event: Event) {
+    let sending = $state(false);
+    let errorMessage = $state("");
+
+    async function handleSubmit(event: Event) {
       event.preventDefault();
-      
+
       if (!name || !email || !message) {
-        alert("Please fill in all fields before submitting.");
+        errorMessage = "Please fill in all fields before submitting.";
         return;
       }
-  
-      // Simulating form submission
-      onsubmit();
-  
-      // Show confirmation message
-      submitted = true;
-    }
 
-    function onsubmit() {
-    fetch('https://www.clearbyte.com/api/contact', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ name, email, message }),
-    })
-      .then((response) => {
+      sending = true;
+      errorMessage = "";
+
+      try {
+        const response = await fetch('https://www.clearbyte.com/api/contact', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ name, email, message }),
+        });
+
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error(`Network response was not ok (${response.status})`);
         }
-        return response.text();
-      })
-      .then((data) => {
-        console.log('Success:', data);
-      })
-      .catch((error) => {
+
+        // Only confirm once the message actually went through.
+        submitted = true;
+      } catch (error) {
         console.error('Error:', error);
-        alert('There was a problem with your submission. Please try again.');
-      });
-  }
+        errorMessage = 'There was a problem sending your message. Please try again.';
+      } finally {
+        sending = false;
+      }
+    }
 
   </script>
   
@@ -55,6 +53,12 @@
         </div>
         <a href="/" class="btn btn-primary mt-4">Go Home</a>
       {:else}
+        {#if errorMessage}
+          <div class="alert alert-error mt-4">
+            <span>{errorMessage}</span>
+          </div>
+        {/if}
+
         <form onsubmit={handleSubmit} class="space-y-4 mt-4">
           <!-- Name Input -->
           <div>
@@ -102,7 +106,9 @@
           </div>
   
           <!-- Submit Button -->
-          <button type="submit" class="btn btn-primary w-full">Send Message</button>
+          <button type="submit" class="btn btn-primary w-full" disabled={sending}>
+            {sending ? 'Sending...' : 'Send Message'}
+          </button>
         </form>
       {/if}
     </div>

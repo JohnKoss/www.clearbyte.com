@@ -1,0 +1,2446 @@
+{
+  "version": 4,
+  "terraform_version": "1.14.8",
+  "serial": 435,
+  "lineage": "005e61de-15a3-0454-5d31-55740509e9e2",
+  "outputs": {
+    "api_clearbyte_com_id": {
+      "value": "37nshlxyk1",
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "mode": "data",
+      "type": "aws_acm_certificate",
+      "name": "clearbyte_com",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:acm:us-east-1:658914799523:certificate/83c73fd6-ff4a-4446-a475-efbfe3240d3d",
+            "certificate": "-----BEGIN CERTIFICATE-----\nMIIGETCCBPmgAwIBAgIQByN0A0sXuPShKS9LfcNfMzANBgkqhkiG9w0BAQsFADA8\nMQswCQYDVQQGEwJVUzEPMA0GA1UEChMGQW1hem9uMRwwGgYDVQQDExNBbWF6b24g\nUlNBIDIwNDggTTAxMB4XDTI1MTAwNTAwMDAwMFoXDTI2MTEwMzIzNTk1OVowGDEW\nMBQGA1UEAxMNY2xlYXJieXRlLmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCC\nAQoCggEBAKGpcgfAnmqf1SJbIEVaWY7X2ca9fcoKOUC/obCDm3crtIAvjjsUBQ31\nKHYptHMP7HxANWjzNnwtiLACkkq3rraqu3bQiET/WaVx7Ukyt41r4M6b+OJ/r5x5\n9tqbyAZ1neyr/FrH/YhfU0H8lzBvDQPah4l7uXjJgGwhUYlViiQBWo4LOvRivZdQ\nQhP0/Bmk8BFee0mNL9aYSVd69y/2HGzQDzIDZIHRbsboRmWqvhDh6PBi2UiZNYEy\nFWxEZFdwr8xlMy3XwqmgbwbsfLcZrrcYTBMW3Kl4xu3y6y4NPjW11bYLY/v6WlkF\nyH2X1fiHvJcp/q8Vy0/EHe7tyWV/Iv0CAwEAAaOCAzEwggMtMB8GA1UdIwQYMBaA\nFIG4DmOKiRIY5fo7O1CVn+blkBOFMB0GA1UdDgQWBBRL+jyqNsigryAZQP9oiGow\n8aLO/zBtBgNVHREEZjBkgg1jbGVhcmJ5dGUuY29tghMqLm1pZ2h0eXN5c3RlbXMu\nY29tggt6ZW56b29tLmNvbYINKi56ZW56b29tLmNvbYIRbWlnaHR5c3lzdGVtcy5j\nb22CDyouY2xlYXJieXRlLmNvbTATBgNVHSAEDDAKMAgGBmeBDAECATAOBgNVHQ8B\nAf8EBAMCBaAwEwYDVR0lBAwwCgYIKwYBBQUHAwEwOwYDVR0fBDQwMjAwoC6gLIYq\naHR0cDovL2NybC5yMm0wMS5hbWF6b250cnVzdC5jb20vcjJtMDEuY3JsMHUGCCsG\nAQUFBwEBBGkwZzAtBggrBgEFBQcwAYYhaHR0cDovL29jc3AucjJtMDEuYW1hem9u\ndHJ1c3QuY29tMDYGCCsGAQUFBzAChipodHRwOi8vY3J0LnIybTAxLmFtYXpvbnRy\ndXN0LmNvbS9yMm0wMS5jZXIwDAYDVR0TAQH/BAIwADCCAX4GCisGAQQB1nkCBAIE\nggFuBIIBagFoAHYA2AlVO5RPev/IFhlvlE+Fq7D4/F6HVSYPFdEucrtFSxQAAAGZ\nsuJVAQAABAMARzBFAiEA+22ab5EtxoolBr6Lui6HkcWEglh5QkAMHzBRtAWHwkAC\nIDjk4p96Pq5FMNUkqXc3BIw1/nz930l+CiNepzt99y4QAHUAwjF+V0UZo0Xufzje\nspBB68fCIVoiv3/Vta12mtkOUs0AAAGZsuJVBAAABAMARjBEAiB0GA3y039b5b4J\n4DWT+EVLgmENNoUbOKMgMTdnrupeiQIgSXubOuFHsh5z8xW8pzZhUm63WxKLBmIg\nXpAuOjQE6RYAdwCUTkOH+uzB74HzGSQmqBhlAcfTXzgCAT9yZ31VNy4Z2AAAAZmy\n4lUXAAAEAwBIMEYCIQCG1Nf9bpCjO8QlMQMewuh26c5HgtrDjmINoyI8DSj+NQIh\nAIfQxZM5AiBLM1PMJ3r5k9KjfnesurzTEY2l563d/RZKMA0GCSqGSIb3DQEBCwUA\nA4IBAQBDh154LyFPcpCO8GR0AcGaKM/gugD9z/C6VxWB2ObcBx/s6IRzY0JXT4Oa\nqHRm0lMe0o+wVyiu6ByHDJsADRZjS8ptWJQAVssSJtJJMEyUG2mfHYfk1xLvk2eW\nfqN5SPj7NZA1Z6FkBBMeVBjI5I6nhBu2IYAGeACzD73rnKrWj+DRZ4gJ29FdiXEd\nlctlBnoLKe87KTjjCQg6vS1FfQ3uyS8ph5du0H+0jeVtH8F/grtVx0f/76cUnvK2\n4g6obOM/GmCKkkk0ZjjBLyO1wuoN0D5/+b4iOsAqXwJvwinSLIfeGK1nRaYJ022n\nqLkwA/HB/yGPoWZLtEXBAat3K44D\n-----END CERTIFICATE-----\n",
+            "certificate_chain": "-----BEGIN CERTIFICATE-----\nMIIEXjCCA0agAwIBAgITB3MSOAudZoijOx7Zv5zNpo4ODzANBgkqhkiG9w0BAQsF\nADA5MQswCQYDVQQGEwJVUzEPMA0GA1UEChMGQW1hem9uMRkwFwYDVQQDExBBbWF6\nb24gUm9vdCBDQSAxMB4XDTIyMDgyMzIyMjEyOFoXDTMwMDgyMzIyMjEyOFowPDEL\nMAkGA1UEBhMCVVMxDzANBgNVBAoTBkFtYXpvbjEcMBoGA1UEAxMTQW1hem9uIFJT\nQSAyMDQ4IE0wMTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAOtxLKnL\nH4gokjIwr4pXD3i3NyWVVYesZ1yX0yLI2qIUZ2t88Gfa4gMqs1YSXca1R/lnCKeT\nepWSGA+0+fkQNpp/L4C2T7oTTsddUx7g3ZYzByDTlrwS5HRQQqEFE3O1T5tEJP4t\nf+28IoXsNiEzl3UGzicYgtzj2cWCB41eJgEmJmcf2T8TzzK6a614ZPyq/w4CPAff\nnAV4coz96nW3AyiE2uhuB4zQUIXvgVSycW7sbWLvj5TDXunEpNCRwC4kkZjK7rol\njtT2cbb7W2s4Bkg3R42G3PLqBvt2N32e/0JOTViCk8/iccJ4sXqrS1uUN4iB5Nmv\nJK74csVl+0u0UecCAwEAAaOCAVowggFWMBIGA1UdEwEB/wQIMAYBAf8CAQAwDgYD\nVR0PAQH/BAQDAgGGMB0GA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEFBQcDAjAdBgNV\nHQ4EFgQUgbgOY4qJEhjl+js7UJWf5uWQE4UwHwYDVR0jBBgwFoAUhBjMhTTsvAyU\nlC4IWZzHshBOCggwewYIKwYBBQUHAQEEbzBtMC8GCCsGAQUFBzABhiNodHRwOi8v\nb2NzcC5yb290Y2ExLmFtYXpvbnRydXN0LmNvbTA6BggrBgEFBQcwAoYuaHR0cDov\nL2NydC5yb290Y2ExLmFtYXpvbnRydXN0LmNvbS9yb290Y2ExLmNlcjA/BgNVHR8E\nODA2MDSgMqAwhi5odHRwOi8vY3JsLnJvb3RjYTEuYW1hem9udHJ1c3QuY29tL3Jv\nb3RjYTEuY3JsMBMGA1UdIAQMMAowCAYGZ4EMAQIBMA0GCSqGSIb3DQEBCwUAA4IB\nAQCtAN4CBSMuBjJitGuxlBbkEUDeK/pZwTXv4KqPK0G50fOHOQAd8j21p0cMBgbG\nkfMHVwLU7b0XwZCav0h1ogdPMN1KakK1DT0VwA/+hFvGPJnMV1Kx2G4S1ZaSk0uU\n5QfoiYIIano01J5k4T2HapKQmmOhS/iPtuo00wW+IMLeBuKMn3OLn005hcrOGTad\nhcmeyfhQP7Z+iKHvyoQGi1C0ClymHETx/chhQGDyYSWqB/THwnN15AwLQo0E5V9E\nSJlbe4mBlqeInUsNYugExNf+tOiybcrswBy8OFsd34XOW3rjSUtsuafd9AWySa3h\nxRRrwszrzX/WWGm6wyB+f7C4\n-----END CERTIFICATE-----\n-----BEGIN CERTIFICATE-----\nMIIEkjCCA3qgAwIBAgITBn+USionzfP6wq4rAfkI7rnExjANBgkqhkiG9w0BAQsF\nADCBmDELMAkGA1UEBhMCVVMxEDAOBgNVBAgTB0FyaXpvbmExEzARBgNVBAcTClNj\nb3R0c2RhbGUxJTAjBgNVBAoTHFN0YXJmaWVsZCBUZWNobm9sb2dpZXMsIEluYy4x\nOzA5BgNVBAMTMlN0YXJmaWVsZCBTZXJ2aWNlcyBSb290IENlcnRpZmljYXRlIEF1\ndGhvcml0eSAtIEcyMB4XDTE1MDUyNTEyMDAwMFoXDTM3MTIzMTAxMDAwMFowOTEL\nMAkGA1UEBhMCVVMxDzANBgNVBAoTBkFtYXpvbjEZMBcGA1UEAxMQQW1hem9uIFJv\nb3QgQ0EgMTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALJ4gHHKeNXj\nca9HgFB0fW7Y14h29Jlo91ghYPl0hAEvrAIthtOgQ3pOsqTQNroBvo3bSMgHFzZM\n9O6II8c+6zf1tRn4SWiw3te5djgdYZ6k/oI2peVKVuRF4fn9tBb6dNqcmzU5L/qw\nIFAGbHrQgLKm+a/sRxmPUDgH3KKHOVj4utWp+UhnMJbulHheb4mjUcAwhmahRWa6\nVOujw5H5SNz/0egwLX0tdHA114gk957EWW67c4cX8jJGKLhD+rcdqsq08p8kDi1L\n93FcXmn/6pUCyziKrlA4b9v7LWIbxcceVOF34GfID5yHI9Y/QCB/IIDEgEw+OyQm\njgSubJrIqg0CAwEAAaOCATEwggEtMA8GA1UdEwEB/wQFMAMBAf8wDgYDVR0PAQH/\nBAQDAgGGMB0GA1UdDgQWBBSEGMyFNOy8DJSULghZnMeyEE4KCDAfBgNVHSMEGDAW\ngBScXwDfqgHXMCs4iKK4bUqc8hGRgzB4BggrBgEFBQcBAQRsMGowLgYIKwYBBQUH\nMAGGImh0dHA6Ly9vY3NwLnJvb3RnMi5hbWF6b250cnVzdC5jb20wOAYIKwYBBQUH\nMAKGLGh0dHA6Ly9jcnQucm9vdGcyLmFtYXpvbnRydXN0LmNvbS9yb290ZzIuY2Vy\nMD0GA1UdHwQ2MDQwMqAwoC6GLGh0dHA6Ly9jcmwucm9vdGcyLmFtYXpvbnRydXN0\nLmNvbS9yb290ZzIuY3JsMBEGA1UdIAQKMAgwBgYEVR0gADANBgkqhkiG9w0BAQsF\nAAOCAQEAYjdCXLwQtT6LLOkMm2xF4gcAevnFWAu5CIw+7bMlPLVvUOTNNWqnkzSW\nMiGpSESrnO09tKpzbeR/FoCJbM8oAxiDR3mjEH4wW6w7sGDgd9QIpuEdfF7Au/ma\neyKdpwAJfqxGF4PcnCZXmTA5YpaP7dreqsXMGz7KQ2hsVxa81Q4gLv7/wmpdLqBK\nbRRYh5TmOTFffHPLkIhqhBGWJ6bt2YFGpn6jcgAKUj6DiAdjd4lpFw85hdKrCEVN\n0FE6/V1dN2RMfjCyVSRCnTawXZwXgWHxyvkQAiSr6w10kY17RSlQOYiypok1JR4U\nakcjMS9cmvqtmg5iUaQqqcT5NJ0hGA==\n-----END CERTIFICATE-----\n",
+            "domain": "clearbyte.com",
+            "id": "arn:aws:acm:us-east-1:658914799523:certificate/83c73fd6-ff4a-4446-a475-efbfe3240d3d",
+            "key_types": null,
+            "most_recent": true,
+            "status": "ISSUED",
+            "statuses": [
+              "ISSUED"
+            ],
+            "tags": {},
+            "types": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "aws_caller_identity",
+      "name": "current",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "account_id": "658914799523",
+            "arn": "arn:aws:iam::658914799523:user/John",
+            "id": "658914799523",
+            "user_id": "AIDAJO4ZYVTOSJRWVSBP6"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "aws_iam_policy_document",
+      "name": "ses_send",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "1886622052",
+            "json": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Effect\": \"Allow\",\n      \"Action\": \"ses:SendEmail\",\n      \"Resource\": \"arn:aws:ses:us-east-1:658914799523:identity/clearbyte.com\"\n    }\n  ]\n}",
+            "minified_json": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Action\":\"ses:SendEmail\",\"Resource\":\"arn:aws:ses:us-east-1:658914799523:identity/clearbyte.com\"}]}",
+            "override_json": null,
+            "override_policy_documents": null,
+            "policy_id": null,
+            "source_json": null,
+            "source_policy_documents": null,
+            "statement": [
+              {
+                "actions": [
+                  "ses:SendEmail"
+                ],
+                "condition": [],
+                "effect": "Allow",
+                "not_actions": [],
+                "not_principals": [],
+                "not_resources": [],
+                "principals": [],
+                "resources": [
+                  "arn:aws:ses:us-east-1:658914799523:identity/clearbyte.com"
+                ],
+                "sid": ""
+              }
+            ],
+            "version": "2012-10-17"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "aws_region",
+      "name": "current",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "description": "US East (N. Virginia)",
+            "endpoint": "ec2.us-east-1.amazonaws.com",
+            "id": "us-east-1",
+            "name": "us-east-1"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "aws_route53_zone",
+      "name": "clearbyte",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:route53:::hostedzone/Z1MFX82U8FFYLX",
+            "caller_reference": "5FD7657D-D74B-B1A8-9670-452F931D3863",
+            "comment": "My Main Domain Name",
+            "id": "Z1MFX82U8FFYLX",
+            "linked_service_description": null,
+            "linked_service_principal": null,
+            "name": "clearbyte.com",
+            "name_servers": [
+              "ns-1763.awsdns-28.co.uk",
+              "ns-200.awsdns-25.com",
+              "ns-976.awsdns-58.net",
+              "ns-1174.awsdns-18.org"
+            ],
+            "primary_name_server": "ns-1763.awsdns-28.co.uk",
+            "private_zone": false,
+            "resource_record_set_count": 12,
+            "tags": {},
+            "vpc_id": null,
+            "zone_id": "Z1MFX82U8FFYLX"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "aws_route53_zone",
+      "name": "mightysystems",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:route53:::hostedzone/Z8MSR1YEO7YSU",
+            "caller_reference": "FA829FE7-38E3-D9B7-A502-C041BCE55630",
+            "comment": "",
+            "id": "Z8MSR1YEO7YSU",
+            "linked_service_description": null,
+            "linked_service_principal": null,
+            "name": "mightysystems.com",
+            "name_servers": [
+              "ns-2035.awsdns-62.co.uk",
+              "ns-846.awsdns-41.net",
+              "ns-1457.awsdns-54.org",
+              "ns-317.awsdns-39.com"
+            ],
+            "primary_name_server": "ns-2035.awsdns-62.co.uk",
+            "private_zone": false,
+            "resource_record_set_count": 5,
+            "tags": {},
+            "vpc_id": null,
+            "zone_id": "Z8MSR1YEO7YSU"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "aws_route53_zone",
+      "name": "this",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:route53:::hostedzone/Z1MFX82U8FFYLX",
+            "caller_reference": "5FD7657D-D74B-B1A8-9670-452F931D3863",
+            "comment": "My Main Domain Name",
+            "id": "Z1MFX82U8FFYLX",
+            "linked_service_description": null,
+            "linked_service_principal": null,
+            "name": "clearbyte.com",
+            "name_servers": [
+              "ns-1763.awsdns-28.co.uk",
+              "ns-200.awsdns-25.com",
+              "ns-976.awsdns-58.net",
+              "ns-1174.awsdns-18.org"
+            ],
+            "primary_name_server": "ns-1763.awsdns-28.co.uk",
+            "private_zone": false,
+            "resource_record_set_count": 12,
+            "tags": {},
+            "vpc_id": null,
+            "zone_id": "Z1MFX82U8FFYLX"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "aws_route53_zone",
+      "name": "zenzoom",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:route53:::hostedzone/Z2K4CGTXVYJG4R",
+            "caller_reference": "ACB4DFB0-8178-0F5B-B2F1-5C6199778D98",
+            "comment": "",
+            "id": "Z2K4CGTXVYJG4R",
+            "linked_service_description": null,
+            "linked_service_principal": null,
+            "name": "zenzoom.com",
+            "name_servers": [
+              "ns-1847.awsdns-38.co.uk",
+              "ns-821.awsdns-38.net",
+              "ns-1465.awsdns-55.org",
+              "ns-146.awsdns-18.com"
+            ],
+            "primary_name_server": "ns-1847.awsdns-38.co.uk",
+            "private_zone": false,
+            "resource_record_set_count": 8,
+            "tags": {},
+            "vpc_id": null,
+            "zone_id": "Z2K4CGTXVYJG4R"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "aws_s3_bucket",
+      "name": "clearbyte_com",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:s3:::www.clearbyte.com",
+            "bucket": "www.clearbyte.com",
+            "bucket_domain_name": "www.clearbyte.com.s3.amazonaws.com",
+            "bucket_regional_domain_name": "www.clearbyte.com.s3.us-east-1.amazonaws.com",
+            "hosted_zone_id": "Z3AQBSTGFYJSTF",
+            "id": "www.clearbyte.com",
+            "region": "us-east-1",
+            "website_domain": null,
+            "website_endpoint": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_apigatewayv2_api",
+      "name": "api_clearbyte_com",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "api_endpoint": "https://37nshlxyk1.execute-api.us-east-1.amazonaws.com",
+            "api_key_selection_expression": "$request.header.x-api-key",
+            "arn": "arn:aws:apigateway:us-east-1::/apis/37nshlxyk1",
+            "body": null,
+            "cors_configuration": [
+              {
+                "allow_credentials": false,
+                "allow_headers": [
+                  "*"
+                ],
+                "allow_methods": [
+                  "GET",
+                  "OPTIONS",
+                  "POST"
+                ],
+                "allow_origins": [
+                  "*"
+                ],
+                "expose_headers": [],
+                "max_age": 2
+              }
+            ],
+            "credentials_arn": null,
+            "description": "Routes for www.clearbyte.com",
+            "disable_execute_api_endpoint": false,
+            "execution_arn": "arn:aws:execute-api:us-east-1:658914799523:37nshlxyk1",
+            "fail_on_warnings": null,
+            "id": "37nshlxyk1",
+            "name": "www.clearbyte.com",
+            "protocol_type": "HTTP",
+            "route_key": null,
+            "route_selection_expression": "$request.method $request.path",
+            "tags": {},
+            "tags_all": {},
+            "target": null,
+            "version": ""
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_apigatewayv2_stage",
+      "name": "develop",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "access_log_settings": [
+              {
+                "destination_arn": "arn:aws:logs:us-east-1:658914799523:log-group:/aws/api_gw/www.clearbyte.com",
+                "format": "{\"httpMethod\":\"$context.httpMethod\",\"integrationErrorMessage\":\"$context.integrationErrorMessage\",\"protocol\":\"$context.protocol\",\"requestId\":\"$context.requestId\",\"requestTime\":\"$context.requestTime\",\"resourcePath\":\"$context.resourcePath\",\"responseLength\":\"$context.responseLength\",\"routeKey\":\"$context.routeKey\",\"sourceIp\":\"$context.identity.sourceIp\",\"status\":\"$context.status\"}"
+              }
+            ],
+            "api_id": "37nshlxyk1",
+            "arn": "arn:aws:apigateway:us-east-1::/apis/37nshlxyk1/stages/v1",
+            "auto_deploy": true,
+            "client_certificate_id": "",
+            "default_route_settings": [
+              {
+                "data_trace_enabled": false,
+                "detailed_metrics_enabled": false,
+                "logging_level": "",
+                "throttling_burst_limit": 0,
+                "throttling_rate_limit": 0
+              }
+            ],
+            "deployment_id": "jww7ef",
+            "description": "",
+            "execution_arn": "arn:aws:execute-api:us-east-1:658914799523:37nshlxyk1/v1",
+            "id": "v1",
+            "invoke_url": "https://37nshlxyk1.execute-api.us-east-1.amazonaws.com/v1",
+            "name": "v1",
+            "route_settings": [],
+            "stage_variables": {},
+            "tags": {},
+            "tags_all": {}
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_apigatewayv2_api.api_clearbyte_com",
+            "aws_cloudwatch_log_group.api_gw"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cloudfront_distribution",
+      "name": "clearbyte_com",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "aliases": [
+              "*.mightysystems.com",
+              "*.zenzoom.com",
+              "clearbyte.com",
+              "mightysystems.com",
+              "www.clearbyte.com",
+              "zenzoom.com"
+            ],
+            "arn": "arn:aws:cloudfront::658914799523:distribution/E16JYCRKDJU32",
+            "caller_reference": "terraform-20250203232913891200000003",
+            "comment": "www.clearbyte.com",
+            "continuous_deployment_policy_id": "",
+            "custom_error_response": [
+              {
+                "error_caching_min_ttl": 10,
+                "error_code": 403,
+                "response_code": 404,
+                "response_page_path": "/404.html"
+              },
+              {
+                "error_caching_min_ttl": 10,
+                "error_code": 404,
+                "response_code": 404,
+                "response_page_path": "/404.html"
+              }
+            ],
+            "default_cache_behavior": [
+              {
+                "allowed_methods": [
+                  "GET",
+                  "HEAD",
+                  "OPTIONS"
+                ],
+                "cache_policy_id": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+                "cached_methods": [
+                  "GET",
+                  "HEAD"
+                ],
+                "compress": true,
+                "default_ttl": 0,
+                "field_level_encryption_id": "",
+                "forwarded_values": [],
+                "function_association": [
+                  {
+                    "event_type": "viewer-request",
+                    "function_arn": "arn:aws:cloudfront::658914799523:function/cf-redirect"
+                  }
+                ],
+                "grpc_config": [
+                  {
+                    "enabled": false
+                  }
+                ],
+                "lambda_function_association": [],
+                "max_ttl": 0,
+                "min_ttl": 0,
+                "origin_request_policy_id": "88a5eaf4-2fd4-4709-b370-b4c650ea3fcf",
+                "realtime_log_config_arn": "",
+                "response_headers_policy_id": "60669652-455b-4ae9-85a4-c4c02393f86c",
+                "smooth_streaming": false,
+                "target_origin_id": "clearbyte_com",
+                "trusted_key_groups": [],
+                "trusted_signers": [],
+                "viewer_protocol_policy": "redirect-to-https"
+              }
+            ],
+            "default_root_object": "index.html",
+            "domain_name": "d2279epakm2n34.cloudfront.net",
+            "enabled": true,
+            "etag": "ETYQURIC2WQ5K",
+            "hosted_zone_id": "Z2FDTNDATAQYW2",
+            "http_version": "http2",
+            "id": "E16JYCRKDJU32",
+            "in_progress_validation_batches": 0,
+            "is_ipv6_enabled": true,
+            "last_modified_time": "2026-07-31 17:14:38.24 +0000 UTC",
+            "logging_config": [
+              {
+                "bucket": "clearbytelogs.s3.amazonaws.com",
+                "include_cookies": false,
+                "prefix": "www"
+              }
+            ],
+            "ordered_cache_behavior": [
+              {
+                "allowed_methods": [
+                  "DELETE",
+                  "GET",
+                  "HEAD",
+                  "OPTIONS",
+                  "PATCH",
+                  "POST",
+                  "PUT"
+                ],
+                "cache_policy_id": "4135ea2d-6df8-44a3-9df3-4b5a84be39ad",
+                "cached_methods": [
+                  "GET",
+                  "HEAD"
+                ],
+                "compress": true,
+                "default_ttl": 0,
+                "field_level_encryption_id": "",
+                "forwarded_values": [],
+                "function_association": [],
+                "grpc_config": [
+                  {
+                    "enabled": false
+                  }
+                ],
+                "lambda_function_association": [],
+                "max_ttl": 0,
+                "min_ttl": 0,
+                "origin_request_policy_id": "b689b0a8-53d0-40ab-baf2-68738e2966ac",
+                "path_pattern": "/api/*",
+                "realtime_log_config_arn": "",
+                "response_headers_policy_id": "",
+                "smooth_streaming": false,
+                "target_origin_id": "apigateway",
+                "trusted_key_groups": [],
+                "trusted_signers": [],
+                "viewer_protocol_policy": "redirect-to-https"
+              }
+            ],
+            "origin": [
+              {
+                "connection_attempts": 3,
+                "connection_timeout": 10,
+                "custom_header": [],
+                "custom_origin_config": [
+                  {
+                    "http_port": 80,
+                    "https_port": 443,
+                    "origin_keepalive_timeout": 5,
+                    "origin_protocol_policy": "https-only",
+                    "origin_read_timeout": 30,
+                    "origin_ssl_protocols": [
+                      "TLSv1.2"
+                    ]
+                  }
+                ],
+                "domain_name": "37nshlxyk1.execute-api.us-east-1.amazonaws.com",
+                "origin_access_control_id": "",
+                "origin_id": "apigateway",
+                "origin_path": "/v1",
+                "origin_shield": [],
+                "s3_origin_config": [],
+                "vpc_origin_config": []
+              },
+              {
+                "connection_attempts": 3,
+                "connection_timeout": 10,
+                "custom_header": [],
+                "custom_origin_config": [],
+                "domain_name": "www.clearbyte.com.s3.amazonaws.com",
+                "origin_access_control_id": "E3PQJ2DFEKBUHR",
+                "origin_id": "clearbyte_com",
+                "origin_path": "",
+                "origin_shield": [],
+                "s3_origin_config": [],
+                "vpc_origin_config": []
+              }
+            ],
+            "origin_group": [],
+            "price_class": "PriceClass_100",
+            "restrictions": [
+              {
+                "geo_restriction": [
+                  {
+                    "locations": [
+                      "CA",
+                      "US"
+                    ],
+                    "restriction_type": "whitelist"
+                  }
+                ]
+              }
+            ],
+            "retain_on_delete": false,
+            "staging": false,
+            "status": "Deployed",
+            "tags": {},
+            "tags_all": {},
+            "trusted_key_groups": [
+              {
+                "enabled": false,
+                "items": []
+              }
+            ],
+            "trusted_signers": [
+              {
+                "enabled": false,
+                "items": []
+              }
+            ],
+            "viewer_certificate": [
+              {
+                "acm_certificate_arn": "arn:aws:acm:us-east-1:658914799523:certificate/83c73fd6-ff4a-4446-a475-efbfe3240d3d",
+                "cloudfront_default_certificate": false,
+                "iam_certificate_id": "",
+                "minimum_protocol_version": "TLSv1.2_2021",
+                "ssl_support_method": "sni-only"
+              }
+            ],
+            "wait_for_deployment": true,
+            "web_acl_id": ""
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "aws_apigatewayv2_api.api_clearbyte_com",
+            "aws_apigatewayv2_stage.develop",
+            "aws_cloudfront_function.redirect",
+            "aws_cloudfront_origin_access_control.clearbyte_com",
+            "aws_cloudwatch_log_group.api_gw",
+            "data.aws_acm_certificate.clearbyte_com",
+            "data.aws_s3_bucket.clearbyte_com"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cloudfront_function",
+      "name": "redirect",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:cloudfront::658914799523:function/cf-redirect",
+            "code": "// Example: https://github.com/aws-samples/amazon-cloudfront-functions/tree/main/url-rewrite-single-page-apps\nfunction handler(event) {\n    var request = event.request;\n    var host = request.headers.host.value;\n\n    if (host === \"clearbyte.com\") {\n        var response = {\n            statusCode: 301,\n            statusDescription: \"Moved Permanently\",\n            headers: {\n                \"location\": { \"value\": \"https://www.clearbyte.com\" }\n            }\n        };\n        return response;\n    }\n\n    // SvelteKit's static adapter prerenders \"/about\" to \"about.html\", so an\n    // extensionless request has to be rewritten or S3 returns 403.\n    var uri = request.uri;\n\n    if (uri === \"/\") {\n        request.uri = \"/index.html\";\n        return request;\n    }\n\n    // \"/about/\" and \"/about\" resolve to the same file.\n    if (uri.endsWith(\"/\")) {\n        uri = uri.slice(0, -1);\n    }\n\n    var lastSegment = uri.slice(uri.lastIndexOf(\"/\") + 1);\n    if (lastSegment.indexOf(\".\") === -1) {\n        uri = uri + \".html\";\n    }\n\n    request.uri = uri;\n\n    return request;\n}\n",
+            "comment": "URL to redirect to WWW",
+            "etag": "E3UN6WX5RRO2AG",
+            "id": "cf-redirect",
+            "key_value_store_associations": [],
+            "live_stage_etag": "E3UN6WX5RRO2AG",
+            "name": "cf-redirect",
+            "publish": true,
+            "runtime": "cloudfront-js-2.0",
+            "status": "IN_PROGRESS"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cloudfront_origin_access_control",
+      "name": "clearbyte_com",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "description": "Clearbyte.com bucket",
+            "etag": "ETVPDKIKX0DER",
+            "id": "E3PQJ2DFEKBUHR",
+            "name": "Clearbyte_com",
+            "origin_access_control_origin_type": "s3",
+            "signing_behavior": "always",
+            "signing_protocol": "sigv4"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cloudwatch_log_group",
+      "name": "api_gw",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:logs:us-east-1:658914799523:log-group:/aws/api_gw/www.clearbyte.com",
+            "id": "/aws/api_gw/www.clearbyte.com",
+            "kms_key_id": "",
+            "log_group_class": "STANDARD",
+            "name": "/aws/api_gw/www.clearbyte.com",
+            "name_prefix": "",
+            "retention_in_days": 1,
+            "skip_destroy": false,
+            "tags": {},
+            "tags_all": {}
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_apigatewayv2_api.api_clearbyte_com"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route53_record",
+      "name": "clearbyte_root_a",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 2,
+          "attributes": {
+            "alias": [
+              {
+                "evaluate_target_health": false,
+                "name": "d2279epakm2n34.cloudfront.net",
+                "zone_id": "Z2FDTNDATAQYW2"
+              }
+            ],
+            "allow_overwrite": null,
+            "cidr_routing_policy": [],
+            "failover_routing_policy": [],
+            "fqdn": "clearbyte.com",
+            "geolocation_routing_policy": [],
+            "geoproximity_routing_policy": [],
+            "health_check_id": "",
+            "id": "Z1MFX82U8FFYLX_clearbyte.com_A",
+            "latency_routing_policy": [],
+            "multivalue_answer_routing_policy": false,
+            "name": "clearbyte.com",
+            "records": [],
+            "set_identifier": "",
+            "ttl": 0,
+            "type": "A",
+            "weighted_routing_policy": [],
+            "zone_id": "Z1MFX82U8FFYLX"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjIifQ==",
+          "dependencies": [
+            "aws_apigatewayv2_api.api_clearbyte_com",
+            "aws_apigatewayv2_stage.develop",
+            "aws_cloudfront_distribution.clearbyte_com",
+            "aws_cloudfront_function.redirect",
+            "aws_cloudfront_origin_access_control.clearbyte_com",
+            "aws_cloudwatch_log_group.api_gw",
+            "data.aws_acm_certificate.clearbyte_com",
+            "data.aws_route53_zone.this",
+            "data.aws_s3_bucket.clearbyte_com"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route53_record",
+      "name": "clearbyte_root_aaaa",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 2,
+          "attributes": {
+            "alias": [
+              {
+                "evaluate_target_health": false,
+                "name": "d2279epakm2n34.cloudfront.net",
+                "zone_id": "Z2FDTNDATAQYW2"
+              }
+            ],
+            "allow_overwrite": null,
+            "cidr_routing_policy": [],
+            "failover_routing_policy": [],
+            "fqdn": "clearbyte.com",
+            "geolocation_routing_policy": [],
+            "geoproximity_routing_policy": [],
+            "health_check_id": "",
+            "id": "Z1MFX82U8FFYLX_clearbyte.com_AAAA",
+            "latency_routing_policy": [],
+            "multivalue_answer_routing_policy": false,
+            "name": "clearbyte.com",
+            "records": [],
+            "set_identifier": "",
+            "ttl": 0,
+            "type": "AAAA",
+            "weighted_routing_policy": [],
+            "zone_id": "Z1MFX82U8FFYLX"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjIifQ==",
+          "dependencies": [
+            "aws_apigatewayv2_api.api_clearbyte_com",
+            "aws_apigatewayv2_stage.develop",
+            "aws_cloudfront_distribution.clearbyte_com",
+            "aws_cloudfront_function.redirect",
+            "aws_cloudfront_origin_access_control.clearbyte_com",
+            "aws_cloudwatch_log_group.api_gw",
+            "data.aws_acm_certificate.clearbyte_com",
+            "data.aws_route53_zone.this",
+            "data.aws_s3_bucket.clearbyte_com"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route53_record",
+      "name": "clearbyte_validation",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 2,
+          "attributes": {
+            "alias": [],
+            "allow_overwrite": null,
+            "cidr_routing_policy": [],
+            "failover_routing_policy": [],
+            "fqdn": "_2ba5e82807fe37ab6e8cd23a3308e998.clearbyte.com",
+            "geolocation_routing_policy": [],
+            "geoproximity_routing_policy": [],
+            "health_check_id": "",
+            "id": "Z1MFX82U8FFYLX__2ba5e82807fe37ab6e8cd23a3308e998.clearbyte.com_CNAME",
+            "latency_routing_policy": [],
+            "multivalue_answer_routing_policy": false,
+            "name": "_2ba5e82807fe37ab6e8cd23a3308e998.clearbyte.com",
+            "records": [
+              "_cbc1ae51400c7d624e40039e10f32f74.mzlfeqexyx.acm-validations.aws."
+            ],
+            "set_identifier": "",
+            "ttl": 300,
+            "type": "CNAME",
+            "weighted_routing_policy": [],
+            "zone_id": "Z1MFX82U8FFYLX"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjIifQ==",
+          "dependencies": [
+            "data.aws_route53_zone.clearbyte"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route53_record",
+      "name": "clearbyte_www_a",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 2,
+          "attributes": {
+            "alias": [
+              {
+                "evaluate_target_health": false,
+                "name": "d2279epakm2n34.cloudfront.net",
+                "zone_id": "Z2FDTNDATAQYW2"
+              }
+            ],
+            "allow_overwrite": null,
+            "cidr_routing_policy": [],
+            "failover_routing_policy": [],
+            "fqdn": "www.clearbyte.com",
+            "geolocation_routing_policy": [],
+            "geoproximity_routing_policy": [],
+            "health_check_id": "",
+            "id": "Z1MFX82U8FFYLX_www.clearbyte.com_A",
+            "latency_routing_policy": [],
+            "multivalue_answer_routing_policy": false,
+            "name": "www.clearbyte.com",
+            "records": [],
+            "set_identifier": "",
+            "ttl": 0,
+            "type": "A",
+            "weighted_routing_policy": [],
+            "zone_id": "Z1MFX82U8FFYLX"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjIifQ==",
+          "dependencies": [
+            "aws_apigatewayv2_api.api_clearbyte_com",
+            "aws_apigatewayv2_stage.develop",
+            "aws_cloudfront_distribution.clearbyte_com",
+            "aws_cloudfront_function.redirect",
+            "aws_cloudfront_origin_access_control.clearbyte_com",
+            "aws_cloudwatch_log_group.api_gw",
+            "data.aws_acm_certificate.clearbyte_com",
+            "data.aws_route53_zone.this",
+            "data.aws_s3_bucket.clearbyte_com"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route53_record",
+      "name": "clearbyte_www_aaaa",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 2,
+          "attributes": {
+            "alias": [
+              {
+                "evaluate_target_health": false,
+                "name": "d2279epakm2n34.cloudfront.net",
+                "zone_id": "Z2FDTNDATAQYW2"
+              }
+            ],
+            "allow_overwrite": null,
+            "cidr_routing_policy": [],
+            "failover_routing_policy": [],
+            "fqdn": "www.clearbyte.com",
+            "geolocation_routing_policy": [],
+            "geoproximity_routing_policy": [],
+            "health_check_id": "",
+            "id": "Z1MFX82U8FFYLX_www.clearbyte.com_AAAA",
+            "latency_routing_policy": [],
+            "multivalue_answer_routing_policy": false,
+            "name": "www.clearbyte.com",
+            "records": [],
+            "set_identifier": "",
+            "ttl": 0,
+            "type": "AAAA",
+            "weighted_routing_policy": [],
+            "zone_id": "Z1MFX82U8FFYLX"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjIifQ==",
+          "dependencies": [
+            "aws_apigatewayv2_api.api_clearbyte_com",
+            "aws_apigatewayv2_stage.develop",
+            "aws_cloudfront_distribution.clearbyte_com",
+            "aws_cloudfront_function.redirect",
+            "aws_cloudfront_origin_access_control.clearbyte_com",
+            "aws_cloudwatch_log_group.api_gw",
+            "data.aws_acm_certificate.clearbyte_com",
+            "data.aws_route53_zone.this",
+            "data.aws_s3_bucket.clearbyte_com"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route53_record",
+      "name": "mightysystems_root",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 2,
+          "attributes": {
+            "alias": [
+              {
+                "evaluate_target_health": false,
+                "name": "d2279epakm2n34.cloudfront.net",
+                "zone_id": "Z2FDTNDATAQYW2"
+              }
+            ],
+            "allow_overwrite": null,
+            "cidr_routing_policy": [],
+            "failover_routing_policy": [],
+            "fqdn": "mightysystems.com",
+            "geolocation_routing_policy": [],
+            "geoproximity_routing_policy": [],
+            "health_check_id": "",
+            "id": "Z8MSR1YEO7YSU_mightysystems.com_A",
+            "latency_routing_policy": [],
+            "multivalue_answer_routing_policy": false,
+            "name": "mightysystems.com",
+            "records": [],
+            "set_identifier": "",
+            "ttl": 0,
+            "type": "A",
+            "weighted_routing_policy": [],
+            "zone_id": "Z8MSR1YEO7YSU"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjIifQ==",
+          "dependencies": [
+            "aws_apigatewayv2_api.api_clearbyte_com",
+            "aws_apigatewayv2_stage.develop",
+            "aws_cloudfront_distribution.clearbyte_com",
+            "aws_cloudfront_function.redirect",
+            "aws_cloudfront_origin_access_control.clearbyte_com",
+            "aws_cloudwatch_log_group.api_gw",
+            "data.aws_acm_certificate.clearbyte_com",
+            "data.aws_route53_zone.mightysystems",
+            "data.aws_s3_bucket.clearbyte_com"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route53_record",
+      "name": "mightysystems_wildcard",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 2,
+          "attributes": {
+            "alias": [
+              {
+                "evaluate_target_health": false,
+                "name": "d2279epakm2n34.cloudfront.net",
+                "zone_id": "Z2FDTNDATAQYW2"
+              }
+            ],
+            "allow_overwrite": null,
+            "cidr_routing_policy": [],
+            "failover_routing_policy": [],
+            "fqdn": "*.mightysystems.com",
+            "geolocation_routing_policy": [],
+            "geoproximity_routing_policy": [],
+            "health_check_id": "",
+            "id": "Z8MSR1YEO7YSU_*.mightysystems.com_A",
+            "latency_routing_policy": [],
+            "multivalue_answer_routing_policy": false,
+            "name": "*.mightysystems.com",
+            "records": [],
+            "set_identifier": "",
+            "ttl": 0,
+            "type": "A",
+            "weighted_routing_policy": [],
+            "zone_id": "Z8MSR1YEO7YSU"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjIifQ==",
+          "dependencies": [
+            "aws_apigatewayv2_api.api_clearbyte_com",
+            "aws_apigatewayv2_stage.develop",
+            "aws_cloudfront_distribution.clearbyte_com",
+            "aws_cloudfront_function.redirect",
+            "aws_cloudfront_origin_access_control.clearbyte_com",
+            "aws_cloudwatch_log_group.api_gw",
+            "data.aws_acm_certificate.clearbyte_com",
+            "data.aws_route53_zone.mightysystems",
+            "data.aws_s3_bucket.clearbyte_com"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route53_record",
+      "name": "zenzoom_root",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 2,
+          "attributes": {
+            "alias": [
+              {
+                "evaluate_target_health": false,
+                "name": "d2279epakm2n34.cloudfront.net",
+                "zone_id": "Z2FDTNDATAQYW2"
+              }
+            ],
+            "allow_overwrite": null,
+            "cidr_routing_policy": [],
+            "failover_routing_policy": [],
+            "fqdn": "zenzoom.com",
+            "geolocation_routing_policy": [],
+            "geoproximity_routing_policy": [],
+            "health_check_id": "",
+            "id": "Z2K4CGTXVYJG4R_zenzoom.com_A",
+            "latency_routing_policy": [],
+            "multivalue_answer_routing_policy": false,
+            "name": "zenzoom.com",
+            "records": [],
+            "set_identifier": "",
+            "ttl": 0,
+            "type": "A",
+            "weighted_routing_policy": [],
+            "zone_id": "Z2K4CGTXVYJG4R"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjIifQ==",
+          "dependencies": [
+            "aws_apigatewayv2_api.api_clearbyte_com",
+            "aws_apigatewayv2_stage.develop",
+            "aws_cloudfront_distribution.clearbyte_com",
+            "aws_cloudfront_function.redirect",
+            "aws_cloudfront_origin_access_control.clearbyte_com",
+            "aws_cloudwatch_log_group.api_gw",
+            "data.aws_acm_certificate.clearbyte_com",
+            "data.aws_route53_zone.zenzoom",
+            "data.aws_s3_bucket.clearbyte_com"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route53_record",
+      "name": "zenzoom_wildcard",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 2,
+          "attributes": {
+            "alias": [
+              {
+                "evaluate_target_health": false,
+                "name": "d2279epakm2n34.cloudfront.net",
+                "zone_id": "Z2FDTNDATAQYW2"
+              }
+            ],
+            "allow_overwrite": null,
+            "cidr_routing_policy": [],
+            "failover_routing_policy": [],
+            "fqdn": "*.zenzoom.com",
+            "geolocation_routing_policy": [],
+            "geoproximity_routing_policy": [],
+            "health_check_id": "",
+            "id": "Z2K4CGTXVYJG4R_*.zenzoom.com_A",
+            "latency_routing_policy": [],
+            "multivalue_answer_routing_policy": false,
+            "name": "*.zenzoom.com",
+            "records": [],
+            "set_identifier": "",
+            "ttl": 0,
+            "type": "A",
+            "weighted_routing_policy": [],
+            "zone_id": "Z2K4CGTXVYJG4R"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjIifQ==",
+          "dependencies": [
+            "aws_apigatewayv2_api.api_clearbyte_com",
+            "aws_apigatewayv2_stage.develop",
+            "aws_cloudfront_distribution.clearbyte_com",
+            "aws_cloudfront_function.redirect",
+            "aws_cloudfront_origin_access_control.clearbyte_com",
+            "aws_cloudwatch_log_group.api_gw",
+            "data.aws_acm_certificate.clearbyte_com",
+            "data.aws_route53_zone.zenzoom",
+            "data.aws_s3_bucket.clearbyte_com"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_cors_configuration",
+      "name": "clearbyte_cors",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "bucket": "www.clearbyte.com",
+            "cors_rule": [
+              {
+                "allowed_headers": [
+                  "*"
+                ],
+                "allowed_methods": [
+                  "GET",
+                  "HEAD",
+                  "POST"
+                ],
+                "allowed_origins": [
+                  "*"
+                ],
+                "expose_headers": [],
+                "id": "",
+                "max_age_seconds": 2
+              }
+            ],
+            "expected_bucket_owner": "",
+            "id": "www.clearbyte.com"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "data.aws_s3_bucket.clearbyte_com"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_policy",
+      "name": "clearbyte_com_origin_access_control",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "bucket": "www.clearbyte.com",
+            "id": "www.clearbyte.com",
+            "policy": "{\"Statement\":[{\"Action\":\"s3:GetObject\",\"Condition\":{\"StringEquals\":{\"AWS:SourceArn\":\"arn:aws:cloudfront::658914799523:distribution/E16JYCRKDJU32\"}},\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"cloudfront.amazonaws.com\"},\"Resource\":\"arn:aws:s3:::www.clearbyte.com/*\",\"Sid\":\"AllowCloudFrontServicePrincipalReadOnly\"}],\"Version\":\"2012-10-17\"}"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_apigatewayv2_api.api_clearbyte_com",
+            "aws_apigatewayv2_stage.develop",
+            "aws_cloudfront_distribution.clearbyte_com",
+            "aws_cloudfront_function.redirect",
+            "aws_cloudfront_origin_access_control.clearbyte_com",
+            "aws_cloudwatch_log_group.api_gw",
+            "data.aws_acm_certificate.clearbyte_com",
+            "data.aws_s3_bucket.clearbyte_com"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.contact",
+      "mode": "data",
+      "type": "aws_caller_identity",
+      "name": "current",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "account_id": "658914799523",
+            "arn": "arn:aws:iam::658914799523:user/John",
+            "id": "658914799523",
+            "user_id": "AIDAJO4ZYVTOSJRWVSBP6"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "module": "module.contact",
+      "mode": "data",
+      "type": "aws_region",
+      "name": "current",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "description": "US East (N. Virginia)",
+            "endpoint": "ec2.us-east-1.amazonaws.com",
+            "id": "us-east-1",
+            "name": "us-east-1"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "module": "module.contact",
+      "mode": "managed",
+      "type": "aws_apigatewayv2_integration",
+      "name": "lambda",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "api_id": "37nshlxyk1",
+            "connection_id": "",
+            "connection_type": "INTERNET",
+            "content_handling_strategy": "",
+            "credentials_arn": "",
+            "description": "",
+            "id": "tde4mv3",
+            "integration_method": "POST",
+            "integration_response_selection_expression": "",
+            "integration_subtype": "",
+            "integration_type": "AWS_PROXY",
+            "integration_uri": "arn:aws:lambda:us-east-1:658914799523:function:clearbyte_contact",
+            "passthrough_behavior": "",
+            "payload_format_version": "2.0",
+            "request_parameters": {},
+            "request_templates": {},
+            "response_parameters": [],
+            "template_selection_expression": "",
+            "timeout_milliseconds": 30000,
+            "tls_config": []
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_apigatewayv2_api.api_clearbyte_com",
+            "data.aws_caller_identity.current",
+            "data.aws_iam_policy_document.ses_send",
+            "data.aws_region.current",
+            "module.contact.module.terraform_lambda.aws_ecr_repository.ecr_repo",
+            "module.contact.module.terraform_lambda.aws_iam_role.iam_for_lambda",
+            "module.contact.module.terraform_lambda.aws_lambda_function.image",
+            "module.contact.module.terraform_lambda.data.aws_ecr_authorization_token.container_registry_token",
+            "module.contact.module.terraform_lambda.docker_registry_image.image_reg",
+            "module.contact.module.terraform_lambda.terraform_data.docker_image"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.contact",
+      "mode": "managed",
+      "type": "aws_apigatewayv2_route",
+      "name": "launch_path",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "api_id": "37nshlxyk1",
+            "api_key_required": false,
+            "authorization_scopes": [],
+            "authorization_type": "NONE",
+            "authorizer_id": "",
+            "id": "h13le42",
+            "model_selection_expression": "",
+            "operation_name": "",
+            "request_models": {},
+            "request_parameter": [],
+            "route_key": "POST /api/contact",
+            "route_response_selection_expression": "",
+            "target": "integrations/tde4mv3"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_apigatewayv2_api.api_clearbyte_com",
+            "data.aws_caller_identity.current",
+            "data.aws_iam_policy_document.ses_send",
+            "data.aws_region.current",
+            "module.contact.aws_apigatewayv2_integration.lambda",
+            "module.contact.module.terraform_lambda.aws_ecr_repository.ecr_repo",
+            "module.contact.module.terraform_lambda.aws_iam_role.iam_for_lambda",
+            "module.contact.module.terraform_lambda.aws_lambda_function.image",
+            "module.contact.module.terraform_lambda.data.aws_ecr_authorization_token.container_registry_token",
+            "module.contact.module.terraform_lambda.docker_registry_image.image_reg",
+            "module.contact.module.terraform_lambda.terraform_data.docker_image"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.contact",
+      "mode": "managed",
+      "type": "aws_lambda_permission",
+      "name": "lambda",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "action": "lambda:InvokeFunction",
+            "event_source_token": null,
+            "function_name": "clearbyte_contact",
+            "function_url_auth_type": null,
+            "id": "AllowExecutionFromAPIGateway-POST-0",
+            "principal": "apigateway.amazonaws.com",
+            "principal_org_id": null,
+            "qualifier": "",
+            "source_account": null,
+            "source_arn": "arn:aws:execute-api:us-east-1:658914799523:37nshlxyk1/*/POST/api/contact",
+            "statement_id": "AllowExecutionFromAPIGateway-POST-0",
+            "statement_id_prefix": ""
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_apigatewayv2_api.api_clearbyte_com",
+            "data.aws_caller_identity.current",
+            "data.aws_iam_policy_document.ses_send",
+            "data.aws_region.current",
+            "module.contact.data.aws_caller_identity.current",
+            "module.contact.data.aws_region.current",
+            "module.contact.module.terraform_lambda.aws_cloudwatch_log_group.lambda",
+            "module.contact.module.terraform_lambda.aws_ecr_repository.ecr_repo",
+            "module.contact.module.terraform_lambda.aws_ecr_repository_policy.ecr_repo_policy",
+            "module.contact.module.terraform_lambda.aws_iam_role.iam_for_lambda",
+            "module.contact.module.terraform_lambda.aws_iam_role_policy.inline_policies",
+            "module.contact.module.terraform_lambda.aws_iam_role_policy_attachment.lambda_exec_basic_policy",
+            "module.contact.module.terraform_lambda.aws_iam_role_policy_attachment.lambda_policy",
+            "module.contact.module.terraform_lambda.aws_lambda_function.image",
+            "module.contact.module.terraform_lambda.data.aws_ecr_authorization_token.container_registry_token",
+            "module.contact.module.terraform_lambda.docker_registry_image.image_reg",
+            "module.contact.module.terraform_lambda.terraform_data.docker_image"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.contact.module.terraform_lambda",
+      "mode": "data",
+      "type": "aws_ecr_authorization_token",
+      "name": "container_registry_token",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "authorization_token": "QVdTOmV5SndZWGxzYjJGa0lqb2llV3czVnpCUE5rMUJRMHBWU0dseFVWRm9UbVp3YmtodlVHUTFkRVIyTUUxTFdEQTFURmMwVG1nMlYzcENiVkp4VkUxd2JGZExhek1yZDNkbFl6aFhkRmRRY0Vsb2QyNHlVVGRwTlVkdVMzVnpPRFpXZVVKelMwNHljbmx5ZFZCU09FRjFMM0JrVEVwT1RGZFNSa0V3Um1KWk9FcE9kMkZtTWxFMllsUmtaV2R0U25Ob04wTTBPVmwyVEU1MGNIZGxlazFuT0RscGJEVXlVbnBOVTJNeU1tVmpaMWhQV1U1cE9VRkxhMjVMWms4MEwxTjNWMDVxWkhKMmFuWlFkbGRCYm04NFpXZFNiVkEyUmpCbVFuaEZWREpwWlhOdmQyVkJTR1pXTVhBd2IweEZPRTRyVlRGRGRFWnpNMEZ6UjNCblNFSjNOMVoxY0hoSFRVNUNZM0F2ZUhsaU4xSkVSa0ZRVlV0dk5IWlRUakpGWjJscWVXOURZVlZDYkd3M2NFSllMMUkzYldWelQxbEpUVmczTm1RMlpHeDVRV2h1YTJKVWVVNTNVMUZ6TkZadGR6SlljVWhhVUVkRWIzUXljVWRrUWs4M1JqbEVaR2xEYW5WMk5FWnRZbGgyYkRoRkwxa3hkbEZqTjNKalQwOVhZV2hDZFhSclJ6bE1NRU5UUzBsTlkzcE1hMWRxTjNVMVZXTlphVlY0VkRZeE5VZHhjREJxYVdOSFZIbEZhbEoxWmtRNVkyMXpNVnBzU0hZcmFpc3lLME5JYUVOeVRtSnpjbGMyZEc5MlZubzFOVGt3VDNoTlZHTnVTRnBwVlhkYWVrVkVZbGRqVGs1c1l5OW9jbUV5TjNZelFYaERTQ3RTZG5relR6QldSMUJFTVhKUFVWQmFTMEpvVVdkamNVMW5jamx3TjNZeGRsQXJVMDExZDJsYVUzcENORVZIYTBkck1WRnNTM0FyWlZoM1RXRjBUR0ZzY0dWbFZFbGhiM1JhTkV4NlVVSk9SVFp0T0cwNGVqVlhaVVE0WWtGSFpIWjRTV1YzTUZodE4zSnpSalIxYUhOTlZuaEdUSE5GYmpkRFJrUk1abk0xY0hoeWVWQXhNMG93WjB4emNFczBXR1pFY2pWQ2IxcHZaM1ExV25wQ2NuWjFSSE5ZZG01c01HRktiR1pMYkVSMWJWSlZUM0l5WTBNNE9UVnVaR3hqYjNBelRYSmpXSEJaV2t4eFZsVlFLMDF2U0dOeloyMXpTMHBSZEdKUmFIRkNXV2R3WWpseFdYVlZibFF5ZFVoSk5Ua3JTMVpuTVdaS1ZuaDRlV0ptUWtWaE1rbHJkMGRpWTA1amQzUkNOMmRSTlZJelQwSjVZWHBKZDNGcWNHeHBhR3RMYTBKc09HczVMek15UTNWQ1JFdGhiMGhXUlVwaWJGZFdSbVExZG5ZelFUVm5XVXM1WmxKTU5FazVORXN6U0ZwSk1GWlNiSE5yVHpSMWFVcEVjR1ZNUlZGVmNFUmllRlJJVGpsRVpFNXZjR1E0WVVob2ExRk1XRWhwWmt0UVVHa3ZUMnhZWkhaamNHUmlTVzVUY0c1RFpUVjBRVFpvZFVKM1NrRkZURFV4Y2s5bFVEZHFjVlJHU1RoWlNqSnhTWG81UkZSblkzVXhOSFYzVTJFMFJVd3pSRXhyV2preE1qRnFNMFV3U0V4c1FWaFRjRlkxSzFkeU5UWmhTRVZsVEdoRVJYbDJlRlE1VDNGaU1ITnVObEk0UjNBeVFsWTJSSE5pU2toUGFHaElSMjFWZDI0MlVHbEJieTh5VUVKaVQzaHpWSGQ0V2tWb1VHSndlbHBHU0dsbVUwRnVPU0lzSW1SaGRHRnJaWGtpT2lKQlVVVkNRVWhvZDIwd1dXRkpVMHBsVW5SS2JUVnVNVWMyZFhGbFpXdFlkVzlZV0ZCbE5WVkdZMlU1VW5FNEx6RTBkMEZCUVVnMGQyWkJXVXBMYjFwSmFIWmpUa0ZSWTBkdlJ6aDNZbEZKUWtGRVFtOUNaMnR4YUd0cFJ6bDNNRUpDZDBWM1NHZFpTbGxKV2tsQlYxVkVRa0ZGZFUxQ1JVVkVUMHRWU201cWFVMVJhRzVMVVRCU2RFRkpRa1ZKUVRkQk5qbDVlVWxFYjNVMWFWSm9VbGxXT0VOQ05WRnRaMlEyWkdKUFRGQXJjRTV3VEU1d2JIcEhhRFY1ZFV3clRFaDBaelJWYkhWbE1sUnRjVXhRVGxSc1lYcE5OMFl3YzBOcVNVNHlUM1ZyUFNJc0luWmxjbk5wYjI0aU9pSXlJaXdpZEhsd1pTSTZJa1JCVkVGZlMwVlpJaXdpWlhod2FYSmhkR2x2YmlJNk1UYzROVFUyTVRJM01YMD0=",
+            "expires_at": "2026-08-01T05:14:31Z",
+            "id": "us-east-1",
+            "password": "eyJwYXlsb2FkIjoieWw3VzBPNk1BQ0pVSGlxUVFoTmZwbkhvUGQ1dER2ME1LWDA1TFc0Tmg2V3pCbVJxVE1wbFdLazMrd3dlYzhXdFdQcElod24yUTdpNUduS3VzODZWeUJzS04ycnlydVBSOEF1L3BkTEpOTFdSRkEwRmJZOEpOd2FmMlE2YlRkZWdtSnNoN0M0OVl2TE50cHdlek1nODlpbDUyUnpNU2MyMmVjZ1hPWU5pOUFLa25LZk80L1N3V05qZHJ2anZQdldBbm84ZWdSbVA2RjBmQnhFVDJpZXNvd2VBSGZWMXAwb0xFOE4rVTFDdEZzM0FzR3BnSEJ3N1Z1cHhHTU5CY3AveHliN1JERkFQVUtvNHZTTjJFZ2lqeW9DYVVCbGw3cEJYL1I3bWVzT1lJTVg3NmQ2ZGx5QWhua2JUeU53U1FzNFZtdzJYcUhaUEdEb3QycUdkQk83RjlEZGlDanV2NEZtYlh2bDhFL1kxdlFjN3JjT09XYWhCdXRrRzlMMENTS0lNY3pMa1dqN3U1VWNZaVV4VDYxNUdxcDBqaWNHVHlFalJ1ZkQ5Y21zMVpsSHYraisyK0NIaENyTmJzclc2dG92Vno1NTkwT3hNVGNuSFppVXdaekVEYldjTk5sYy9ocmEyN3YzQXhDSCtSdnkzTzBWR1BEMXJPUVBaS0JoUWdjcU1ncjlwN3YxdlArU011d2laU3pCNEVHa0drMVFsS3ArZVh3TWF0TGFscGVlVElhb3RaNEx6UUJORTZtOG04ejVXZUQ4YkFHZHZ4SWV3MFhtN3JzRjR1aHNNVnhGTHNFbjdDRkRMZnM1cHhyeVAxM0owZ0xzcEs0WGZEcjVCb1pvZ3Q1WnpCcnZ1RHNYdm5sMGFKbGZLbER1bVJVT3IyY0M4OTVuZGxjb3AzTXJjWHBZWkxxVlVQK01vSGNzZ21zS0pRdGJRaHFCWWdwYjlxWXVVblQydUhJNTkrS1ZnMWZKVnh4eWJmQkVhMklrd0diY05jd3RCN2dRNVIzT0J5YXpJd3FqcGxpaGtLa0JsOGs5LzMyQ3VCREthb0hWRUpibFdWRmQ1dnYzQTVnWUs5ZlJMNEk5NEszSFpJMFZSbHNrTzR1aUpEcGVMRVFVcERieFRITjlEZE5vcGQ4YUhoa1FMWEhpZktQUGkvT2xYZHZjcGRiSW5TcG5DZTV0QTZodUJ3SkFFTDUxck9lUDdqcVRGSThZSjJxSXo5RFRnY3UxNHV3U2E0RUwzRExrWjkxMjFqM0UwSExsQVhTcFY1K1dyNTZhSEVlTGhERXl2eFQ5T3FiMHNuNlI4R3AyQlY2RHNiSkhPaGhIR21Vd242UGlBby8yUEJiT3hzVHd4WkVoUGJwelpGSGlmU0FuOSIsImRhdGFrZXkiOiJBUUVCQUhod20wWWFJU0plUnRKbTVuMUc2dXFlZWtYdW9YWFBlNVVGY2U5UnE4LzE0d0FBQUg0d2ZBWUpLb1pJaHZjTkFRY0dvRzh3YlFJQkFEQm9CZ2txaGtpRzl3MEJCd0V3SGdZSllJWklBV1VEQkFFdU1CRUVET0tVSm5qaU1RaG5LUTBSdEFJQkVJQTdBNjl5eUlEb3U1aVJoUllWOENCNVFtZ2Q2ZGJPTFArcE5wTE5wbHpHaDV5dUwrTEh0ZzRVbHVlMlRtcUxQTlRsYXpNN0Ywc0NqSU4yT3VrPSIsInZlcnNpb24iOiIyIiwidHlwZSI6IkRBVEFfS0VZIiwiZXhwaXJhdGlvbiI6MTc4NTU2MTI3MX0=",
+            "proxy_endpoint": "https://658914799523.dkr.ecr.us-east-1.amazonaws.com",
+            "registry_id": null,
+            "user_name": "AWS"
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "authorization_token"
+              }
+            ],
+            [
+              {
+                "type": "get_attr",
+                "value": "password"
+              }
+            ]
+          ],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "module": "module.contact.module.terraform_lambda",
+      "mode": "managed",
+      "type": "aws_cloudwatch_log_group",
+      "name": "lambda",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:logs:us-east-1:658914799523:log-group:/aws/lambda/clearbyte_contact",
+            "id": "/aws/lambda/clearbyte_contact",
+            "kms_key_id": "",
+            "log_group_class": "STANDARD",
+            "name": "/aws/lambda/clearbyte_contact",
+            "name_prefix": "",
+            "retention_in_days": 1,
+            "skip_destroy": false,
+            "tags": {},
+            "tags_all": {}
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "data.aws_caller_identity.current",
+            "data.aws_iam_policy_document.ses_send",
+            "data.aws_region.current"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.contact.module.terraform_lambda",
+      "mode": "managed",
+      "type": "aws_ecr_repository",
+      "name": "ecr_repo",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ecr:us-east-1:658914799523:repository/clearbyte_contact",
+            "encryption_configuration": [
+              {
+                "encryption_type": "AES256",
+                "kms_key": ""
+              }
+            ],
+            "force_delete": null,
+            "id": "clearbyte_contact",
+            "image_scanning_configuration": [
+              {
+                "scan_on_push": false
+              }
+            ],
+            "image_tag_mutability": "MUTABLE",
+            "name": "clearbyte_contact",
+            "registry_id": "658914799523",
+            "repository_url": "658914799523.dkr.ecr.us-east-1.amazonaws.com/clearbyte_contact",
+            "tags": {},
+            "tags_all": {},
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiZGVsZXRlIjoxMjAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "data.aws_caller_identity.current",
+            "data.aws_iam_policy_document.ses_send",
+            "data.aws_region.current"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.contact.module.terraform_lambda",
+      "mode": "managed",
+      "type": "aws_ecr_repository_policy",
+      "name": "ecr_repo_policy",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "clearbyte_contact",
+            "policy": "{\"Statement\":[{\"Action\":[\"ecr:BatchGetImage\",\"ecr:DeleteRepository\",\"ecr:GetDownloadUrlForLayer\",\"ecr:GetRepositoryPolicy\",\"ecr:SetRepositoryPolicy\"],\"Effect\":\"Allow\",\"Principal\":\"*\"}],\"Version\":\"2008-10-17\"}",
+            "registry_id": "658914799523",
+            "repository": "clearbyte_contact"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "data.aws_caller_identity.current",
+            "data.aws_iam_policy_document.ses_send",
+            "data.aws_region.current",
+            "module.contact.module.terraform_lambda.aws_ecr_repository.ecr_repo"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.contact.module.terraform_lambda",
+      "mode": "managed",
+      "type": "aws_iam_role",
+      "name": "iam_for_lambda",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:iam::658914799523:role/clearbyte_contact",
+            "assume_role_policy": "{\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"}}],\"Version\":\"2012-10-17\"}",
+            "create_date": "2025-02-04T15:38:06Z",
+            "description": "",
+            "force_detach_policies": false,
+            "id": "clearbyte_contact",
+            "inline_policy": [],
+            "managed_policy_arns": [
+              "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+            ],
+            "max_session_duration": 3600,
+            "name": "clearbyte_contact",
+            "name_prefix": "",
+            "path": "/",
+            "permissions_boundary": "",
+            "tags": {},
+            "tags_all": {},
+            "unique_id": "AROAZS2TB56RVH5ZCZY6W"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "data.aws_caller_identity.current",
+            "data.aws_iam_policy_document.ses_send",
+            "data.aws_region.current"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.contact.module.terraform_lambda",
+      "mode": "managed",
+      "type": "aws_iam_role_policy",
+      "name": "inline_policies",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": "clearbyte_contact_ses",
+          "schema_version": 0,
+          "attributes": {
+            "id": "clearbyte_contact:clearbyte_contact_ses",
+            "name": "clearbyte_contact_ses",
+            "name_prefix": "",
+            "policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":\"ses:SendEmail\",\"Effect\":\"Allow\",\"Resource\":\"arn:aws:ses:us-east-1:658914799523:identity/clearbyte.com\"}]}",
+            "role": "clearbyte_contact"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "data.aws_caller_identity.current",
+            "data.aws_iam_policy_document.ses_send",
+            "data.aws_region.current",
+            "module.contact.module.terraform_lambda.aws_iam_role.iam_for_lambda"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.contact.module.terraform_lambda",
+      "mode": "managed",
+      "type": "aws_iam_role_policy_attachment",
+      "name": "lambda_exec_basic_policy",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "clearbyte_contact-20250204153806624900000002",
+            "policy_arn": "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+            "role": "clearbyte_contact"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "data.aws_caller_identity.current",
+            "data.aws_iam_policy_document.ses_send",
+            "data.aws_region.current",
+            "module.contact.module.terraform_lambda.aws_iam_role.iam_for_lambda"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.contact.module.terraform_lambda",
+      "mode": "managed",
+      "type": "aws_iam_role_policy_attachment",
+      "name": "lambda_policy",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+          "schema_version": 0,
+          "attributes": {
+            "id": "clearbyte_contact-20250204153806544900000001",
+            "policy_arn": "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+            "role": "clearbyte_contact"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "data.aws_caller_identity.current",
+            "data.aws_iam_policy_document.ses_send",
+            "data.aws_region.current",
+            "module.contact.module.terraform_lambda.aws_iam_role.iam_for_lambda"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.contact.module.terraform_lambda",
+      "mode": "managed",
+      "type": "aws_lambda_function",
+      "name": "image",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "architectures": [
+              "arm64"
+            ],
+            "arn": "arn:aws:lambda:us-east-1:658914799523:function:clearbyte_contact",
+            "code_sha256": "419e6817aee6e8f863496a72b9f5fa48e556722083cecfbcbf1de650297755c1",
+            "code_signing_config_arn": "",
+            "dead_letter_config": [],
+            "description": "Used to store contact information",
+            "environment": [
+              {
+                "variables": {
+                  "DEBUG": "yes",
+                  "EMAIL_ADDRESS_FROM": "noreply@clearbyte.com",
+                  "EMAIL_ADDRESS_TO": "kossjohn@gmail.com"
+                }
+              }
+            ],
+            "ephemeral_storage": [
+              {
+                "size": 512
+              }
+            ],
+            "file_system_config": [],
+            "filename": null,
+            "function_name": "clearbyte_contact",
+            "handler": "",
+            "id": "clearbyte_contact",
+            "image_config": [],
+            "image_uri": "658914799523.dkr.ecr.us-east-1.amazonaws.com/clearbyte_contact:latest",
+            "invoke_arn": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:658914799523:function:clearbyte_contact/invocations",
+            "kms_key_arn": "",
+            "last_modified": "2025-02-04T15:39:11.313+0000",
+            "layers": [],
+            "logging_config": [
+              {
+                "application_log_level": "DEBUG",
+                "log_format": "JSON",
+                "log_group": "/aws/lambda/clearbyte_contact",
+                "system_log_level": "DEBUG"
+              }
+            ],
+            "memory_size": 128,
+            "package_type": "Image",
+            "publish": false,
+            "qualified_arn": "arn:aws:lambda:us-east-1:658914799523:function:clearbyte_contact:$LATEST",
+            "qualified_invoke_arn": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:658914799523:function:clearbyte_contact:$LATEST/invocations",
+            "replace_security_groups_on_destroy": null,
+            "replacement_security_group_ids": null,
+            "reserved_concurrent_executions": -1,
+            "role": "arn:aws:iam::658914799523:role/clearbyte_contact",
+            "runtime": "",
+            "s3_bucket": null,
+            "s3_key": null,
+            "s3_object_version": null,
+            "signing_job_arn": "",
+            "signing_profile_version_arn": "",
+            "skip_destroy": false,
+            "snap_start": [],
+            "source_code_hash": "7cefcc74602ee8898fbe8c12133297f8e6b1ec604ef79c2ad99d914b84b08c19",
+            "source_code_size": 0,
+            "tags": {},
+            "tags_all": {},
+            "timeout": 5,
+            "timeouts": null,
+            "tracing_config": [
+              {
+                "mode": "PassThrough"
+              }
+            ],
+            "version": "$LATEST",
+            "vpc_config": []
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6NjAwMDAwMDAwMDAwLCJ1cGRhdGUiOjYwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "data.aws_caller_identity.current",
+            "data.aws_iam_policy_document.ses_send",
+            "data.aws_region.current",
+            "module.contact.module.terraform_lambda.aws_ecr_repository.ecr_repo",
+            "module.contact.module.terraform_lambda.aws_iam_role.iam_for_lambda",
+            "module.contact.module.terraform_lambda.data.aws_ecr_authorization_token.container_registry_token",
+            "module.contact.module.terraform_lambda.docker_registry_image.image_reg",
+            "module.contact.module.terraform_lambda.terraform_data.docker_image"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.contact.module.terraform_lambda",
+      "mode": "managed",
+      "type": "docker_registry_image",
+      "name": "image_reg",
+      "provider": "module.contact.module.terraform_lambda.provider[\"registry.terraform.io/kreuzwerker/docker\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "sha256:7cefcc74602ee8898fbe8c12133297f8e6b1ec604ef79c2ad99d914b84b08c19",
+            "insecure_skip_verify": false,
+            "keep_remotely": false,
+            "name": "658914799523.dkr.ecr.us-east-1.amazonaws.com/clearbyte_contact:latest",
+            "sha256_digest": "sha256:7cefcc74602ee8898fbe8c12133297f8e6b1ec604ef79c2ad99d914b84b08c19",
+            "triggers": {
+              "sha1_dir": "3b7961e42088177850833c65c1e6081f863b2a5e",
+              "sha1_docker_file": "e765a1221d009f487c59d2dc42ea3953"
+            }
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "data.aws_caller_identity.current",
+            "data.aws_iam_policy_document.ses_send",
+            "data.aws_region.current",
+            "module.contact.module.terraform_lambda.aws_ecr_repository.ecr_repo",
+            "module.contact.module.terraform_lambda.data.aws_ecr_authorization_token.container_registry_token",
+            "module.contact.module.terraform_lambda.terraform_data.docker_image"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.contact.module.terraform_lambda",
+      "mode": "managed",
+      "type": "terraform_data",
+      "name": "docker_image",
+      "provider": "provider[\"terraform.io/builtin/terraform\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "93d92976-7e8d-bf69-4496-71aa1a37bbb4",
+            "input": null,
+            "output": null,
+            "triggers_replace": {
+              "value": {
+                "sha1_dir": "3b7961e42088177850833c65c1e6081f863b2a5e",
+                "sha1_docker_file": "e765a1221d009f487c59d2dc42ea3953"
+              },
+              "type": [
+                "object",
+                {
+                  "sha1_dir": "string",
+                  "sha1_docker_file": "string"
+                }
+              ]
+            }
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "dependencies": [
+            "data.aws_caller_identity.current",
+            "data.aws_iam_policy_document.ses_send",
+            "data.aws_region.current",
+            "module.contact.module.terraform_lambda.aws_ecr_repository.ecr_repo"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.sms_opt_in",
+      "mode": "data",
+      "type": "aws_caller_identity",
+      "name": "current",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "account_id": "658914799523",
+            "arn": "arn:aws:iam::658914799523:user/John",
+            "id": "658914799523",
+            "user_id": "AIDAJO4ZYVTOSJRWVSBP6"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "module": "module.sms_opt_in",
+      "mode": "data",
+      "type": "aws_region",
+      "name": "current",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "description": "US East (N. Virginia)",
+            "endpoint": "ec2.us-east-1.amazonaws.com",
+            "id": "us-east-1",
+            "name": "us-east-1"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "module": "module.sms_opt_in",
+      "mode": "managed",
+      "type": "aws_apigatewayv2_integration",
+      "name": "lambda",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "api_id": "37nshlxyk1",
+            "connection_id": "",
+            "connection_type": "INTERNET",
+            "content_handling_strategy": "",
+            "credentials_arn": "",
+            "description": "",
+            "id": "sjo8e2b",
+            "integration_method": "POST",
+            "integration_response_selection_expression": "",
+            "integration_subtype": "",
+            "integration_type": "AWS_PROXY",
+            "integration_uri": "arn:aws:lambda:us-east-1:658914799523:function:clearbyte_sms_opt_in",
+            "passthrough_behavior": "",
+            "payload_format_version": "2.0",
+            "request_parameters": {},
+            "request_templates": {},
+            "response_parameters": [],
+            "template_selection_expression": "",
+            "timeout_milliseconds": 30000,
+            "tls_config": []
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_apigatewayv2_api.api_clearbyte_com",
+            "data.aws_caller_identity.current",
+            "data.aws_iam_policy_document.ses_send",
+            "data.aws_region.current",
+            "module.sms_opt_in.module.terraform_lambda.aws_ecr_repository.ecr_repo",
+            "module.sms_opt_in.module.terraform_lambda.aws_iam_role.iam_for_lambda",
+            "module.sms_opt_in.module.terraform_lambda.aws_lambda_function.image",
+            "module.sms_opt_in.module.terraform_lambda.data.aws_ecr_authorization_token.container_registry_token",
+            "module.sms_opt_in.module.terraform_lambda.docker_registry_image.image_reg",
+            "module.sms_opt_in.module.terraform_lambda.terraform_data.docker_image"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.sms_opt_in",
+      "mode": "managed",
+      "type": "aws_apigatewayv2_route",
+      "name": "launch_path",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "api_id": "37nshlxyk1",
+            "api_key_required": false,
+            "authorization_scopes": [],
+            "authorization_type": "NONE",
+            "authorizer_id": "",
+            "id": "44z8ljk",
+            "model_selection_expression": "",
+            "operation_name": "",
+            "request_models": {},
+            "request_parameter": [],
+            "route_key": "POST /api/sms-opt-in",
+            "route_response_selection_expression": "",
+            "target": "integrations/sjo8e2b"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_apigatewayv2_api.api_clearbyte_com",
+            "data.aws_caller_identity.current",
+            "data.aws_iam_policy_document.ses_send",
+            "data.aws_region.current",
+            "module.sms_opt_in.aws_apigatewayv2_integration.lambda",
+            "module.sms_opt_in.module.terraform_lambda.aws_ecr_repository.ecr_repo",
+            "module.sms_opt_in.module.terraform_lambda.aws_iam_role.iam_for_lambda",
+            "module.sms_opt_in.module.terraform_lambda.aws_lambda_function.image",
+            "module.sms_opt_in.module.terraform_lambda.data.aws_ecr_authorization_token.container_registry_token",
+            "module.sms_opt_in.module.terraform_lambda.docker_registry_image.image_reg",
+            "module.sms_opt_in.module.terraform_lambda.terraform_data.docker_image"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.sms_opt_in",
+      "mode": "managed",
+      "type": "aws_lambda_permission",
+      "name": "lambda",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "action": "lambda:InvokeFunction",
+            "event_source_token": null,
+            "function_name": "clearbyte_sms_opt_in",
+            "function_url_auth_type": null,
+            "id": "AllowExecutionFromAPIGateway-POST-0",
+            "principal": "apigateway.amazonaws.com",
+            "principal_org_id": null,
+            "qualifier": "",
+            "source_account": null,
+            "source_arn": "arn:aws:execute-api:us-east-1:658914799523:37nshlxyk1/*/POST/api/sms-opt-in",
+            "statement_id": "AllowExecutionFromAPIGateway-POST-0",
+            "statement_id_prefix": ""
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_apigatewayv2_api.api_clearbyte_com",
+            "data.aws_caller_identity.current",
+            "data.aws_iam_policy_document.ses_send",
+            "data.aws_region.current",
+            "module.sms_opt_in.data.aws_caller_identity.current",
+            "module.sms_opt_in.data.aws_region.current",
+            "module.sms_opt_in.module.terraform_lambda.aws_cloudwatch_log_group.lambda",
+            "module.sms_opt_in.module.terraform_lambda.aws_ecr_repository.ecr_repo",
+            "module.sms_opt_in.module.terraform_lambda.aws_ecr_repository_policy.ecr_repo_policy",
+            "module.sms_opt_in.module.terraform_lambda.aws_iam_role.iam_for_lambda",
+            "module.sms_opt_in.module.terraform_lambda.aws_iam_role_policy.inline_policies",
+            "module.sms_opt_in.module.terraform_lambda.aws_iam_role_policy_attachment.lambda_exec_basic_policy",
+            "module.sms_opt_in.module.terraform_lambda.aws_iam_role_policy_attachment.lambda_policy",
+            "module.sms_opt_in.module.terraform_lambda.aws_lambda_function.image",
+            "module.sms_opt_in.module.terraform_lambda.data.aws_ecr_authorization_token.container_registry_token",
+            "module.sms_opt_in.module.terraform_lambda.docker_registry_image.image_reg",
+            "module.sms_opt_in.module.terraform_lambda.terraform_data.docker_image"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.sms_opt_in.module.terraform_lambda",
+      "mode": "data",
+      "type": "aws_ecr_authorization_token",
+      "name": "container_registry_token",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "authorization_token": "QVdTOmV5SndZWGxzYjJGa0lqb2llV2hTY2pkSFFYTTRSR1pTVFdZdk4wVXZlbTA1YlN0MlFtc3ZhMk5QVDBoQ2RFUnVkMmN4Y0dKaVMzZG9kSEZsYlVnM2NrTk9NRTFqWkhnd2NuZFVNRUpCSzNwYU9FVmphemczZGpGcU5FdHdabTgxU1ZKVk5DdFhTWEpKZVVaa1pqSnFMMFIxZFhaSU5ucDZOMDl4TmxkUU0yZFRZVUZ3VVU1UGEyWkVWR05yZEVZeU4xWnZkakEwYmpOMmFtazRVa052Y2xCbVFVVk1PR2xVYzJVMloxbElkRGt2WjBodmNIWjFiR3AyUVRnNU9GUnlaRmw1V0VKc2VuVkJkVVZKZDJ4RlVtSnRhMk50UmxGUldGbGlVbmxXY21OSFVIbE5jMng0WmxGbk9FaEJVVXBEWlRadFJWWXJkRGw0VVZVM1ZHZElVbVJWWjNNd05WRjRaRTFaYkdWdVoyRXlNQ3QyTDJwbVdIQjRNM1JZUlVWVlRXbEhjamRhY2pRMVNsWnRSRXcxZEdSNE9IazFSVkp4VVV4SFF6a3pTMEZpTDIxYU5rWkVPRUZJTjJocVowNUJTVE5sTURsbU9GVmpXSGRvVjBWV1lsTldTbFo2T0hsT2N6aFpNMngxSzNGdlRGTlZSMFkwT1ZaU1RqUkRiV00yWlM4MVIyWkZZbnBITms5aWRrbFVkMnBxY1RSUVYwTlBjWE1yTldSeVRESlRTR1ozWlZSdVpITkxNRGR5Y0N0alRubERTV1JXU2xsaE0xTkpiWHBJWVROYWJIcHRUMWsyUjJwemQwRnNTRnBGUkZGbWQyVlVWbE5XVVVFM1dsVmhaMlkyTUdRelpsQnJVSFkxV2trM1RrRklSV3d5YUdoUVFYbG5XbEJJZDJSdGFrbHBTRkpWVG5kWFkwcGlPRXA0UlhCSmJVd3JjM2RZWlZObU0wcDViRVpoVG1GUVUySlVkMFJhYmswdk9IcHJRMkowYlZRMk56SnNUVXhCVDJkVVprdFlkR2h4WjJSVVkyTjFVVU5rUm1KR2NWWjZZWEJCTWxaMVQxQk9OVFJJYUhKNE5sY3lhMnBvVUhsRE9XcFlSamROTlZoeFJuVjFaRzl2U2tGVFJ5OVNZa3RQY0VwUFdqZE5ZbnBOYm01NFVGVmtSVU51V1RkVlJuaFlhMFZCVURrdlpHMU5WMlZyZW5Ca1YyTk1hVTlpVjJSb01HMTZZbTlVV2xseFJtOUNhMlUwZFd0VldURjVkVkpxVm1OVkwwTlBSalY1VG5nck1IVk9XbkpQUjFWdFNraEpkMFJLV214bU9GaHFlRlY1Y25Wa01qRmxOMWd6ZUdKSldHWkRWMDk2ZW1SSlptTkpjM1pZWkc5dWFERkdSVVZEVnpGYVdFWjZORGRXZERCRFNVdFZZeXQ0TjNwU2VIcE1ObEZ1V1UxUlJqRXZhVmtyVm05RFRraDFNbFphY1c1dGN6TktRbTlLUVRSdFdIUk9kbmhPYWpGMmRERkJhVXR1TmtKemJGYzBMMng2TmxwbGJrZElla3hoYzJWT1ZEVk9NWGhUYVVkbldVWnBRMlJSZUhoNVYzWXhLMWh5WWtOTVZ6VnBZa0o0VHpoNFJqSkJWMFJVUVZJd1RGSlRPRTQyUm5aRlRGRkVTMHRuVVRCM1pUazRXRlF5T1c0eVZuRnhZbVJ5ZERaR1REVXJURFJKVUc5bWRuZE9TVGN5VG5sM2FVa3JRMEZ4U3pSNlRHdFljV0ZvVkVKMFRWRkdRWFpxWldSTFpHZHhVVmhKTTB4RWFubENWMHQyWVU5c2FYSllUVVphYUVOeVRXMHlWSGwzWVhGQmJqZGFaeUlzSW1SaGRHRnJaWGtpT2lKQlVVVkNRVWhvZDIwd1dXRkpVMHBsVW5SS2JUVnVNVWMyZFhGbFpXdFlkVzlZV0ZCbE5WVkdZMlU1VW5FNEx6RTBkMEZCUVVnMGQyWkJXVXBMYjFwSmFIWmpUa0ZSWTBkdlJ6aDNZbEZKUWtGRVFtOUNaMnR4YUd0cFJ6bDNNRUpDZDBWM1NHZFpTbGxKV2tsQlYxVkVRa0ZGZFUxQ1JVVkVUMHRWU201cWFVMVJhRzVMVVRCU2RFRkpRa1ZKUVRkQk5qbDVlVWxFYjNVMWFWSm9VbGxXT0VOQ05WRnRaMlEyWkdKUFRGQXJjRTV3VEU1d2JIcEhhRFY1ZFV3clRFaDBaelJWYkhWbE1sUnRjVXhRVGxSc1lYcE5OMFl3YzBOcVNVNHlUM1ZyUFNJc0luWmxjbk5wYjI0aU9pSXlJaXdpZEhsd1pTSTZJa1JCVkVGZlMwVlpJaXdpWlhod2FYSmhkR2x2YmlJNk1UYzROVFUyTVRJM01YMD0=",
+            "expires_at": "2026-08-01T05:14:31Z",
+            "id": "us-east-1",
+            "password": "eyJwYXlsb2FkIjoieWhScjdHQXM4RGZSTWYvN0Uvem05bSt2Qmsva2NPT0hCdERud2cxcGJiS3dodHFlbUg3ckNOME1jZHgwcndUMEJBK3paOEVjazg3djFqNEtwZm81SVJVNCtXSXJJeUZkZjJqL0R1dXZINnp6N09xNldQM2dTYUFwUU5Pa2ZEVGNrdEYyN1ZvdjA0bjN2amk4UkNvclBmQUVMOGlUc2U2Z1lIdDkvZ0hvcHZ1bGp2QTg5OFRyZFl5WEJsenVBdUVJd2xFUmJta2NtRlFRWFliUnlWcmNHUHlNc2x4ZlFnOEhBUUpDZTZtRVYrdDl4UVU3VGdIUmRVZ3MwNVF4ZE1ZbGVuZ2EyMCt2L2pmWHB4M3RYRUVVTWlHcjdacjQ1SlZtREw1dGR4OHk1RVJxUUxHQzkzS0FiL21aNkZEOEFIN2hqZ05BSTNlMDlmOFVjWHdoV0VWYlNWSlZ6OHlOczhZM2x1K3FvTFNVR0Y0OVZSTjRDbWM2ZS81R2ZFYnpHNk9idklUd2pqcTRQV0NPcXMrNWRyTDJTSGZ3ZVRuZHNLMDdycCtjTnlDSWRWSllhM1NJbXpIYTNabHptT1k2R2pzd0FsSFpFRFFmd2VUVlNWUUE3WlVhZ2Y2MGQzZlBrUHY1Wkk3TkFIRWwyaGhQQXlnWlBId2RtaklpSFJVTndXY0piOEp4RXBJbUwrc3dYZVNmM0p5bEZhTmFQU2JUd0Rabk0vOHprQ2J0bVQ2NzJsTUxBT2dUZktYdGhxZ2RUY2N1UUNkRmJGcVZ6YXBBMlZ1T1BONTRIaHJ4Nlcya2poUHlDOWpYRjdNNVhxRnV1ZG9vSkFTRy9SYktPcEpPWjdNYnpNbm54UFVkRUNuWTdVRnhYa0VBUDkvZG1NV2VrenBkV2NMaU9iV2RoMG16Ym9UWllxRm9Ca2U0dWtVWTF5dVJqVmNVL0NPRjV5TngrMHVOWnJPR1VtSkhJd0RKWmxmOFhqeFV5cnVkMjFlN1gzeGJJWGZDV096emRJZmNJc3ZYZG9uaDFGRUVDVzFaWEZ6NDdWdDBDSUtVYyt4N3pSeHpMNlFuWU1RRjEvaVkrVm9DTkh1MlZacW5tczNKQm9KQTRtWHROdnhOajF2dDFBaUtuNkJzbFc0L2x6NlplbkdIekxhc2VOVDVOMXhTaUdnWUZpQ2RReHh5V3YxK1hyYkNMVzVpYkJ4Tzh4RjJBV0RUQVIwTFJTOE42RnZFTFFES0tnUTB3ZTk4WFQyOW4yVnFxYmRydDZGTDUrTDRJUG9mdndOSTcyTnl3aUkrQ0FxSzR6TGtYcWFoVEJ0TVFGQXZqZWRLZGdxUVhJM0xEanlCV0t2YU9saXJYTUZaaENyTW0yVHl3YXFBbjdaZyIsImRhdGFrZXkiOiJBUUVCQUhod20wWWFJU0plUnRKbTVuMUc2dXFlZWtYdW9YWFBlNVVGY2U5UnE4LzE0d0FBQUg0d2ZBWUpLb1pJaHZjTkFRY0dvRzh3YlFJQkFEQm9CZ2txaGtpRzl3MEJCd0V3SGdZSllJWklBV1VEQkFFdU1CRUVET0tVSm5qaU1RaG5LUTBSdEFJQkVJQTdBNjl5eUlEb3U1aVJoUllWOENCNVFtZ2Q2ZGJPTFArcE5wTE5wbHpHaDV5dUwrTEh0ZzRVbHVlMlRtcUxQTlRsYXpNN0Ywc0NqSU4yT3VrPSIsInZlcnNpb24iOiIyIiwidHlwZSI6IkRBVEFfS0VZIiwiZXhwaXJhdGlvbiI6MTc4NTU2MTI3MX0=",
+            "proxy_endpoint": "https://658914799523.dkr.ecr.us-east-1.amazonaws.com",
+            "registry_id": null,
+            "user_name": "AWS"
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "authorization_token"
+              }
+            ],
+            [
+              {
+                "type": "get_attr",
+                "value": "password"
+              }
+            ]
+          ],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "module": "module.sms_opt_in.module.terraform_lambda",
+      "mode": "managed",
+      "type": "aws_cloudwatch_log_group",
+      "name": "lambda",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:logs:us-east-1:658914799523:log-group:/aws/lambda/clearbyte_sms_opt_in",
+            "id": "/aws/lambda/clearbyte_sms_opt_in",
+            "kms_key_id": "",
+            "log_group_class": "STANDARD",
+            "name": "/aws/lambda/clearbyte_sms_opt_in",
+            "name_prefix": "",
+            "retention_in_days": 1,
+            "skip_destroy": false,
+            "tags": {},
+            "tags_all": {}
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "data.aws_caller_identity.current",
+            "data.aws_iam_policy_document.ses_send",
+            "data.aws_region.current"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.sms_opt_in.module.terraform_lambda",
+      "mode": "managed",
+      "type": "aws_ecr_repository",
+      "name": "ecr_repo",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ecr:us-east-1:658914799523:repository/clearbyte_sms_opt_in",
+            "encryption_configuration": [
+              {
+                "encryption_type": "AES256",
+                "kms_key": ""
+              }
+            ],
+            "force_delete": null,
+            "id": "clearbyte_sms_opt_in",
+            "image_scanning_configuration": [
+              {
+                "scan_on_push": false
+              }
+            ],
+            "image_tag_mutability": "MUTABLE",
+            "name": "clearbyte_sms_opt_in",
+            "registry_id": "658914799523",
+            "repository_url": "658914799523.dkr.ecr.us-east-1.amazonaws.com/clearbyte_sms_opt_in",
+            "tags": {},
+            "tags_all": {},
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiZGVsZXRlIjoxMjAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "data.aws_caller_identity.current",
+            "data.aws_iam_policy_document.ses_send",
+            "data.aws_region.current"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.sms_opt_in.module.terraform_lambda",
+      "mode": "managed",
+      "type": "aws_ecr_repository_policy",
+      "name": "ecr_repo_policy",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "clearbyte_sms_opt_in",
+            "policy": "{\"Statement\":[{\"Action\":[\"ecr:BatchGetImage\",\"ecr:DeleteRepository\",\"ecr:GetDownloadUrlForLayer\",\"ecr:GetRepositoryPolicy\",\"ecr:SetRepositoryPolicy\"],\"Effect\":\"Allow\",\"Principal\":\"*\"}],\"Version\":\"2008-10-17\"}",
+            "registry_id": "658914799523",
+            "repository": "clearbyte_sms_opt_in"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "data.aws_caller_identity.current",
+            "data.aws_iam_policy_document.ses_send",
+            "data.aws_region.current",
+            "module.sms_opt_in.module.terraform_lambda.aws_ecr_repository.ecr_repo"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.sms_opt_in.module.terraform_lambda",
+      "mode": "managed",
+      "type": "aws_iam_role",
+      "name": "iam_for_lambda",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:iam::658914799523:role/clearbyte_sms_opt_in",
+            "assume_role_policy": "{\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"}}],\"Version\":\"2012-10-17\"}",
+            "create_date": "2025-02-03T23:29:10Z",
+            "description": "",
+            "force_detach_policies": false,
+            "id": "clearbyte_sms_opt_in",
+            "inline_policy": [],
+            "managed_policy_arns": [
+              "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+            ],
+            "max_session_duration": 3600,
+            "name": "clearbyte_sms_opt_in",
+            "name_prefix": "",
+            "path": "/",
+            "permissions_boundary": "",
+            "tags": {},
+            "tags_all": {},
+            "unique_id": "AROAZS2TB56RSPX65XHDC"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "data.aws_caller_identity.current",
+            "data.aws_iam_policy_document.ses_send",
+            "data.aws_region.current"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.sms_opt_in.module.terraform_lambda",
+      "mode": "managed",
+      "type": "aws_iam_role_policy",
+      "name": "inline_policies",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": "clearbyte_sms_opt_in_ses",
+          "schema_version": 0,
+          "attributes": {
+            "id": "clearbyte_sms_opt_in:clearbyte_sms_opt_in_ses",
+            "name": "clearbyte_sms_opt_in_ses",
+            "name_prefix": "",
+            "policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":\"ses:SendEmail\",\"Effect\":\"Allow\",\"Resource\":\"arn:aws:ses:us-east-1:658914799523:identity/clearbyte.com\"}]}",
+            "role": "clearbyte_sms_opt_in"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "data.aws_caller_identity.current",
+            "data.aws_iam_policy_document.ses_send",
+            "data.aws_region.current",
+            "module.sms_opt_in.module.terraform_lambda.aws_iam_role.iam_for_lambda"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.sms_opt_in.module.terraform_lambda",
+      "mode": "managed",
+      "type": "aws_iam_role_policy_attachment",
+      "name": "lambda_exec_basic_policy",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "clearbyte_sms_opt_in-20250203232912481200000002",
+            "policy_arn": "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+            "role": "clearbyte_sms_opt_in"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "data.aws_caller_identity.current",
+            "data.aws_iam_policy_document.ses_send",
+            "data.aws_region.current",
+            "module.sms_opt_in.module.terraform_lambda.aws_iam_role.iam_for_lambda"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.sms_opt_in.module.terraform_lambda",
+      "mode": "managed",
+      "type": "aws_iam_role_policy_attachment",
+      "name": "lambda_policy",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+          "schema_version": 0,
+          "attributes": {
+            "id": "clearbyte_sms_opt_in-20250203232912400100000001",
+            "policy_arn": "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+            "role": "clearbyte_sms_opt_in"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "data.aws_caller_identity.current",
+            "data.aws_iam_policy_document.ses_send",
+            "data.aws_region.current",
+            "module.sms_opt_in.module.terraform_lambda.aws_iam_role.iam_for_lambda"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.sms_opt_in.module.terraform_lambda",
+      "mode": "managed",
+      "type": "aws_lambda_function",
+      "name": "image",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "architectures": [
+              "arm64"
+            ],
+            "arn": "arn:aws:lambda:us-east-1:658914799523:function:clearbyte_sms_opt_in",
+            "code_sha256": "9ae6f6b5308f68ec79d0cb90f166ea44d2060ffbffd3f3c0511bc4db31f59f96",
+            "code_signing_config_arn": "",
+            "dead_letter_config": [],
+            "description": "Used to store SMS opt-in data",
+            "environment": [
+              {
+                "variables": {
+                  "DEBUG": "yes"
+                }
+              }
+            ],
+            "ephemeral_storage": [
+              {
+                "size": 512
+              }
+            ],
+            "file_system_config": [],
+            "filename": null,
+            "function_name": "clearbyte_sms_opt_in",
+            "handler": "",
+            "id": "clearbyte_sms_opt_in",
+            "image_config": [],
+            "image_uri": "658914799523.dkr.ecr.us-east-1.amazonaws.com/clearbyte_sms_opt_in:latest",
+            "invoke_arn": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:658914799523:function:clearbyte_sms_opt_in/invocations",
+            "kms_key_arn": "",
+            "last_modified": "2025-02-03T23:29:18.733+0000",
+            "layers": [],
+            "logging_config": [
+              {
+                "application_log_level": "DEBUG",
+                "log_format": "JSON",
+                "log_group": "/aws/lambda/clearbyte_sms_opt_in",
+                "system_log_level": "DEBUG"
+              }
+            ],
+            "memory_size": 128,
+            "package_type": "Image",
+            "publish": false,
+            "qualified_arn": "arn:aws:lambda:us-east-1:658914799523:function:clearbyte_sms_opt_in:$LATEST",
+            "qualified_invoke_arn": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:658914799523:function:clearbyte_sms_opt_in:$LATEST/invocations",
+            "replace_security_groups_on_destroy": null,
+            "replacement_security_group_ids": null,
+            "reserved_concurrent_executions": -1,
+            "role": "arn:aws:iam::658914799523:role/clearbyte_sms_opt_in",
+            "runtime": "",
+            "s3_bucket": null,
+            "s3_key": null,
+            "s3_object_version": null,
+            "signing_job_arn": "",
+            "signing_profile_version_arn": "",
+            "skip_destroy": false,
+            "snap_start": [],
+            "source_code_hash": "9ae6f6b5308f68ec79d0cb90f166ea44d2060ffbffd3f3c0511bc4db31f59f96",
+            "source_code_size": 0,
+            "tags": {},
+            "tags_all": {},
+            "timeout": 5,
+            "timeouts": null,
+            "tracing_config": [
+              {
+                "mode": "PassThrough"
+              }
+            ],
+            "version": "$LATEST",
+            "vpc_config": []
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6NjAwMDAwMDAwMDAwLCJ1cGRhdGUiOjYwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "data.aws_caller_identity.current",
+            "data.aws_iam_policy_document.ses_send",
+            "data.aws_region.current",
+            "module.sms_opt_in.module.terraform_lambda.aws_ecr_repository.ecr_repo",
+            "module.sms_opt_in.module.terraform_lambda.aws_iam_role.iam_for_lambda",
+            "module.sms_opt_in.module.terraform_lambda.data.aws_ecr_authorization_token.container_registry_token",
+            "module.sms_opt_in.module.terraform_lambda.docker_registry_image.image_reg",
+            "module.sms_opt_in.module.terraform_lambda.terraform_data.docker_image"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.sms_opt_in.module.terraform_lambda",
+      "mode": "managed",
+      "type": "terraform_data",
+      "name": "docker_image",
+      "provider": "provider[\"terraform.io/builtin/terraform\"]",
+      "instances": [
+        {
+          "status": "tainted",
+          "schema_version": 0,
+          "attributes": {
+            "id": "bcb0ac3b-2f68-8e0b-edc6-8646b7c05790",
+            "input": null,
+            "output": null,
+            "triggers_replace": {
+              "value": {
+                "sha1_dir": "f0b0a19dd2f847f94241ebbe43224e938ca77cce",
+                "sha1_docker_file": "f032d7b4ace5e17997103b8e6608cdfd"
+              },
+              "type": [
+                "object",
+                {
+                  "sha1_dir": "string",
+                  "sha1_docker_file": "string"
+                }
+              ]
+            }
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "dependencies": [
+            "data.aws_caller_identity.current",
+            "data.aws_iam_policy_document.ses_send",
+            "data.aws_region.current",
+            "module.sms_opt_in.module.terraform_lambda.aws_ecr_repository.ecr_repo"
+          ]
+        }
+      ]
+    }
+  ],
+  "check_results": [
+    {
+      "object_kind": "var",
+      "config_addr": "module.contact.module.terraform_lambda.var.arch",
+      "status": "pass",
+      "objects": [
+        {
+          "object_addr": "module.contact.module.terraform_lambda.var.arch",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "object_kind": "var",
+      "config_addr": "module.sms_opt_in.var.lambda",
+      "status": "pass",
+      "objects": [
+        {
+          "object_addr": "module.sms_opt_in.var.lambda",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "object_kind": "var",
+      "config_addr": "module.sms_opt_in.module.terraform_lambda.var.arch",
+      "status": "pass",
+      "objects": [
+        {
+          "object_addr": "module.sms_opt_in.module.terraform_lambda.var.arch",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "object_kind": "var",
+      "config_addr": "module.contact.var.lambda",
+      "status": "pass",
+      "objects": [
+        {
+          "object_addr": "module.contact.var.lambda",
+          "status": "pass"
+        }
+      ]
+    }
+  ]
+}

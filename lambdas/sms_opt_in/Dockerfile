@@ -1,26 +1,42 @@
-FROM golang AS builder
+ARG BUILDPLATFORM
+ARG TARGETPLATFORM
+ARG TARGETARCH
 
-# Some of our dependencies are private, so we need to use SSH to clone them.
-# Therefore, set git conifig so that SSH is the protocol instead of HTTP, 
-# which will prompt for a username and password.
-RUN mkdir -p -m 0600 /etc/ssh && ssh-keyscan github.com >> /etc/ssh/ssh_known_hosts
-RUN git config --global --add url."git@github.com:".insteadOf "https://github.com/"
+FROM --platform=$BUILDPLATFORM golang:1.26-alpine AS builder
+ARG TARGETARCH
 
-# Get and cache the app dependencies...
+RUN apk add --no-cache git
+
+RUN --mount=type=secret,id=github_token \
+    echo "machine github.com login x-token password $(cat /run/secrets/github_token)" > /root/.netrc && \
+    chmod 600 /root/.netrc
+
+ENV GOPRIVATE=github.com/zenzoom/*
+ENV GONOSUMCHECK=github.com/zenzoom/*
+
 WORKDIR /app
-COPY lambdas/sms_opt_in/context ./
-RUN --mount=type=ssh go mod download
 
-# Build (speedily) - https://stackoverflow.com/questions/50520103/speeding-up-go-builds-with-go-1-10-build-cache-in-docker-containers
+# Passed by the terraform module as a hash of the context, so a source change
+# rebuilds rather than reusing a cached layer.
+ARG CACHE_BUST
+
+COPY context ./
+
+RUN go mod download
+
 RUN --mount=type=cache,target=/go/pkg/mod \
-    --mount=type=cache,target=/root/.cache/go-build \ 
-    --mount=type=ssh GOOS=linux GOARCH=arm64 go build -tags lambda.norpc -o bootstrap .
+    --mount=type=cache,target=/root/.cache/go-build \
+    CGO_ENABLED=0 GOOS=linux GOARCH=$TARGETARCH go build \
+    -tags lambda.norpc \
+    -trimpath \
+    -ldflags="-s -w" \
+    -o bootstrap .
 
 ###################################
-# Copy artifacts to a clean image
-FROM alpine
+FROM alpine:3.23
 
-# Copy over the function...
+# The handler calls SES over HTTPS, so the image needs a trust store.
+RUN apk add --no-cache ca-certificates
+
 COPY --from=builder /app/bootstrap /bootstrap
-
 ENTRYPOINT [ "/bootstrap" ]

@@ -3,6 +3,7 @@
   let agreed = $state(false);
   let errorMessage = $state('');
   let submitted = $state(false);
+  let sending = $state(false);
 
   function validatePhoneNumber(): boolean {
     const phoneRegex = /^[+]?[0-9]{10,15}$/; // Supports international and local formats
@@ -14,51 +15,42 @@
       return true;
     }
   }
-  function handleSubmit(event: Event) {
+  async function handleSubmit(event: Event) {
     event.preventDefault();
     if (!agreed) {
-      alert('You must agree to receive messages before submitting.');
+      errorMessage = 'You must agree to receive messages before submitting.';
       return;
     }
     if (!validatePhoneNumber()) {
       return;
     }
 
-    onsubmit();
+    sending = true;
+    errorMessage = '';
 
-    console.log('User opted in:', { phoneNumber, agreed });
-    //alert('Thank you for opting in! You will receive AWS-related messages.');
-    // Show confirmation message
-    submitted = true;
-  }
-
-  function onsubmit() {
-    fetch('https://www.clearbyte.com/api/sms-opt-in', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ phoneNumber, agreed }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.text();
-      })
-      .then((data) => {
-        console.log('Success:', data);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-        alert('There was a problem with your submission. Please try again.');
+    try {
+      const response = await fetch('https://www.clearbyte.com/api/sms-opt-in', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ phoneNumber, agreed }),
       });
+
+      if (!response.ok) {
+        throw new Error(`Network response was not ok (${response.status})`);
+      }
+
+      // Only confirm once the opt-in was actually recorded.
+      submitted = true;
+    } catch (error) {
+      console.error('Error:', error);
+      errorMessage = 'There was a problem with your submission. Please try again.';
+    } finally {
+      sending = false;
+    }
   }
 </script>
-
-{#if errorMessage}
-  <span class="text-error text-sm">{errorMessage}</span>
-{/if}
 
 <section class="min-h-screen flex items-center justify-center p-6">
   <div class="card w-full max-w-lg bg-base-100 shadow-xl p-6">
@@ -74,6 +66,12 @@
       </div>
       <a href="/" class="btn btn-primary mt-4">Go Home</a>
     {:else}
+      {#if errorMessage}
+        <div class="alert alert-error mb-4">
+          <span>{errorMessage}</span>
+        </div>
+      {/if}
+
       <form onsubmit={handleSubmit} class="space-y-4">
         <!-- Phone Number Input -->
         <div>
@@ -113,7 +111,9 @@
         </div>
 
         <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary w-full">Subscribe</button>
+        <button type="submit" class="btn btn-primary w-full" disabled={sending}>
+          {sending ? 'Submitting...' : 'Subscribe'}
+        </button>
       </form>
     {/if}
   </div>
