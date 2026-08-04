@@ -60,50 +60,56 @@
 </script>
 
 <Seo
-  title="Request an instructor demo"
-  description="Request a demo of Clearbyte's hands-on AWS labs for your course. Demo seats are provisioned per request."
+  title="Try it with your class"
+  description="Send over what you're teaching and Clearbyte labs can be set up for your class. Seats are provisioned per request, so there's nothing for students to sign up for."
 />
 
 <Section>
   <Container>
     <div class="grid gap-12 lg:grid-cols-2">
       <div>
-        <h1 class="text-h1">Request an instructor demo</h1>
+        <h1 class="text-h1">Try it with your class</h1>
         <p class="mt-4 text-lead text-base-content/70">
-          Tell us what you teach and we'll set up demo seats matched to your
-          course. Your students get the real lab &mdash; a live AWS account,
-          launched from Canvas, graded automatically.
+          Send over what you're teaching and seats will be set up for your
+          students. They get the real thing &mdash; a live AWS account, launched
+          from your course, graded against what they built.
         </p>
 
         <ul class="mt-8 space-y-4">
           <li class="flex gap-3">
             <span aria-hidden="true" class="text-accent">&#10003;</span>
             <span class="text-base-content/80">
-              Seats are provisioned per request, so there is nothing for
-              students to sign up for.
+              Seats are set up per request, so there's nothing for students to
+              sign up for.
             </span>
           </li>
           <li class="flex gap-3">
             <span aria-hidden="true" class="text-accent">&#10003;</span>
             <span class="text-base-content/80">
-              We match the lab to what you are teaching.
+              An existing lab can be matched to your material, or a new one
+              worked out from scratch.
             </span>
           </li>
           <li class="flex gap-3">
             <span aria-hidden="true" class="text-accent">&#10003;</span>
             <span class="text-base-content/80">
-              Accounts are destroyed when the lab ends.
+              Accounts are destroyed when the lab ends. Nothing keeps running.
             </span>
           </li>
         </ul>
+
+        <p class="mt-8 text-sm text-base-content/60">
+          There's no sales process here. The form goes straight to the
+          instructor who maintains it.
+        </p>
       </div>
 
       <div class="rounded-box border border-base-300 bg-base-100 p-6 shadow-card sm:p-8">
         {#if submitted}
           <div class="alert alert-success">
-            <span>Thanks &mdash; your request is in. We'll be in touch shortly.</span>
+            <span>Thanks &mdash; got it. You'll hear back shortly.</span>
           </div>
-          <a href="/labs" class="btn btn-primary mt-6">Browse the lab catalog</a>
+          <a href="/labs" class="btn btn-primary mt-6">Browse the labs</a>
         {:else}
           {#if errorMessage}
             <div class="alert alert-error mb-6">
@@ -160,7 +166,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary w-full" disabled={sending}>
-              {sending ? 'Sending...' : 'Request demo'}
+              {sending ? 'Sending...' : 'Send it over'}
             </button>
           </form>
         {/if}

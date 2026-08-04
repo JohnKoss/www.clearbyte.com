@@ -42,10 +42,17 @@
 
     <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       <div class="rounded-box border border-base-300 bg-base-100 p-6">
-        <h3 class="font-semibold">Byte-size steps</h3>
+        <h3 class="font-semibold">Small steps</h3>
         <p class="mt-2 text-sm text-base-content/70">
-          Broken into small, ordered steps so a student can tell whether each
-          one worked before moving on.
+          Ordered so a student can tell whether each one worked before moving
+          on &mdash; and so you can see which one they stalled on.
+        </p>
+      </div>
+      <div class="rounded-box border border-base-300 bg-base-100 p-6">
+        <h3 class="font-semibold">Yours to change</h3>
+        <p class="mt-2 text-sm text-base-content/70">
+          Add steps, cut steps, or rewrite the one your class keeps getting
+          stuck on.
         </p>
       </div>
       <div class="rounded-box border border-base-300 bg-base-100 p-6">
@@ -76,7 +83,7 @@
     </div>
 
     <div class="mt-10">
-      <a href="/demo" class="btn btn-primary">Request a demo</a>
+      <a href="/demo" class="btn btn-primary">Try it with your class</a>
     </div>
   </Container>
 </Section>

@@ -162,10 +162,12 @@ resource "aws_cloudfront_distribution" "clearbyte_com" {
     "mightysystems.com"
   ] # CNAMEs added
 
+  // No geo restriction. A US/CA whitelist blocked roughly half of the subnets
+  // ChatGPT fetches from when answering a question, and locked out any
+  // instructor outside North America - including the /api/* form endpoints.
   restrictions {
     geo_restriction {
-      restriction_type = "whitelist"
-      locations        = ["US", "CA"]
+      restriction_type = "none"
     }
   }
 

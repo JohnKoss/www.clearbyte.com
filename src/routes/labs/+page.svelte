@@ -7,18 +7,23 @@
 </script>
 
 <Seo
-  title="Lab catalog"
-  description="Byte-size AWS lab activities for schools, launched from your LMS and run in a real AWS account."
+  title="Labs"
+  description="AWS lab activities written for real cloud courses and broken into small steps. Get in touch to run them, or to have one shaped around what you teach."
 />
 
 <Section>
   <Container>
-    <h1 class="text-h1">Lab catalog</h1>
+    <h1 class="text-h1">Labs</h1>
     <p class="mt-4 max-w-readable text-lead text-base-content/70">
-      Each lab is broken into byte-size steps &mdash; more of them, each small
-      enough to finish and check. They run in a real AWS account, launch from
-      your course, and are graded automatically. The account is destroyed when
-      the lab ends.
+      These labs run in real cloud courses today. Each one is broken into small
+      steps, runs in a real AWS account, and is graded against what the student
+      actually built.
+    </p>
+    <p class="mt-4 max-w-readable text-base-content/70">
+      Any of them can be run as-is, or reworked around what your course
+      actually needs &mdash; that flexibility is the point.
+      <a class="text-primary hover:underline" href="/contact">Get in touch</a>
+      to talk through which would fit.
     </p>
   </Container>
 </Section>
@@ -32,12 +37,12 @@
     </div>
 
     <div class="mt-12 rounded-box border border-base-300 bg-base-100 p-8 text-center">
-      <h2 class="text-h3">Want to try one with your class?</h2>
+      <h2 class="text-h3">Need one that isn't here?</h2>
       <p class="mx-auto mt-2 max-w-readable text-base-content/70">
-        Demo seats are provisioned per request, so we can match the lab to what
-        you are teaching.
+        That's rather the point. Send over what you're teaching and the lab can
+        be shaped around it.
       </p>
-      <a href="/demo" class="btn btn-primary mt-6">Request a demo</a>
+      <a href="/demo" class="btn btn-primary mt-6">Try it with your class</a>
     </div>
   </Container>
 </Section>

@@ -12,6 +12,7 @@
   const nav = [
     { href: '/labs', label: 'Labs' },
     { href: '/about', label: 'About' },
+    { href: '/faq', label: 'FAQ' },
     { href: '/contact', label: 'Contact' },
     { href: '/opt-in', label: 'SMS Opt-in' },
   ];
@@ -43,7 +44,7 @@
             {item.label}
           </a>
         {/each}
-        <a href="/demo" class="btn btn-primary btn-sm ml-2">Request a demo</a>
+        <a href="/demo" class="btn btn-primary btn-sm ml-2">Try it with your class</a>
       </nav>
 
       <!-- Mobile -->
@@ -86,7 +87,7 @@
             class="btn btn-primary mt-2"
             onclick={() => (open = false)}
           >
-            Request a demo
+            Try it with your class
           </a>
         </div>
       </Container>
@@ -106,15 +107,15 @@
           <Logo />
         </div>
         <p class="mt-3 text-sm text-base-content/70">
-          Byte-size AWS lab activities, built for schools.
+          AWS lab activities, written by an instructor for other instructors.
         </p>
       </div>
 
       <div>
         <h2 class="text-sm font-semibold">Labs</h2>
         <ul class="mt-3 space-y-2 text-sm">
-          <li><a class="text-base-content/70 hover:text-base-content" href="/labs">Lab catalog</a></li>
-          <li><a class="text-base-content/70 hover:text-base-content" href="/demo">Request a demo</a></li>
+          <li><a class="text-base-content/70 hover:text-base-content" href="/labs">All labs</a></li>
+          <li><a class="text-base-content/70 hover:text-base-content" href="/demo">Try it with your class</a></li>
         </ul>
       </div>
 
@@ -122,6 +123,7 @@
         <h2 class="text-sm font-semibold">Company</h2>
         <ul class="mt-3 space-y-2 text-sm">
           <li><a class="text-base-content/70 hover:text-base-content" href="/about">About</a></li>
+          <li><a class="text-base-content/70 hover:text-base-content" href="/faq">FAQ</a></li>
           <li><a class="text-base-content/70 hover:text-base-content" href="/contact">Contact</a></li>
         </ul>
       </div>

@@ -46,22 +46,22 @@
 </script>
 
 <Seo
-  title="Contact"
-  description="Get in touch with Clearbyte about hands-on AWS lab activities for your course."
+  title="Get in touch"
+  description="Questions about Clearbyte's AWS lab activities, the LMS integration, or whether it would fit your course."
 />
 
 <Section>
   <Container width="readable">
-    <h1 class="text-h1">Contact us</h1>
+    <h1 class="text-h1">Get in touch</h1>
     <p class="mt-4 text-lead text-base-content/70">
-      Questions about the labs, pricing, or getting set up in Canvas? Send us a
-      note.
+      Questions about the labs, how the LMS side works, or whether this would
+      fit your course? Send a note.
     </p>
 
     <div class="mt-10 rounded-box border border-base-300 bg-base-100 p-6 shadow-card sm:p-8">
       {#if submitted}
         <div class="alert alert-success">
-          <span>Your message has been sent. We will get back to you soon.</span>
+          <span>Message sent. You'll hear back soon.</span>
         </div>
         <a href="/" class="btn btn-primary mt-6">Go home</a>
       {:else}
@@ -122,9 +122,9 @@
     </div>
 
     <p class="mt-6 text-sm text-base-content/60">
-      Teaching a course and want to try a lab with students?
-      <a class="text-primary hover:underline" href="/demo">Request an instructor demo</a>
-      instead.
+      Teaching a course and want to run a lab with students?
+      <a class="text-primary hover:underline" href="/demo">Start here</a>
+      instead &mdash; it asks for the details needed anyway.
     </p>
   </Container>
 </Section>

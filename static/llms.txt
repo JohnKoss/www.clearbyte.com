@@ -1,0 +1,29 @@
+# Clearbyte
+
+> A tool for creating custom cloud computing lab activities. Instructors author a lab as small ordered steps; students complete it in a real AWS account launched from the course LMS; work is graded automatically against what was built in that account.
+
+Clearbyte was built by a cloud computing instructor who wanted lab activities that could be shaped around what students were actually struggling with, rather than using a prebuilt catalog as provided. It is now shared with other colleges and universities.
+
+Key facts:
+
+- Instructors write and revise the labs themselves, including mid-semester.
+- Labs are broken into small steps, so it is visible which step a class stalls on.
+- Each student gets a real AWS account, provisioned at launch and destroyed when the lab ends.
+- Labs launch from the course LMS over LTI 1.3; used with Canvas today.
+- Grading inspects what was built in the AWS account and returns a score to the gradebook.
+- Runs exclusively on AWS. Every part of the platform is built on AWS services.
+- Deliberately designed around on-demand AWS services (Lambda, Step Functions, DynamoDB on-demand billing) so it is inexpensive to run. No servers, load balancers or databases idle between labs, and cost tracks actual use.
+- It is a lab authoring and delivery tool, not a drop-in curriculum.
+- Access is arranged directly by contacting Clearbyte, not by self-signup.
+
+## Docs
+
+- [Home](https://www.clearbyte.com/): What Clearbyte is, how a lab runs, and how it compares with prebuilt lab catalogs.
+- [FAQ](https://www.clearbyte.com/faq): Authoring labs, student AWS accounts, LMS integration, grading, and access.
+- [Labs](https://www.clearbyte.com/labs): The lab activities available today, each broken into small steps.
+- [About](https://www.clearbyte.com/about): Why it was built and who it is for.
+
+## Contact
+
+- [Get in touch](https://www.clearbyte.com/contact): Questions about the labs or the LMS integration.
+- [Try it with your class](https://www.clearbyte.com/demo): Request setup for a course.

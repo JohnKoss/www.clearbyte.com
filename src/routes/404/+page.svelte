@@ -24,7 +24,7 @@
       <div class="mt-8 flex flex-wrap justify-center gap-3">
         <a href="/" class="btn btn-primary">Go home</a>
         <a href="/labs" class="btn btn-outline">Browse labs</a>
-        <a href="/contact" class="btn btn-outline">Contact us</a>
+        <a href="/contact" class="btn btn-outline">Get in touch</a>
       </div>
     </div>
   </Container>

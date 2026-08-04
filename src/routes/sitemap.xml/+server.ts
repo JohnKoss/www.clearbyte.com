@@ -9,6 +9,7 @@ const staticPaths = [
   '/',
   '/labs',
   '/about',
+  '/faq',
   '/demo',
   '/contact',
   '/opt-in',
